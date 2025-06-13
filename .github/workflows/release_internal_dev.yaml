@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   web_build:
-    uses: DemienIlnutskiy/flutter_workflows/.github/workflows/next_js_release_build.yml@main
+    uses: DemienIlnutskiy/workflows/.github/workflows/next_js_build.yml@main
     secrets: inherit
     with:
       FLAVOUR: "development"
