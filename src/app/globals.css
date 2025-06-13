@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-big-desk: 78rem;
+  --breakpoint-desk: 64rem;
+  --breakpoint-tablet: 48rem;
+  --breakpoint-small-mobile: 30rem;
+
+  /* --animate-loading: loading-animation 1.5s ease-in-out infinite; */
+
+  /* @keyframes loading-animation {
+    0% {
+      transform: rotate(360deg);
+      border-top: 0.56rem dashed var(--color-source-seed);
+      border-bottom: 0.56rem dashed var(--color-ref-error-error-60);
+    }
+
+    25% {
+      border-top: 0.56rem dashed var(--color-sys-dark-tertiary);
+      border-bottom: 0.56rem dashed var(--color-sys-dark-on-tertiary-container);
+    }
+
+    50% {
+      border-top: 0.56rem dashed var(--color-sys-dark-tertiary);
+      border-bottom: 0.56rem dashed var(--color-sys-dark-on-tertiary-container);
+    }
+
+    75% {
+      border-top: 0.56rem dashed var(--color-sys-dark-tertiary);
+      border-bottom: 0.56rem dashed var(--color-sys-dark-on-tertiary-container);
+    }
+
+    100% {
+      border-top: 0.56rem dashed var(--color-source-seed);
+      border-bottom: 0.56rem dashed var(--color-ref-error-error-60);
+    }
+  }
+
+  --animate-loading-screen: loading-screen-animation 1.5s ease-in-out infinite;
+
+
+  @keyframes loading-screen-animation {
+    0% {
+        left: -5%;
+        right: 105%;
+    }
+
+    100% {
+        left: 100%;
+        right: 0%;
+    }
+  } */
+}
+/* @theme inline {
+  --font-: var(--font--icons);
+} */
+@layer base {
+
+  /* Button Theme (General) */
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Main container styles */
+  main a {
+    text-decoration: none;
+    color: var(--color-secondary);
+  }
+
+  main{
+    max-width: 90rem;
+    width: 100%;
+    align-self: center;
+  }
+
+  .dialog-scrollbar::-webkit-scrollbar {
+    width: 8px; 
+  }
+
+  .dialog-scrollbar::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+
+  .dialog-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(136, 136, 136, 0.8); 
+    border-radius: 10px;
+    border: 2px solid transparent; 
+    background-clip: padding-box; 
+  }
+
+  .dialog-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(85, 85, 85, 0.9);
+  }
+
+  .dialog-scrollbar {
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(136, 136, 136, 0.8) transparent; 
+  }
+}

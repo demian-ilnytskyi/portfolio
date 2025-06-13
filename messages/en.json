@@ -1,0 +1,49 @@
+{
+    "HomePage": {},
+    "NotFound": {
+        "General": {
+            "title": "Page Not Found",
+            "description": "This page may have been deleted, moved, or you simply mistyped the link.",
+            "goToHomePage": "To Home"
+        },
+        "Metadata": {
+            "General": {
+                "title": "Page not found",
+                "description": "This page may have been deleted, moved, or you might have mistyped the link."
+            }
+        }
+    },
+    "PrivacyPolicyPage": {
+        "title": "Privacy policy",
+        "notFount": "Failed to load the privacy policy.",
+        "somethingWrong": "Something went wrong."
+    },
+    "Metadata": {
+        "Main": {
+            "category": "",
+            "title": {
+                "default": "",
+                "template": "%s |"
+            },
+            "description": ""
+        },
+        "PrivacyPolicy": {
+            "title": "Privacy Policy",
+            "description": "Review the privacy policy."
+        }
+    },
+    "NavigationBar": {
+        "home": "Home",
+        "contact": "Contact"
+    },
+    "Footer": {
+        "content": "All rights reserved.",
+        "privacyPolicy": "Privacy Policy"
+    },
+    "CookiesDialog": {
+        "description": "We use essential and analytical cookies for security and service improvement purposes",
+        "privacyPolicy": "Privacy Policy",
+        "acceptNecessary": "Accept necessary",
+        "accept": "Accept"
+    }
+}

@@ -1,0 +1,61 @@
+import Link from "@/shared/components/custom_link";
+import { cn } from "@/lib/utils";
+import AppTextStyle from "@/shared/constants/styles/app_text_styles";
+import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
+import RootLayout from "./[locale]/layout";
+import { useTranslations } from "next-intl";
+import metadataHelper from "@/shared/helpers/metadata_helper";
+
+// Generate this page dynamic because we get language from cookie
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as Language;
+  const t = await getTranslations({ locale, namespace: 'NotFound.Metadata.General' });
+  return {
+    ...metadataHelper({
+      t: t,
+      linkPart: '',
+      locale: locale,
+      setCanonical: false,
+    }),
+    robots: {
+      index: false,
+      follow: false,
+    },
+  };
+};
+
+export default async function NotFound(): Promise<Component> {
+  const locale = (await getLocale()) as Language;
+  return <RootLayout params={Promise.resolve({ locale })}>
+    <PageContent />
+  </RootLayout>;
+}
+
+function PageContent() {
+  const t = useTranslations('NotFound.General');
+  return <main className="flex-1 flex flex-col items-center justify-center p-4 text-center">
+    <h1 className={cn(AppTextStyle.h1Tablet, 'font-bold not-small-mobile:text-4xl')}>
+      {t('title')}
+    </h1>
+    <h2 className={cn(AppTextStyle.bodyLarge, 'text-xl my-2')}>
+      {t('description')}
+    </h2>
+    <div className={cn(
+      AppTextStyle.bodyLarge,
+      "flex flex-wrap gap-5 justify-center text-xl",
+      "not-small-mobile:text-base"
+    )}>
+      <Link
+        href="/"
+        className={cn(
+          'p-2 flex w-max justify-self-center mt-5',
+          'rounded-xl hover:brightness-110 active:brightness-90',
+        )} >
+        {t('goToHomePage')}
+      </Link>
+    </div>
+  </main>;
+}
