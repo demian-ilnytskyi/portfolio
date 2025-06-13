@@ -25,7 +25,7 @@
 //     ],
 // });
 
-// export const veteranam = localFont({
+// export const t = localFont({
 //     variable: '--font-icons',
 //     display: 'swap',
 //     fallback: ['sans-serif'],
