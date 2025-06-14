@@ -28,8 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 };
 
 export default async function NotFound(): Promise<Component> {
-  const locale = (await getLocale()) as Language;
-  return <RootLayout params={Promise.resolve({ locale })}>
+  return <RootLayout>
     <PageContent />
   </RootLayout>;
 }
