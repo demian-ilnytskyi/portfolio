@@ -31,7 +31,7 @@ export default function BottomDialog({
         <dialog
             className={cn(
                 "fixed hidden peer-checked:flex left-1/2 transform -translate-x-1/2",
-                "bottom-0 w-full bg-neutral text-secondary z-20 rounded-t-3xl shadow-lg",
+                "bottom-0 w-full bg-neutral z-20 rounded-t-3xl shadow-lg",
                 "shadow-sys-light-surface-dim",
                 "shadow-lg max-w-200 border flex-col max-h-9/10 h-full",
                 !buttomButton && 'overflow-y-auto dialog-scrollbar',
