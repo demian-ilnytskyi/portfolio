@@ -26,7 +26,7 @@ export default function CookieDialogButtons({ acceptNecessaryText, acceptText }:
             className={cn(
                 AppTextStyle.titleMedium,
                 "cursor-pointer border-none outline-none px-2 sm:px-5 py-1 sm:py-2 bg-neutral",
-                "text-secondary font-bold hover:bg-primary not-sm:text-sm"
+                "font-bold hover:bg-primary not-sm:text-sm"
             )}>
             {acceptText}
         </button>

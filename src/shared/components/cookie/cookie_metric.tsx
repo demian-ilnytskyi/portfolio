@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { usePathname } from "@/l18n/navigation";
+import { usePathname } from "next/navigation";
+// import { usePathname } from "@/l18n/navigation";
 // import { analytics } from "@/shared/data_provider/firebase_config_client";
 // import { logEvent } from "firebase/analytics";
 import { useReportWebVitals } from "next/web-vitals";

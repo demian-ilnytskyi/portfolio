@@ -1,12 +1,12 @@
 
 "use server";
 
-import { localeCookieName } from "@/l18n/routing";
+import CookieKey from "@/shared/constants/variables/cookie_key";
 import { cookies } from "next/headers";
 
 export default async function languageSwitchFunction(value: Language): Promise<void> {
     try {
-        (await cookies()).set(localeCookieName, value, {
+        (await cookies()).set(CookieKey.localeCookieName, value, {
             path: '/',
             maxAge: 60 * 60 * 24 * 365,
             httpOnly: true,

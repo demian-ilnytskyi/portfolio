@@ -1,6 +1,6 @@
-import { cookies } from "next/headers";
 import dynamic from 'next/dynamic'
-import KTextConstants from "@/shared/constants/variables/text_constants";
+import CookieKey from "@/shared/constants/variables/cookie_key";
+import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 
 const CookieDialogComponent = dynamic(() =>
@@ -11,16 +11,15 @@ const CookieAnalyticsComponent = dynamic(() =>
     import('./cooke_analytics_component')
 )
 
-export default async function CookieHook(): Promise<Component | null> {
+export default async function CookieHook({ cookie }: { cookie: ReadonlyRequestCookies }): Promise<Component | null> {
     let state: boolean | null = null;
     try {
-        const cookie = await cookies();
         // Disable Cookie dialog for SEO bot. It's recomandation from google.
-        const isBot = cookie.get(KTextConstants.isBotCookieKey);
+        const isBot = cookie.get(CookieKey.isBotCookieKey);
         if (getCookieBooleanValue(isBot?.value) === true) {
             return null;
         }
-        const repository = cookie.get(KTextConstants.analyticsCookieKey);;
+        const repository = cookie.get(CookieKey.analyticsCookieKey);;
         state = getCookieBooleanValue(repository?.value);
     } catch (e) {
         console.warn('Get Cookie Error ', e);

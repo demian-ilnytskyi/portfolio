@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import KTextConstants from "../constants/variables/text_constants";
+import CookieKey from "../constants/variables/cookie_key";
 
 export default async function clearCookiesAndCache(): Promise<void> {
   const cookieStore = await cookies();
@@ -10,7 +10,7 @@ export default async function clearCookiesAndCache(): Promise<void> {
   });
 
   // Set Cookie value for no store cache 2 minutes
-  cookieStore.set(KTextConstants.clearCacheCookieKey, 'true', {
+  cookieStore.set(CookieKey.clearCacheCookieKey, 'true', {
     path: '/',
     maxAge: 120,
     httpOnly: true,

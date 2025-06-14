@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --breakpoint-big-desk: 78rem;
   --breakpoint-desk: 64rem;
