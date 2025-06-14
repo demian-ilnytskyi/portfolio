@@ -167,9 +167,8 @@ const nextConfig: NextConfig = {
     },
 };
 
-// const withNextIntl = createNextIntlPlugin('./src/l18n/request.ts');
+const withNextIntl = createNextIntlPlugin('./src/l18n/request.ts');
 
-// export default withNextIntl(nextConfig);
-export default nextConfig;
+export default withNextIntl(nextConfig);
 
 initOpenNextCloudflareForDev();
