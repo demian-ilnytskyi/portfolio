@@ -14,7 +14,7 @@ export default async function CookieDialogComponent(): Promise<Component> {
     return <SnackBar
         id={dialogId}
         className={cn(
-            "bg-secondary p-2 sm:p-6 flex flex-wrap",
+            "p-2 sm:p-6 flex flex-wrap",
             "sm:justify-between gap-2 sm:gap-4 top-0 sticky",
         )}
         aria-labelledby={dialogLabelId}>
