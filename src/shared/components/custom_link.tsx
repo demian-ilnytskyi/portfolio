@@ -37,7 +37,6 @@ function CustomLinkFunction(
         } else {
             pathname = href;
         }
-        console.log('dsfdfsdsfsdf ', curLocale);
         pathnames = `/${curLocale}${pathname}`;
     } else {
         pathnames = href;

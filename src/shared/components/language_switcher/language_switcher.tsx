@@ -4,7 +4,7 @@
 import Link from "@/shared/components/custom_link";
 import { cn } from "@/lib/utils";
 // import { useLocale } from "next-intl";
-import languageSwitchFunction from "./language_swticher_function";
+import languageSwitchFunction from "../language_switcher/language_swticher_function";
 import { EnglishFlag, UkraineFlag } from "./flags";
 import { usePathname } from "next/navigation";
 import { useLocale } from "@/shared/localization/client_provider";
