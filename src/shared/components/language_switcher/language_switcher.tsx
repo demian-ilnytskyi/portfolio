@@ -25,7 +25,7 @@ export default function LanguageSwitcher({ className }: { className?: string }):
         href={pathname} // Link to the current path
         locale={nextLocale} // Set the target locale for the link
         className={cn(
-            "flex flex-row bg-blue-50 rounded-4xl group", // Styling for the switcher container
+            "flex flex-row bg-blue-50 rounded-4xl group dark:bg-gray-400", // Styling for the switcher container
             className
         )}
         prefetch={false} // Disable prefetching for better control over locale switching

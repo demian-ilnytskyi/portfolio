@@ -57,6 +57,13 @@
   --font-: var(--font--icons);
 } */
 @layer base {
+  body{
+    color:black;
+  }
+
+  .dark body{
+    color:white;
+  }
 
   /* Button Theme (General) */
   button {

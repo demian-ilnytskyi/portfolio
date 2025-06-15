@@ -22,7 +22,7 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
     return <header className="flex justify-center mt-4 p-0 w-full">
         <nav className={cn(
             "bg-blue-100 max-h-18 w-full rounded-4xl",
-            "shadow-xl",
+            "shadow-xl dark:bg-gray-700",
             "overflow-hidden flex justify-between items-center px-3 py-4"
         )}>
             <Link
