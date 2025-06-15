@@ -75,16 +75,10 @@
     },
     "NavigationBar": {
         "home": "Home",
-        "contact": "Contact"
+        "aboutMe": "About me"
     },
     "Footer": {
         "content": "All rights reserved.",
         "privacyPolicy": "Privacy Policy"
-    },
-    "CookiesDialog": {
-        "description": "We use essential and analytical cookies for security and service improvement purposes",
-        "privacyPolicy": "Privacy Policy",
-        "acceptNecessary": "Accept necessary",
-        "accept": "Accept"
     }
 }

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { setPageLocale, setPageLocaleAsync } from '@/shared/constants/variables/locale_helper';
-import AnalyticsInitScript from "@/shared/components/analytics_init_script";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import NavigationBar from "@/shared/components/nav_bar/nav_bar";
 import { cn } from "@/lib/utils";
 import metadataHelper, { openGraph } from "@/shared/helpers/metadata_helper";
@@ -51,19 +49,11 @@ export default async function RootLayout({
   return <html suppressHydrationWarning={!KTextConstants.isDev} lang={locale} {...htmlClass} >
     <head>
       <meta httpEquiv="Content-Language" content={locale} />
-      <AnalyticsInitScript />
-      {/* Google tag */}
-      {process.env.NODE_ENV !== "development"
-        && <GoogleAnalytics
-          gaId=""
-        // nonce={nonce} 
-        />}
       {!isDarkMode && <DeletectThemeScript />}
     </head>
     <body
       className={cn(`bg-white dark:bg-gray-900`)}>
       <LocationzationProvider locale={locale} >
-        {/* <CookieHook /> */}
         <div className="flex flex-col min-h-screen mx-4 desk:mx-24 tablet:mx-8 self-center">
           <NavigationBar isDark={isDark ?? undefined} />
           {children}

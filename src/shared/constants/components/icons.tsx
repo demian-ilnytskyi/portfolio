@@ -64,6 +64,7 @@ const baseClass = 'select-none cursor-default inline-block text-2xl';
 const KIcons = {
     sun: (props: IconProps): Component => <Sun {...props} className={cn(baseClass, props?.className)} />,
     moon: (props: IconProps): Component => <Moon {...props} className={cn(baseClass, props?.className)} />,
+    aboutMe: (props: IconProps): Component => <Info {...props} className={cn(baseClass, props?.className)} />,
     // arrowLeft: (props: IconProps): Component => <ArrowLeft {...props} className={cn(baseClass,  props?.className)} />,
     // arrowBack: (props: IconProps): Component => <ArrowLeft {...props} className={cn(baseClass, props?.className)} />,
     // arrowRight: (props: IconProps): Component => <ArrowRight {...props} className={cn(baseClass, props?.className)} />,
