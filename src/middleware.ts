@@ -4,46 +4,6 @@ import KTextConstants from './shared/constants/variables/text_constants';
 import getMatchingLocaleFromAcceptLanguage from './shared/helpers/language_detect_helper';
 import CookieKey from './shared/constants/variables/cookie_key';
 
-// export default createMiddleware(routing);
-
-// const ALLOWED_SOURCES = [
-//     '*.g.doubleclick.net',
-//     '*.googleadservices.com',
-//     '*.googletagservices.com',
-//     '*.googletagmanager.com',
-//     '*.google.com',
-//     '*.google.com.ua',
-//     '*.doubleclick.net',
-//     '*.adtrafficquality.google',
-//     '*.google',
-//     '*.googlesyndication.com',
-//     '*.google-analytics.com',
-//     '*.googleapis.com',
-//     '*.algolia.net',
-//     '*.fundingchoicesmessages.google.com',
-//     '*.gstatic.com',
-//     'https://dev.---.info/cdn-cgi/',
-//     '*.safeframe.googlesyndication.com',
-// ];
-// const SCRIPT_HASHES = [
-//     "sha256-l126ECKhvRC2jlEM73NjqAv1I8lIyEiqXs5XTMscpG0=",
-//     "sha256-bGSVHoMEJKsgXk/66rgtBJc6YaOnmGNN54yqJW2tBjA=",
-//     "sha256-LcsuUMiDkprrt6ZKeiLP4iYNhWo8NqaSbAgtoZxVK3s=",
-//     "sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo=",
-//     "sha256-3is/o4fOdD7UaTj1GClhToFJAhwdWxu1WNZ3+gGxylc=",
-//     "sha256-cQClROWM0ad+eUUoCoIIKodZuy8YP4lyCiIdXrVPgs8=",
-//     "sha256-lfITC39+JQgfxsFwkvQ70G+cZ1u4Enn02PbQPTADWF8=",
-//     "sha256-mxEv7iLgMDVn4ob3sHADEEtZnVhrTKbhAg6ZeYiFj4U=",
-//     "sha256-0Q35n9wDGTqn52GWHTWluVVMnfbapuebBxA508NmQx4=",
-//     "sha256-RGDGXFsm19Y2dprCLpGITZyMgnGoPd+yOfkQSeRi3nQ=",
-//     "sha256-d7d1LvhNVTjgaeGms/rYR1c75tgbeJ+M3Os7/7a2iTE=",
-//     "sha256-Sv4fw1r1tuHT4vZP4u0HBtcdO6rp2NQVd9HW4fz8wBs=",
-//     "sha256-neTQRcdpbAWKDcQr3TArosbG7WTD0uu3QilgeHx6+Dc=",
-// ];
-
-// const scriptHashesList = SCRIPT_HASHES.map(hash => `'${hash}'`).join(' ');
-// const generalSrcList = ALLOWED_SOURCES.join(' ');
-
 declare global {
     type Language = 'uk' | 'en';
 }
