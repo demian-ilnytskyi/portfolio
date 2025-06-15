@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import KTextConstants from "../constants/variables/text_constants";
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
+import type { TranslatorReturnType } from "../localization/server";
 
 export const metadataIcons: Icon[] = [
   {
@@ -103,7 +104,7 @@ export function languages(link: string, linkPart?: string): Record<string, strin
 }
 
 interface MetadataHelperProps {
-  t: (key: string) => string;
+  t: TranslatorReturnType;
   locale: Language;
   isMain?: boolean;
   canonical?: string

@@ -1,6 +1,5 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-// import createMiddleware from 'next-intl/middleware';
 import KTextConstants from './shared/constants/variables/text_constants';
 import getMatchingLocaleFromAcceptLanguage from './shared/helpers/language_detect_helper';
 import CookieKey from './shared/constants/variables/cookie_key';
