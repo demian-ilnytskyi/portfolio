@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import HomeImagePart from "./home_components/image_part";
-import AboutMe from "./home_components/about_me";
 import { setPageLocaleAsync } from "@/shared/constants/variables/locale_helper";
 
 export default async function Home({
