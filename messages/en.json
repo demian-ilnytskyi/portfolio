@@ -7,6 +7,38 @@
             "description3": "crafting intuitive, high-performance",
             "description4": "cross-platform",
             "description5": "applications that deliver seamless user experiences."
+        },
+        "AboutMe": {
+            "title": "About Me",
+            "paragraph1": {
+                "part1": "I am an",
+                "part2": "Associate Flutter Developer",
+                "part3": "with a passion for creating",
+                "part4": "intuitive",
+                "part5": "mobile and web applications. I have hands-on experience with",
+                "part6": "back-end technologies",
+                "part7": "such as Firebase and JavaScript with PostgreSQL, enabling me to build",
+                "part8": "comprehensive and reliable solutions",
+                "part9": ". My goal is to develop high-performance applications that deliver seamless user experiences."
+            },
+            "paragraph2": {
+                "part1": "Throughout my career, I have successfully delivered projects of varying scale—from small utilities to large systems. I have significant experience in",
+                "part2": "bug fixing",
+                "part3": "and",
+                "part4": "optimizing existing functionality",
+                "part5": "on both Front-end and Back-end. Additionally, I have actively participated in",
+                "part6": "code reviews",
+                "part7": "and",
+                "part8": "mentoring new team members",
+                "part9": ", contributing to their professional growth."
+            },
+            "paragraph3": {
+                "part1": "My skills encompass a wide range of technologies and tools, including",
+                "part2": "GitHub Workflow, Cloudflare, AWS, Stripe, Google Play Console, App Store Connect, Firebase Functions, SendGrid, Algolia",
+                "part3": ". I also have experience in developing",
+                "part4": "Next.js web applications",
+                "part5": ", which complements my expertise in modern web development."
+            }
         }
     },
     "NotFound": {
