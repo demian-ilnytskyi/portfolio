@@ -30,7 +30,7 @@ export default async function PrivacyPolicyPage({ params }: {
         className={cn(
             "flex-1 flex flex-col w-full max-w-4xl",
             "mx-auto mt-10 shadow-md rounded-xl p-8 bg-neutral",
-            "shadow-sys-light-surface-dim shadow-xl",
+            "shadow-xl",
         )}>
         <h1 className={cn(AppTextStyle.h1TabletBold, "mb-6 text-center not-tablet:text-3xl")}>
             {t('title')}

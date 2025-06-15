@@ -10,7 +10,7 @@ interface SnackBarProps {
 
 export default function SnackBar({ className, ...props }: SnackBarProps): Component {
     return <dialog
-        className={cn("fixed bottom-0 w-full bg-secondary text-neutral z-20 flex justify-center items-center", className)}
+        className={cn("fixed bottom-0 w-full text-neutral z-20 flex justify-center items-center", className)}
         role="dialog"
         aria-modal="false"
         {...props} />

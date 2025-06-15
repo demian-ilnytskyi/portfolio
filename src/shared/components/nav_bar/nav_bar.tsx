@@ -41,7 +41,8 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
                 <NavigationMobDialog >
                     <Buttons />
                     <div className="flex flex-row gap-2 flex-wrap">
-                        <LanguageSwitcher className="mr-5" />
+                        <LanguageSwitcher className="mr-3" />
+                        <ThemeSwticher isDark={isDark} />
                     </div>
                 </NavigationMobDialog>
             </div>
@@ -68,7 +69,7 @@ function _Button(props: ButtonProps) {
         <div className={"h-full py-0 not-small-mobile:px-0 px-3 flex flex-row justify-center items-center"}>
             <div className="flex-col flex items-center">
                 <span>{props.text}</span>
-                <div className={"w-0 h-0.5 relative top-1 transition-width duration-400 ease group-hover:w-full bg-secondary group-active:w-0"} />
+                <div className={"w-0 h-0.5 relative top-1 transition-width duration-400 ease group-hover:w-full group-active:w-0"} />
             </div>
 
             {props.icon && props.icon}
