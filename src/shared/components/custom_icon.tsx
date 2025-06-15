@@ -10,7 +10,7 @@ interface CustomIconProps {
 export default function CustomIcon({ className, code, }: CustomIconProps): Component {
     return <span
         className={cn(
-            `text-secondary text-2xl font-normal not-italic`,
+            `text-2xl font-normal not-italic`,
             className
         )}
         // style={{

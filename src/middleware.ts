@@ -1,9 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-// import createMiddleware from 'next-intl/middleware';
-import { localeCookieName } from './l18n/routing';
 import KTextConstants from './shared/constants/variables/text_constants';
 import getMatchingLocaleFromAcceptLanguage from './shared/helpers/language_detect_helper';
+import CookieKey from './shared/constants/variables/cookie_key';
 
 // export default createMiddleware(routing);
 
@@ -69,7 +68,7 @@ async function getIsBotValue(userAgent: string | null): Promise<boolean> {
 export async function middleware(request: NextRequest): Promise<NextResponse<unknown>> {
     try {
         let initialChosenLocale: Language;
-        const existingLocaleCookie = request.cookies.get(localeCookieName)?.value as Language | undefined;
+        const existingLocaleCookie = request.cookies.get(CookieKey.localeCookieName)?.value as Language | undefined;
 
         let isSEOBot: boolean | undefined = undefined;
 
@@ -137,10 +136,10 @@ export async function middleware(request: NextRequest): Promise<NextResponse<unk
             existingLocaleCookie !== effectiveLocaleForRequest ||
             (urlLocale && urlLocale !== effectiveLocaleForRequest)) {
 
-            response.cookies.set(localeCookieName, urlLocale ? urlLocale : effectiveLocaleForRequest, cookieSetOption);
+            response.cookies.set(CookieKey.localeCookieName, urlLocale ? urlLocale : effectiveLocaleForRequest, cookieSetOption);
 
             if (isSEOBot !== undefined) {
-                response.cookies.set(KTextConstants.isBotCookieKey, isSEOBot.toString(), {
+                response.cookies.set(CookieKey.isBotCookieKey, isSEOBot.toString(), {
                     ...cookieSetOption,
                     maxAge: 31536000, // 1 year
                 });

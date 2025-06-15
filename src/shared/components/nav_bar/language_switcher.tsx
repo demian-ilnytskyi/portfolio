@@ -1,42 +1,36 @@
 "use client";
 
-import { usePathname } from "@/l18n/navigation";
+// import { usePathname } from "@/l18n/navigation";
 import Link from "@/shared/components/custom_link";
 import { cn } from "@/lib/utils";
-import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import { useLocale } from "next-intl";
+// import { useLocale } from "next-intl";
 import languageSwitchFunction from "./language_swticher_function";
+import { EnglishFlag, UkraineFlag } from "./flags";
+import { usePathname } from "next/navigation";
+import { useLocale } from "@/shared/localization/client_provider";
 
+
+/**
+ * LanguageSwitcher component allows users to switch between Ukrainian and English languages.
+ * It displays two flags, one for each language, and highlights the currently active language.
+ * When a flag is clicked, it navigates to the same page with the selected locale.
+ */
 export default function LanguageSwitcher({ className }: { className?: string }): Component {
-    const itemsClass = cn(
-        'min-w-10 min-h-10 bg-neutral rounded-full m-1 p-2 text-secondary text-center',
-        AppTextStyle.titleMedium,
-    );
-    const locale = useLocale() as Language;
-    const pathname = usePathname();
-    const activeClass = 'bg-secondary text-neutral';
+    const locale = useLocale() as Language; // Get the current locale
+    const pathname = usePathname().replace(`/${locale}`, ''); // Get the current path to maintain navigation context
+    // Determine the next locale to switch to
     const nextLocale: Language = locale === 'uk' ? 'en' : 'uk';
+
     return <Link
-        href={pathname}
-        locale={nextLocale}
+        href={pathname} // Link to the current path
+        locale={nextLocale} // Set the target locale for the link
         className={cn(
-            // ButtonStyles.white,
-            "flex flex-row",
+            "flex flex-row bg-blue-50 rounded-4xl group", // Styling for the switcher container
             className
         )}
-        prefetch={false}
-        onClick={() => languageSwitchFunction(nextLocale)}>
-        <span className={cn(
-            itemsClass,
-            (locale === 'uk' && activeClass),
-        )}>
-            UA
-        </span>
-        <span className={cn(
-            itemsClass,
-            (locale === 'en' && activeClass),
-        )}>
-            EN
-        </span>
+        prefetch={false} // Disable prefetching for better control over locale switching
+        onClick={() => languageSwitchFunction(nextLocale)}> {/* Call a function on click for additional logic if needed */}
+        <UkraineFlag isActive={locale === 'uk'} />
+        <EnglishFlag isActive={locale === 'en'} />
     </Link>
 }
