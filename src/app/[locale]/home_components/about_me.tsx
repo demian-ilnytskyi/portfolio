@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
+import Link from "@/shared/components/custom_link";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
+import AppLinks from "@/shared/constants/variables/links";
 import { getTranslations } from "@/shared/localization/server";
 
 export default async function AboutMe(): Promise<Component> {
@@ -7,9 +9,11 @@ export default async function AboutMe(): Promise<Component> {
     const paragraphClass = cn("text-lg leading-relaxed");
 
     return <section className="items-center flex flex-col p-4 md:p-8">
-        <h3 className={cn(AppTextStyle.h1Mob, "font-bold not-md:text-3xl text-center mb-6")}>
-            {t('title')}
-        </h3>
+        <Link href={`#${AppLinks.aboutMe}`}>
+            <h3 className={cn(AppTextStyle.h1Mob, "font-bold not-md:text-3xl text-center mb-6 hover:underline")}>
+                {t('title')}
+            </h3>
+        </Link>
         <div className="max-w-3xl flex flex-col space-y-8 my-10">
             <p className={paragraphClass}>
                 {t('paragraph1.part1')} <b>{t('paragraph1.part2')}</b> {t('paragraph1.part3')} <b>{t('paragraph1.part4')}</b> {t('paragraph1.part5')} <b>{t('paragraph1.part6')}</b> {t('paragraph1.part7')} <b>{t('paragraph1.part8')}</b> {t('paragraph1.part9')}

@@ -1,3 +1,4 @@
 export default abstract class AppLinks {
-    static readonly privacyPolicyLink = '/privacy-policy';
+    static readonly homePage = '';
+    static readonly aboutMe = 'about-me';
 }

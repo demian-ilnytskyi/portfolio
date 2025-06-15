@@ -75,7 +75,7 @@
     },
     "NavigationBar": {
         "home": "Home",
-        "contact": "Contact"
+        "aboutMe": "About me"
     },
     "Footer": {
         "content": "All rights reserved.",
