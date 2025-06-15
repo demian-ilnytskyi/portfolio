@@ -20,7 +20,7 @@ export default async function HomeImagePart(): Promise<Component> {
             {t('title')}
         </h1>
         <h2 className={cn(AppTextStyle.titleLarge, 'text-center mt-3 not-tablet:text-2xl')}>
-            {t('description1')} <span className="font-bold">{t('description2')}</span> {t('description3')} <span className="font-bold">{t('description4')}</span> {t('description5')}
+            {t('description1')} <b>{t('description2')}</b> {t('description3')} <b>{t('description4')}</b> {t('description5')}
         </h2>
     </section>;
 }
