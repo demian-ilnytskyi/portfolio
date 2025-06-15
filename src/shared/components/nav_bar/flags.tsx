@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 // Common classes for the flag container
 const flagClass = cn(
     'min-w-10 min-h-10 bg-neutral rounded-full m-1 text-center flex flex-col',
-    'overflow-clip duration-200 ease-in-out group-hover:scale-110', // Ensures content outside the rounded shape is hidden
+    'overflow-clip duration-200 ease-in-out group-hover:scale-115', // Ensures content outside the rounded shape is hidden
 );
 
 // Class applied when a flag is active
-const activeFlagClass = 'scale-115 group-hover:scale-110';
+const activeFlagClass = 'scale-115 group-hover:scale-100';
 
 /**
  * UkraineFlag component displays the Ukrainian flag.
