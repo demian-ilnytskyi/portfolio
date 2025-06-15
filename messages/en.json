@@ -1,5 +1,14 @@
 {
-    "HomePage": {},
+    "HomePage": {
+        "ImagePart": {
+            "title": "Demian Ilnutskiy",
+            "description1": "I'm an",
+            "description2": "Associate Flutter Developer",
+            "description3": "crafting intuitive, high-performance",
+            "description4": "cross-platform",
+            "description5": "applications that deliver seamless user experiences."
+        }
+    },
     "NotFound": {
         "General": {
             "title": "Page Not Found",

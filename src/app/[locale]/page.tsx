@@ -1,7 +1,14 @@
 import { cn } from "@/lib/utils";
 import HomeImagePart from "./home_components/image_part";
+import AboutMe from "./home_components/about_me";
+import { setPageLocaleAsync } from "@/shared/constants/variables/locale_helper";
 
-export default function Home(): Component {
+export default async function Home({
+  params
+}: {
+  params: Promise<{ locale: Language }>;
+}): Promise<Component> {
+  await setPageLocaleAsync(params);
   return <main className="flex-1 flex flex-col">
     <HomeImagePart />
     <Divider />

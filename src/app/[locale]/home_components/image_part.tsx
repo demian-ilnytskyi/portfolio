@@ -2,8 +2,10 @@ import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import profileImage from "../../../../public/images/profile.jpg"
 import Image from 'next/image';
 import { cn } from "@/lib/utils";
+import { getTranslations } from "@/shared/localization/server";
 
-export default function HomeImagePart(): Component {
+export default async function HomeImagePart(): Promise<Component> {
+    const t = await getTranslations('HomePage.ImagePart');
     return <section className="items-center flex flex-col mt-10 min-h-[77vh]">
         <Image
             src={profileImage}
@@ -15,10 +17,10 @@ export default function HomeImagePart(): Component {
             height={400}
             className="rounded-full border-gray-200 dark:border-0 border-2" />
         <h1 className={cn(AppTextStyle.h1, 'text-center not-tablet:text-5xl')}>
-            Demian Ilnutskiy
+            {t('title')}
         </h1>
         <h2 className={cn(AppTextStyle.titleLarge, 'text-center mt-3 not-tablet:text-2xl')}>
-            I'm an <span className="font-bold">Associate Flutter Developer</span> crafting intuitive, high-performance <span className="font-bold">cross-platform</span> applications that deliver seamless user experiences.
+            {t('description1')} <span className="font-bold">{t('description2')}</span> {t('description3')} <span className="font-bold">{t('description4')}</span> {t('description5')}
         </h2>
     </section>;
 }
