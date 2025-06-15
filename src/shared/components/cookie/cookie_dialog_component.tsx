@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { getTranslations } from "@/shared/localization/server";
 import CookieDialogButtons from "./cookie_dialog_buttons";
 
-export default async function CookieDialogComponent(): Component {
+export default async function CookieDialogComponent(): Promise<Component> {
     const t = await getTranslations("CookiesDialog");
 
     const dialogId = "cookieConsentDialog";
