@@ -5,10 +5,10 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import NavigationBar from "@/shared/components/nav_bar/nav_bar";
 import { cn } from "@/lib/utils";
 import metadataHelper, { openGraph } from "@/shared/helpers/metadata_helper";
-import DeletectThemeScript from "@/shared/components/deletect_theme_script";
+import DeletectThemeScript from "@/shared/components/theme_switcher/deletect_theme_script";
 import { cookies } from "next/headers";
 import KTextConstants from "@/shared/constants/variables/text_constants";
-import CookieKey from "@/shared/constants/variables/cookie_key";
+import CookieKey, { getCookieBooleanValue } from "@/shared/constants/variables/cookie_key";
 import { getTranslations } from "@/shared/localization/server";
 import LocationzationProvider from "@/shared/localization/server_provider";
 
@@ -42,12 +42,13 @@ export default async function RootLayout({
 }>): Promise<Component> {
   const cookie = await cookies();
   const isDarkMode = cookie.get(CookieKey.isDarkCookieKey)?.value;
+  const isDark = getCookieBooleanValue(isDarkMode);
   const locale = (cookie.get(CookieKey.localeCookieName)?.value as Language) ?? KTextConstants.defaultLocale;
   setPageLocale({ locale });
-  const htmlClass = (isDarkMode === 'true' && { className: 'dark' });
+  const htmlClass = (isDark === true && { className: 'dark' });
 
   // const nonce = (await headers()).get('x-nonce') ?? undefined;
-  return <html lang={locale} {...htmlClass} >
+  return <html suppressHydrationWarning={!KTextConstants.isDev} lang={locale} {...htmlClass} >
     <head>
       <meta httpEquiv="Content-Language" content={locale} />
       <AnalyticsInitScript />
@@ -64,7 +65,7 @@ export default async function RootLayout({
       <LocationzationProvider locale={locale} >
         {/* <CookieHook /> */}
         <div className="flex flex-col min-h-screen mx-4 desk:mx-24 tablet:mx-8 self-center">
-          <NavigationBar />
+          <NavigationBar isDark={isDark ?? undefined} />
           {children}
 
         </div>

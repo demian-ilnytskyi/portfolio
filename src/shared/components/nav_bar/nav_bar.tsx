@@ -3,10 +3,11 @@ import AppTextStyle from "../../constants/styles/app_text_styles";
 import { cn } from "@/lib/utils";
 import NavigationMobDialog from "./nav_mob_dialog";
 import Link from "@/shared/components/custom_link";
-import LanguageSwitcher from "./language_switcher";
+import LanguageSwitcher from "../language_switcher/language_switcher";
 import { getTranslations } from "@/shared/localization/server";
+import ThemeSwticher from "../theme_switcher/theme_switcher";
 
-export default async function NavigationBar(): Promise<Component> {
+export default async function NavigationBar({ isDark }: { isDark?: boolean }): Promise<Component> {
     const t = await getTranslations('NavigationBar');
 
     function Buttons() {
@@ -35,6 +36,7 @@ export default async function NavigationBar(): Promise<Component> {
                 <Buttons />
             </div>
             <div className="flex flex-row pr-3">
+                <ThemeSwticher isDark={isDark} className="hidden tablet:flex mr-3" />
                 <LanguageSwitcher className="hidden tablet:flex" />
                 <NavigationMobDialog >
                     <Buttons />

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import CookieKey from "@/shared/constants/variables/cookie_key";
+import CookieKey, { getCookieBooleanValue } from "@/shared/constants/variables/cookie_key";
 import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 
@@ -28,16 +28,5 @@ export default async function CookieHook({ cookie }: { cookie: ReadonlyRequestCo
         return <CookieDialogComponent />;
     } else {
         return <CookieAnalyticsComponent state={state} />;
-    }
-}
-
-function getCookieBooleanValue(cookieValue: string | undefined): boolean | null {
-    switch (cookieValue) {
-        case "true":
-            return true;
-        case "false":
-            return false;
-        default:
-            return null;
     }
 }
