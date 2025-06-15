@@ -1,12 +1,13 @@
-import { useTranslations } from "next-intl";
+// import { useTranslations } from "next-intl";
 import AppTextStyle from "../../constants/styles/app_text_styles";
 import { cn } from "@/lib/utils";
 import NavigationMobDialog from "./nav_mob_dialog";
 import Link from "@/shared/components/custom_link";
 import LanguageSwitcher from "./language_switcher";
+import { getTranslations } from "@/shared/localization/server";
 
-export default function NavigationBar(): Component {
-    const t = useTranslations('NavigationBar');
+export default async function NavigationBar(): Promise<Component> {
+    const t = await getTranslations('NavigationBar');
 
     function Buttons() {
         return <>

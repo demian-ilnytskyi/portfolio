@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import PrivacyPolicyContent from "./components/content";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import { cn } from "@/lib/utils";
-import { getTranslations } from "next-intl/server";
+// import { getTranslations } from "next-intl/server";
 import metadataHelper from "@/shared/helpers/metadata_helper";
-import { setPageLocaleAsync } from "@/shared/constants/variables/locale_helper";
 import AppLinks from "@/shared/constants/variables/links";
+import { getTranslations } from "@/shared/localization/server";
 
 export async function generateMetadata({ params }: {
     params: Promise<{ locale: Language }>;
 }): Promise<Metadata> {
     const { locale } = await params;
-    const t = await getTranslations({ locale, namespace: 'Metadata.PrivacyPolicy' });
+    const t = await getTranslations('Metadata.PrivacyPolicy', locale);
     return metadataHelper({
         t: t,
         linkPart: AppLinks.privacyPolicyLink,
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: {
 export default async function PrivacyPolicyPage({ params }: {
     params: Promise<{ locale: Language }>;
 }): Promise<Component> {
-    const locale = await setPageLocaleAsync(params);
+    const { locale } = await params;
 
     const t = await getTranslations('PrivacyPolicyPage');
 

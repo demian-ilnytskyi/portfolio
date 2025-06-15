@@ -5,10 +5,9 @@ import {
     type Ref,
 } from 'react';
 import KTextConstants from '../constants/variables/text_constants';
-import { getPathname } from '@/l18n/navigation';
 import type { UrlObject } from 'url';
 import { format } from 'url';
-import { useLocale } from 'next-intl';
+import { getLagnuageCustom } from '../localization/server';
 
 type Url = string | UrlObject;
 
@@ -24,7 +23,7 @@ function CustomLinkFunction(
     { href, locale, prefetch, ...rest }: Props,
     ref: Ref<HTMLAnchorElement>
 ) {
-    const localeValue = useLocale();
+    const localeValue = getLagnuageCustom();
     const curLocale = locale ?? localeValue;
 
     const needsLangPath = curLocale !== KTextConstants.defaultLocale || locale;
@@ -38,12 +37,8 @@ function CustomLinkFunction(
         } else {
             pathname = href;
         }
-
-        pathnames = getPathname({
-            locale: locale || curLocale,
-            href: pathname,
-            forcePrefix: true
-        });
+        console.log('dsfdfsdsfsdf ', curLocale);
+        pathnames = `/${curLocale}${pathname}`;
     } else {
         pathnames = href;
     }

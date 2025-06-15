@@ -7,7 +7,7 @@ const flagClass = cn(
 );
 
 // Class applied when a flag is active
-const activeFlagClass = 'scale-115 hover:scale-115';
+const activeFlagClass = 'scale-115 group-hover:scale-110';
 
 /**
  * UkraineFlag component displays the Ukrainian flag.

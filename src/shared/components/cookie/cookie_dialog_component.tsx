@@ -1,12 +1,12 @@
 import Link from "@/shared/components/custom_link";
 import SnackBar from "../dialogs/snack_bar";
-import { useTranslations } from "next-intl";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import { cn } from "@/lib/utils";
+import { getTranslations } from "@/shared/localization/server";
 import CookieDialogButtons from "./cookie_dialog_buttons";
 
-export default function CookieDialogComponent(): Component {
-    const t = useTranslations("CookiesDialog");
+export default async function CookieDialogComponent(): Promise<Component> {
+    const t = await getTranslations("CookiesDialog");
 
     const dialogId = "cookieConsentDialog";
     const dialogLabelId = "cookieConsentTitle";

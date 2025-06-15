@@ -3,10 +3,11 @@
 // import { usePathname } from "@/l18n/navigation";
 import Link from "@/shared/components/custom_link";
 import { cn } from "@/lib/utils";
-import { useLocale } from "next-intl";
+// import { useLocale } from "next-intl";
 import languageSwitchFunction from "./language_swticher_function";
 import { EnglishFlag, UkraineFlag } from "./flags";
 import { usePathname } from "next/navigation";
+import { useLocale } from "@/shared/localization/client_provider";
 
 
 /**
@@ -29,7 +30,7 @@ export default function LanguageSwitcher({ className }: { className?: string }):
         )}
         prefetch={false} // Disable prefetching for better control over locale switching
         onClick={() => languageSwitchFunction(nextLocale)}> {/* Call a function on click for additional logic if needed */}
-        <UkraineFlag isActive={locale === 'uk'} /> {/* Render Ukraine flag, active if current locale is 'uk' */}
-        <EnglishFlag isActive={locale === 'en'} /> {/* Render English flag, active if current locale is 'en' */}
+        <UkraineFlag isActive={locale === 'uk'} />
+        <EnglishFlag isActive={locale === 'en'} />
     </Link>
 }
