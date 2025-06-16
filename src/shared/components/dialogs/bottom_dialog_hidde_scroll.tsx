@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 // import { usePathname } from "@/l18n/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -36,19 +35,20 @@ export default function BottomDialogScrollHelper({ checkedBoxId }: { checkedBoxI
 }
 
 function RouterCloseDialog({ checkbox }: { checkbox: HTMLInputElement | null }) {
-    const pathname = usePathname();
-    const path = useRef(pathname);
 
     useEffect(() => {
-        if (checkbox && checkbox.checked) {
-            if (path.current != pathname) {
-                checkbox.checked = false;
+        function handleHashChange() {
+            if (checkbox && checkbox.checked) {
+                checkbox!.checked = false;
                 const event = new Event('change', { bubbles: true });
-                checkbox.dispatchEvent(event);
+                checkbox!.dispatchEvent(event);
             }
         }
-        path.current = pathname;
-    }, [pathname, checkbox]);
+        window.addEventListener('scrollend', handleHashChange);
+        return () => {
+            window.removeEventListener('scrollend', handleHashChange);
+        };
+    }, [checkbox]);
 
     return null;
 }
