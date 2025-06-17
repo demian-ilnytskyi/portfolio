@@ -39,6 +39,40 @@
                 "part4": "Next.js веб-додатків",
                 "part5": ", що доповнює мою експертизу в сучасному веброзробці."
             }
+        },
+        "WorkExperience": {
+            "title": "Досвід роботи",
+            "jobs": [
+                {
+                    "title": "Додаток Flutter для українських ветеранів з бізнес-порталом",
+                    "position": "Розробник Flutter та Next.js",
+                    "period": "Травень 2024 - По теперішній час",
+                    "description": "Додаток на Flutter для українських ветеранів з мобільними (Android/iOS) та веб-платформами, зручним дизайном, що централізує знижки. Включає бізнес-офіс для компаній для управління пропозиціями, сприяючи підтримці громади та доступу до пільг.",
+                    "skills": [
+                        "Flutter",
+                        "Firebase",
+                        "Next.js",
+                        "GitHub Actions",
+                        "JavaScript",
+                        "Python"
+                    ]
+                },
+                {
+                    "title": "Покращення додатка Liva Clinic",
+                    "position": "Фріланс-розробник",
+                    "period": "Жовтень 2024 - Квітень 2025",
+                    "description": "Покращив додаток на Flutter та бекенд на PostgreSQL/Sequelize, усунувши помилки та додавши нові функції. Використовував AWS для стабільності бекенду, забезпечуючи надійну роботу системи.",
+                    "skills": [
+                        "Flutter",
+                        "JavaScript",
+                        "PostgreSQL",
+                        "Stripe Connect",
+                        "SendGrid",
+                        "GitHub Actions",
+                        "Agora"
+                    ]
+                }
+            ]
         }
     },
     "NotFound": {
@@ -54,28 +88,17 @@
             }
         }
     },
-    "PrivacyPolicyPage": {
-        "title": "Політика конфіденційності",
-        "notFount": "Не вдалося завантажити політику конфіденційності.",
-        "somethingWrong": "Щось пішло не так."
-    },
     "Metadata": {
         "Main": {
             "category": "",
-            "title": {
-                "default": "%s |",
-                "template": ""
-            },
+            "title": "Дем'ян Ільницький",
             "description": ""
-        },
-        "PrivacyPolicy": {
-            "title": "Політика конфіденційності",
-            "description": "Ознайомтеся з політикою конфіденційності"
         }
     },
     "NavigationBar": {
         "home": "Головна",
-        "aboutMe": "Про мене"
+        "aboutMe": "Про мене",
+        "workExperience": "Досвід роботи"
     },
     "Footer": {
         "content": "Всі права захищені.",

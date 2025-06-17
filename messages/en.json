@@ -39,6 +39,40 @@
                 "part4": "Next.js web applications",
                 "part5": ", which complements my expertise in modern web development."
             }
+        },
+        "WorkExperience": {
+            "title": "Work Experience",
+            "jobs": [
+                {
+                    "title": "Flutter App for Ukrainian Veterans with Business Portal",
+                    "position": "Flutter and Next.js Developer",
+                    "period": "May 2024 - Present",
+                    "description": "Flutter app for Ukrainian veterans, with mobile (Android/iOS) and web platforms, user-friendly design, centralizing discounts. Includes business office for companies to manage offers, boosting community support and benefit access.",
+                    "skills": [
+                        "Flutter",
+                        "Firebase",
+                        "Next.js",
+                        "GitHub Actions",
+                        "JavaScript",
+                        "Python"
+                    ]
+                },
+                {
+                    "title": "Liva Clinic Application Enhancement",
+                    "position": "Freelance Developer",
+                    "period": "Oct 2024 - Apr 2025",
+                    "description": "Enhanced Flutter application and PostgreSQL/Sequelize backend, resolving bugs and adding features. Utilized AWS for backend stability, ensuring reliable system performance.",
+                    "skills": [
+                        "Flutter",
+                        "JavaScript",
+                        "PostgreSQL",
+                        "Stripe Connect",
+                        "SendGrid",
+                        "GitHub Actions",
+                        "Agora"
+                    ]
+                }
+            ]
         }
     },
     "NotFound": {
@@ -54,28 +88,17 @@
             }
         }
     },
-    "PrivacyPolicyPage": {
-        "title": "Privacy policy",
-        "notFount": "Failed to load the privacy policy.",
-        "somethingWrong": "Something went wrong."
-    },
     "Metadata": {
         "Main": {
             "category": "",
-            "title": {
-                "default": "",
-                "template": "%s |"
-            },
+            "title": "Demian Ilnutskiy",
             "description": ""
-        },
-        "PrivacyPolicy": {
-            "title": "Privacy Policy",
-            "description": "Review the privacy policy."
         }
     },
     "NavigationBar": {
         "home": "Home",
-        "aboutMe": "About me"
+        "aboutMe": "About me",
+        "workExperience": "Work experience"
     },
     "Footer": {
         "content": "All rights reserved.",

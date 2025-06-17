@@ -1,19 +1,14 @@
 import { cn } from "@/lib/utils";
-import Link from "@/shared/components/custom_link";
-import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import AppLinks from "@/shared/constants/variables/links";
 import { getTranslations } from "@/shared/localization/server";
+import TitleSection from "./title_section";
 
 export default async function AboutMe(): Promise<Component> {
     const t = await getTranslations('HomePage.AboutMe');
     const paragraphClass = cn("text-lg leading-relaxed");
 
     return <section className="items-center flex flex-col p-4 md:p-8">
-        <Link href={`#${AppLinks.aboutMe}`}>
-            <h3 className={cn(AppTextStyle.h1Mob, "font-bold not-md:text-3xl text-center mb-6 hover:underline")}>
-                {t('title')}
-            </h3>
-        </Link>
+        <TitleSection link={AppLinks.aboutMe} title={t('title')} />
         <div className="max-w-3xl flex flex-col space-y-8 my-10">
             <p className={paragraphClass}>
                 {t('paragraph1.part1')} <b>{t('paragraph1.part2')}</b> {t('paragraph1.part3')} <b>{t('paragraph1.part4')}</b> {t('paragraph1.part5')} <b>{t('paragraph1.part6')}</b> {t('paragraph1.part7')} <b>{t('paragraph1.part8')}</b> {t('paragraph1.part9')}
