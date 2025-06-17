@@ -8,7 +8,10 @@ export interface TranslationObject {
     [key: string]: TranslationEntry;
 }
 
-export type TranslatorReturnType = (key: string) => string;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ReturnType = any
+
+export type TranslatorReturnType = (key: string) => ReturnType;
 
 // Caches for loaded translation objects and memoized translation functions.
 const loadedTranslations = new Map<Language, TranslationObject>();
@@ -129,14 +132,6 @@ export function getTranslationsImpl(locale: Language, messages: TranslationObjec
     for (let i = 0; i < namespaceParts.length; i++) {
         const part = namespaceParts[i];
 
-        if (typeof currentLevel === 'string') {
-            // Namespace path prematurely leads to a string.
-            return warnAndReturnFallback(
-                `Namespace "${namespace}" leads to a string prematurely at "${part}".`,
-                cacheKeyValue, locale, namespace
-            );
-        }
-
         const nextLevel: TranslationEntry | undefined = currentLevel[part];
 
         if (i === namespaceParts.length - 1) {
@@ -177,7 +172,7 @@ export function getTranslationsImpl(locale: Language, messages: TranslationObjec
      * @param key The dot-separated translation key (e.g., "title", "description.long").
      * @returns The translated string or the key itself if not found/invalid.
      */
-    const translateFunction = (key: string): string => {
+    const translateFunction = (key: string): ReturnType => {
         const keyParts = key.split('.');
         let currentTranslation: TranslationEntry | TranslationObject = translationsBase;
 
@@ -194,10 +189,7 @@ export function getTranslationsImpl(locale: Language, messages: TranslationObjec
             const value: TranslationEntry = currentTranslation[part];
 
             if (i === keyParts.length - 1) {
-                // Last part of the key, should be the final string translation.
-                if (typeof value === 'string') {
-                    return value;
-                }
+                return value;
             } else {
                 // Intermediate part of the key, must be an object.
                 if (typeof value === 'object' && value !== null) {

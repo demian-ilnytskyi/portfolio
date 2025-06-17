@@ -7,7 +7,7 @@ import DeletectThemeScript from "@/shared/components/theme_switcher/deletect_the
 import { cookies } from "next/headers";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import CookieKey, { getCookieBooleanValue } from "@/shared/constants/variables/cookie_key";
-import { getTranslations } from "@/shared/localization/server";
+// import { getTranslations } from "@/shared/localization/server";
 import LocationzationProvider from "@/shared/localization/server_provider";
 
 
@@ -15,17 +15,17 @@ export async function generateMetadata({ params }: {
   params: Promise<{ locale: Language }>;
 }): Promise<Metadata> {
   const locale = await setPageLocaleAsync(params);
-  const t = await getTranslations('Metadata.Main', locale);
+  // const t = await getTranslations('Metadata.Main', locale);
 
   return {
     ...metadataHelper({
       isMain: true,
-      t: t,
+      t: () => '',
       linkPart: '',
       locale: locale,
     }),
     openGraph: openGraph(locale),
-    category: t('category'),
+    category: '',//t('category'),
     manifest: `/${locale}/manifest.json`,
     other: {
       "Content-Language": locale,
