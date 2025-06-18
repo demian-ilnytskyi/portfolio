@@ -19,7 +19,10 @@ export default function SocilaCard({
             "dark:bg-gray-800 border-2 dark:border-gray-800 shadow dark:shadow-gray-300 flex flex-row px-5 py-2 rounded-3xl",
             "bg-gray-50 border-gray-50 shadow-gray-700"
         )}
-            href={link}>
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={title}>
             {Icon && <Icon className="w-10 h-10 self-center dark:text-gray-300 text-gray-500" />}
             <div className="flex flex-col ml-5">
                 <p className={cn(
