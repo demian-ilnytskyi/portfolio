@@ -1,9 +1,9 @@
 export default abstract class AppTextStyle {
     // Hint Styles
-    static readonly textHint16: string = 'text-base font-normal text-neutral-variant'; // 16px = 1rem
-    static readonly textHint20: string = 'text-xl font-normal text-neutral-variant'; // 20px = 1.25rem
-    static readonly textHint24: string = 'text-2xl font-normal text-neutral-variant'; // 24px = 1.5rem
-    static readonly textHint14: string = 'text-sm font-normal text-neutral-variant'; // 14px = 0.875rem
+    static readonly textHint16: string = 'text-base font-normal'; // 16px = 1rem
+    static readonly textHint20: string = 'text-xl font-normal'; // 20px = 1.25rem
+    static readonly textHint24: string = 'text-2xl font-normal'; // 24px = 1.5rem
+    static readonly textHint14: string = 'text-sm font-normal'; // 14px = 0.875rem
 
     // Error Styles
     static readonly textError14: string = 'text-sm font-normal text-ref-error-50'; // 14px = 0.875rem
@@ -15,7 +15,7 @@ export default abstract class AppTextStyle {
     static readonly headlineMediumBold: string = 'text-3xl font-bold leading-snug'; // 28px = 1.75rem
     static readonly headlineSmall: string = 'text-2xl font-medium leading-normal'; // 24px = 1.5rem
     static readonly headlineSmallBold: string = 'text-2xl font-bold leading-normal'; // 24px = 1.5rem
-    static readonly headlineSmallVariant: string = 'text-2xl font-medium text-neutral-variant leading-normal'; // 24px = 1.5rem
+    static readonly headlineSmallVariant: string = 'text-2xl font-medium leading-normal'; // 24px = 1.5rem
 
     // Material Theme Body Styles
     static readonly bodyLarge: string = 'text-base font-normal leading-relaxed tracking-wide'; // 16px = 1rem
