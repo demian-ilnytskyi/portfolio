@@ -25,7 +25,7 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
                 prefetch={false}
                 icon={<KIcons.workExpirience className="cursor-pointer" />} />
             <_Button
-                path={`#${AppLinks.workExperience}`}
+                path={`#${AppLinks.connect}`}
                 text={t('connect')}
                 prefetch={false}
                 icon={<KIcons.connect className="cursor-pointer" />} />

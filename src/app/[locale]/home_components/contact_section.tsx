@@ -37,7 +37,7 @@ export default async function ContactSection(): Promise<Component> {
     const contactText: ContactListTextProps[] = t('social');
 
     return <section className="items-center flex flex-col p-4 md:p-8 max-w-3xl self-center">
-        <TitleSection link={AppLinks.contact} title={t('title')} />
+        <TitleSection link={AppLinks.connect} title={t('title')} />
         <h5 className={cn(
             AppTextStyle.titleLargeBold,
             "font-bold not-md:text-3xl text-center mb-10 dark:text-gray-300 text-gray-500"

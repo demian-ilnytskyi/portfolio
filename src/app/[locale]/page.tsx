@@ -20,7 +20,7 @@ export default async function Home({
     <AboutMe />
     <Divider id={AppLinks.workExperience} />
     <WorkExperience />
-    <Divider id={AppLinks.contact} />
+    <Divider id={AppLinks.connect} />
     <ContactSection />
     <CardDivider className="max-w-3xl self-center" />
     <ContactFormContent />
