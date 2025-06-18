@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import CardDivider from "./card_divider";
 
 export interface ExperienceModel {
