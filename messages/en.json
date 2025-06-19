@@ -73,6 +73,41 @@
                     ]
                 }
             ]
+        },
+        "Connect": {
+            "title": "Let's Connect",
+            "description": "Find me on social media.",
+            "social": [
+                {
+                    "title": "Email",
+                    "description": "demien.ilnutskiy@gmail.com"
+                },
+                {
+                    "title": "LinkedIn",
+                    "description": "demian-ilnytskyi-54367a268"
+                },
+                {
+                    "title": "GitHub",
+                    "description": "DemienIlnutskiy"
+                }
+            ]
+        },
+        "ContactForm": {
+            "title": "Contact Me",
+            "description": "Got a question or a project in mind? Drop me a message below, and let's start the conversation!",
+            "nameLabel": "Name",
+            "emailLabel": "Email",
+            "messageLabel": "Message",
+            "namePlaceholder": "Your Name",
+            "emailPlaceholder": "Your Email",
+            "messagePlaceholder": "Your Message",
+            "nameError": "Please enter your name.",
+            "emailError": "Please enter your email.",
+            "emailFormatError": "Please enter a valid email address.",
+            "messageError": "Please enter your message.",
+            "submitButton": "Send Message",
+            "successMessage": "Thank you for your message! I'll get back to you soon.",
+            "errorMessage": "There was an error sending your message. Please try again later or contact me via social media."
         }
     },
     "NotFound": {
@@ -98,7 +133,8 @@
     "NavigationBar": {
         "home": "Home",
         "aboutMe": "About me",
-        "workExperience": "Work experience"
+        "workExperience": "Work experience",
+        "connect": "Connect"
     },
     "Footer": {
         "content": "All rights reserved.",

@@ -73,6 +73,41 @@
                     ]
                 }
             ]
+        },
+        "Connect": {
+            "title": "Зв'яжіться зі мною",
+            "description": "Знайдіть мене в соціальних мережах.",
+            "social": [
+                {
+                    "title": "Електронна пошта",
+                    "description": "demien.ilnutskiy@gmail.com"
+                },
+                {
+                    "title": "LinkedIn",
+                    "description": "demian-ilnytskyi-54367a268"
+                },
+                {
+                    "title": "GitHub",
+                    "description": "DemienIlnutskiy"
+                }
+            ]
+        },
+        "ContactForm": {
+            "title": "Напишіть мені",
+            "description": "Маєте запитання чи ідею для співпраці? Заповніть форму нижче, і я зв’яжуся з вами якнайшвидше!",
+            "nameLabel": "Ім’я",
+            "emailLabel": "Електронна пошта",
+            "messageLabel": "Повідомлення",
+            "namePlaceholder": "Ваше ім’я",
+            "emailPlaceholder": "Ваша електронна пошта",
+            "messagePlaceholder": "Ваше повідомлення",
+            "nameError": "Будь ласка, введіть ваше ім’я.",
+            "emailError": "Будь ласка, введіть вашу електронну пошту.",
+            "emailFormatError": "Будь ласка, введіть дійсну адресу електронної пошти.",
+            "messageError": "Будь ласка, введіть ваше повідомлення.",
+            "submitButton": "Надіслати повідомлення",
+            "successMessage": "Дякую за ваше повідомлення! Я зв’яжуся з вами незабаром.",
+            "errorMessage": "Сталася помилка під час надсилання повідомлення. Спробуйте ще раз пізніше або зв’яжіться зі мною через соціальні мережі."
         }
     },
     "NotFound": {
@@ -98,7 +133,8 @@
     "NavigationBar": {
         "home": "Головна",
         "aboutMe": "Про мене",
-        "workExperience": "Досвід роботи"
+        "workExperience": "Досвід роботи",
+        "connect": "зв’язатися"
     },
     "Footer": {
         "content": "Всі права захищені.",

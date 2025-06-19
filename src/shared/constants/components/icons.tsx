@@ -4,6 +4,10 @@ import {
     Moon,
     Sun,
     Briefcase,
+    Mail,
+    Linkedin,
+    Github,
+    Users,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -18,8 +22,12 @@ const KIcons = {
     moon: (props: IconProps): Component => <Moon {...props} className={cn(baseClass, props?.className)} />,
     aboutMe: (props: IconProps): Component => <Info {...props} className={cn(baseClass, props?.className)} />,
     workExpirience: (props: IconProps): Component => <Briefcase {...props} className={cn(baseClass, props?.className)} />,
+    connect: (props: IconProps): Component => <Users {...props} className={cn(baseClass, props?.className)} />,
     error: (props: IconProps): Component => <Info {...props} className={cn(baseClass, 'text-red-500', props?.className)} />,
     menu: (props: IconProps): Component => <Menu {...props} className={cn(baseClass, props?.className)} />,
+    email: (props: IconProps): Component => <Mail {...props} className={cn(baseClass, props?.className)} />,
+    linkedin: (props: IconProps): Component => <Linkedin {...props} className={cn(baseClass, props?.className)} />,
+    github: (props: IconProps): Component => <Github {...props} className={cn(baseClass, props?.className)} />,
 };
 
 export default KIcons;

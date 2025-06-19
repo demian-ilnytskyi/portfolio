@@ -4,6 +4,9 @@ import AboutMe from "./home_components/about_me";
 import { setPageLocaleAsync } from "@/shared/constants/variables/locale_helper";
 import AppLinks from "@/shared/constants/variables/links";
 import WorkExperience from "./home_components/work_experience";
+import ContactSection from "./home_components/contact_section";
+import CardDivider from "@/shared/components/card_divider";
+import ContactFormContent from "./home_components/contact_form/contact_form_content";
 
 export default async function Home({
   params
@@ -17,6 +20,10 @@ export default async function Home({
     <AboutMe />
     <Divider id={AppLinks.workExperience} />
     <WorkExperience />
+    <Divider id={AppLinks.connect} />
+    <ContactSection />
+    <CardDivider className="max-w-3xl self-center" />
+    <ContactFormContent />
     <Divider />
   </main>
 

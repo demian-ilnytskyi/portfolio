@@ -24,10 +24,15 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
                 text={t('workExperience')}
                 prefetch={false}
                 icon={<KIcons.workExpirience className="cursor-pointer" />} />
+            <_Button
+                path={`#${AppLinks.connect}`}
+                text={t('connect')}
+                prefetch={false}
+                icon={<KIcons.connect className="cursor-pointer" />} />
         </>
     };
 
-    return <header className="sticky top-0 flex justify-center m-0 p-0 w-full">
+    return <header className="sticky top-0 flex justify-center m-0 p-0 w-full z-10">
         <nav className={cn(
             "bg-blue-100 max-h-18 w-full rounded-b-4xl",
             "shadow-xl dark:bg-gray-700",
@@ -48,7 +53,7 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
                 <LanguageSwitcher className="hidden tablet:flex" />
                 <NavigationMobDialog >
                     <Buttons />
-                    <div className="flex flex-row gap-2 flex-wrap">
+                    <div className="flex flex-row gap-2 flex-wrap mt-2">
                         <LanguageSwitcher className="mr-3" />
                         <ThemeSwticher isDark={isDark} />
                     </div>
@@ -70,7 +75,7 @@ function _Button(props: ButtonProps) {
         href={props.path}
         className={cn(
             AppTextStyle.titleMedium,
-            "my-4 flex items-center justify-center group text-base"
+            "flex items-center justify-center group text-base"
         )}
         prefetch={props.prefetch}>
         <div className={"h-full py-0 not-small-mobile:px-0 px-3 flex flex-row justify-center items-center"}>

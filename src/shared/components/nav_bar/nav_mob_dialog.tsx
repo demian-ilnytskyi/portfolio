@@ -7,7 +7,7 @@ export default function NavigationMobDialog({ children }: { children: React.Reac
         buttonIcon={<div className="bg-black dark:bg-gray-400 p-3 rounded-full">
             < KIcons.menu className="cursor-pointer text-white dark:text-black" />
         </div>}
-        dialogClassName="h-max flex-col items-start self-end pb-5 pl-5">
+        dialogClassName="h-max flex-col items-start self-end pb-5 pl-5 space-y-5 pt-4">
         {children}
     </BottomDialog>
 }
