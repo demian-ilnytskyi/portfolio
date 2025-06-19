@@ -15,7 +15,10 @@ export default async function Footer(): Promise<Component> {
         </p>
         <a
             href={KTextConstants.projectGitHubLink}
-            className="flex flex-row py-2 px-3 rounded-4xl bg-gray-900 cursor-pointer space-x-2"
+            className={cn(
+                "flex flex-row py-2 px-3 rounded-4xl bg-blue-200 cursor-pointer space-x-2 dark:bg-gray-900",
+                "hover:bg-blue-300 dark:hover:bg-blue-950"
+            )}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={'GitHub'}>
