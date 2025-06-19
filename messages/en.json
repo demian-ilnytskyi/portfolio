@@ -137,7 +137,7 @@
         "connect": "Connect"
     },
     "Footer": {
-        "content": "All rights reserved.",
-        "privacyPolicy": "Privacy Policy"
+        "content": "Demian Ilnutskiy. All rights reserved.",
+        "viewSource": "View Source"
     }
 }

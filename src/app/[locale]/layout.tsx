@@ -9,6 +9,7 @@ import KTextConstants from "@/shared/constants/variables/text_constants";
 import CookieKey, { getCookieBooleanValue } from "@/shared/constants/variables/cookie_key";
 // import { getTranslations } from "@/shared/localization/server";
 import LocationzationProvider from "@/shared/localization/server_provider";
+import Footer from "@/shared/components/footer";
 
 
 export async function generateMetadata({ params }: {
@@ -57,7 +58,7 @@ export default async function RootLayout({
         <div className="flex flex-col min-h-screen mx-4 desk:mx-24 tablet:mx-8 self-center">
           <NavigationBar isDark={isDark ?? undefined} />
           {children}
-
+          <Footer />
         </div>
       </LocationzationProvider>
     </body>
