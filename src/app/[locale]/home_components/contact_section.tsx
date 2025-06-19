@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import SocilaCard from "@/shared/components/social_card";
 import KIcons from "@/shared/constants/components/icons";
 import { getTranslations } from "@/shared/localization/server";
+import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export interface ContactListProps {
     link: string;
@@ -19,15 +20,15 @@ export interface ContactListTextProps {
 const contactList: ContactListProps[] = [
     {
         Icon: ({ className }) => <KIcons.email className={className} />,
-        link: "mailto:demien.ilnutskiy@gmail.com",
+        link: `mailto:${KTextConstants.ownerEmail}`,
     },
     {
         Icon: ({ className }) => <KIcons.linkedin className={className} />,
-        link: "https://www.linkedin.com/in/demian-ilnytskyi-54367a268",
+        link: KTextConstants.ownerLinkedIn,
     },
     {
         Icon: ({ className }) => <KIcons.github className={className} />,
-        link: "https://github.com/DemienIlnutskiy",
+        link: KTextConstants.ownerGitHub,
     },
 ]
 

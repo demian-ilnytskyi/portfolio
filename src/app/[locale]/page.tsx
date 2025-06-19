@@ -24,7 +24,6 @@ export default async function Home({
     <ContactSection />
     <CardDivider className="max-w-3xl self-center" />
     <ContactFormContent />
-    <Divider />
   </main>
 
 }
