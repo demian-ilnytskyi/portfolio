@@ -15,22 +15,26 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
     function Buttons() {
         return <>
             <_Button
-                path={`#${AppLinks.aboutMe}`}
+                path={`/#${AppLinks.aboutMe}`}
                 text={t('aboutMe')}
                 prefetch={false}
                 icon={<KIcons.aboutMe className="cursor-pointer" />} />
             <_Button
-                path={`#${AppLinks.workExperience}`}
+                path={`/#${AppLinks.workExperience}`}
                 text={t('workExperience')}
                 prefetch={false}
                 icon={<KIcons.workExpirience className="cursor-pointer" />} />
             <_Button
-                path={`#${AppLinks.connect}`}
+                path={`/#${AppLinks.connect}`}
                 text={t('connect')}
                 prefetch={false}
                 icon={<KIcons.connect className="cursor-pointer" />} />
         </>
     };
+    const lightModeText = t('lightMode');
+    const darkModeText = t('darkMode');
+    const ukSwitchText = t('ukSwitcherLabel');
+    const enSwitchText = t('enSwitcherLabel');
 
     return <header className="sticky top-0 flex justify-center m-0 p-0 w-full z-10">
         <nav className={cn(
@@ -39,23 +43,33 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
             "overflow-hidden flex justify-between items-center px-3 py-4"
         )}>
             <Link
-                href={`#${AppLinks.homePage}`}
+                href={`/#${AppLinks.homePage}`}
                 className="flex items-center p-2 hover:scale-105 duration-200 drop-shadow-md active:scale-90 cursor-pointer"
                 aria-label={t('home')}
                 prefetch={false}>
-                Demian Ilnutskiy
+                {t('logo')}
             </Link>
             <div className="flex flex-row items-center not-small-mobile:w-full not-small-mobile:justify-evenly space-x-6 not-tablet:hidden">
                 <Buttons />
             </div>
             <div className="flex flex-row pr-3">
-                <ThemeSwticher isDark={isDark} className="hidden tablet:flex mr-3" />
-                <LanguageSwitcher className="hidden tablet:flex" />
-                <NavigationMobDialog >
+                <ThemeSwticher
+                    isDark={isDark}
+                    className="hidden tablet:flex mr-3"
+                    lightText={lightModeText}
+                    darkText={darkModeText} />
+                <LanguageSwitcher
+                    className="hidden tablet:flex"
+                    ukraineSwitcherText={ukSwitchText}
+                    englishSwitcherText={enSwitchText} />
+                <NavigationMobDialog ariaLabel={t('dialogLabel')} >
                     <Buttons />
                     <div className="flex flex-row gap-2 flex-wrap mt-2">
-                        <LanguageSwitcher className="mr-3" />
-                        <ThemeSwticher isDark={isDark} />
+                        <LanguageSwitcher
+                            className="mr-3"
+                            ukraineSwitcherText={ukSwitchText}
+                            englishSwitcherText={enSwitchText} />
+                        <ThemeSwticher isDark={isDark} lightText={lightModeText} darkText={darkModeText} />
                     </div>
                 </NavigationMobDialog>
             </div>

@@ -39,10 +39,10 @@ export default async function ContactSection(): Promise<Component> {
 
     return <section className="items-center flex flex-col p-4 md:p-8 max-w-3xl self-center">
         <TitleSection link={AppLinks.connect} title={t('title')} />
-        <h5 className={cn(
+        <h4 className={cn(
             AppTextStyle.titleLargeBold,
             "font-bold not-md:text-3xl text-center mb-10 dark:text-gray-300 text-gray-500"
-        )}>{t('description')}</h5>
+        )}>{t('description')}</h4>
         <ul className="grid grid-cols-1 gap-7 tablet:grid-cols-2">
             {contactText.map((contact, i) => {
                 const contactItem = contactList.at(i);

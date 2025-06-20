@@ -8,8 +8,9 @@ interface BottomDialogProps {
     buttonText?: string;
     buttonIcon?: Component;
     buttonClassName?: string | undefined;
-    bottomButton?: (htmlFor: string, formId: string) => React.ReactNode
-    checkBox?: (id: string, className: string, formId: string) => DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+    bottomButton?: (htmlFor: string, formId: string) => React.ReactNode;
+    arriaLabel: string;
+    checkBox?: (id: string, className: string, formId: string) => DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 }
 export default function BottomDialog({
     children,
@@ -18,7 +19,8 @@ export default function BottomDialog({
     buttonText,
     bottomButton: buttomButton,
     checkBox,
-    buttonIcon
+    buttonIcon,
+    arriaLabel,
 }: BottomDialogProps): Component {
     const id = useId();
     const idValue = `bottom-dialog-${id}`;
@@ -39,7 +41,8 @@ export default function BottomDialog({
                 dialogClassName
             )}
             role="dialog"
-            aria-modal="true">
+            aria-modal="true"
+            aria-label={arriaLabel}>
             {buttomButton
                 ? <form method="dialog" id={formIdValue} className="flex flex-col h-full" >
                     <div className="flex-1 overflow-y-auto dialog-scrollbar p-6 pb-0">

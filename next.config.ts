@@ -45,13 +45,13 @@ const nextConfig: NextConfig = {
                     },
                     // Set the Cache-Control header to manage how the response is cached.
                     // 'public': Response can be cached by any cache.
-                    // 'max-age=3600': Response is fresh for 1 hour.
+                    // 'max-age=86400': Response is fresh for 24 hours.
                     // 'must-revalidate': Cache must revalidate stale responses with the server.
                     // 'stale-while-revalidate=120': Allows serving stale content for up to 120 seconds while revalidating in the background.
                     // 'stale-if-error=86400': Allows serving stale content for up to 1 day if the server is unreachable or returns an error.
                     {
                         key: 'Cache-Control',
-                        value: cacheHeader(3600),
+                        value: cacheHeader(86400),
                     },
                     // Set the X-DNS-Prefetch-Control header to 'on'.
                     // This enables DNS prefetching, allowing the browser to resolve domain names in advance, improving perceived performance.
@@ -66,62 +66,6 @@ const nextConfig: NextConfig = {
                         value: 'origin-when-cross-origin'
                     }
                 ],
-            },
-            {
-                // Apply specific cache-control for localized root paths (e.g., /en, /uk).
-                source: '/:locale([a-z]{2})?',
-                headers: [
-                    {
-                        // Cache for 24 hours (86400 seconds).
-                        key: 'Cache-Control',
-                        // TODO: Set corect cache time in Jun
-                        value: cacheHeader(0), // 86400
-                    },
-                ]
-            },
-            {
-                // Apply specific cache-control for the feedback link, assuming KTextConstants.feedbackLink holds the path.
-                source: `/:locale([a-z]{2})?/feedback`,
-                headers: [
-                    {
-                        // Cache for 7 days (604800 seconds).
-                        key: 'Cache-Control',
-                        value: cacheHeader(604800),
-                    },
-                ]
-            },
-            {
-                // Apply specific cache-control for the feedback link, assuming KTextConstants.feedbackLink holds the path.
-                source: `/:locale([a-z]{2})?/mobile`,
-                headers: [
-                    {
-                        // Cache for 30 days (2592000 seconds).
-                        key: 'Cache-Control',
-                        value: cacheHeader(2592000),
-                    },
-                ]
-            },
-            {
-                // Apply specific cache-control for the privacy policy link, assuming KTextConstants.privacyPolicyLink holds the path.
-                source: `/:locale([a-z]{2})?/privacy-policy`,
-                headers: [
-                    {
-                        // Cache for 30 days (2592000 seconds).
-                        key: 'Cache-Control',
-                        value: cacheHeader(2592000),
-                    },
-                ]
-            },
-            {
-                // Apply specific cache-control for discount pages, assuming KTextConstants.discountsLink holds the base path.
-                source: `/:locale([a-z]{2})?/discounts/:path*`,
-                headers: [
-                    {
-                        // Cache for 24 hours (86400 seconds).
-                        key: 'Cache-Control',
-                        value: cacheHeader(86400),
-                    },
-                ]
             },
             {
                 // Apply specific cache-control for the favicon.

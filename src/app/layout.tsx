@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import KTextConstants from "@/shared/constants/variables/text_constants";
-// import { keywords } from "@/shared/constants/variables/koywords";
-import { twitter } from "@/shared/helpers/metadata_helper";
+import { metadataIcons, twitter } from "@/shared/helpers/metadata_helper";
 
 import "./globals.css";
 
@@ -20,31 +19,31 @@ export const metadata: Metadata = {
   // verification: {
   //   google: '',
   // },
-  // icons: {
-  //   icon: [
-  //     {
-  //       url: "/favicon.ico",
-  //       type: "image/x-icon"
-  //     },
-  //     ...metadataIcons,
-  //   ],
-  //   apple: [
-  //     ...metadataIcons,
-  //     {
-  //       rel: 'mask-icon',
-  //       url: "/icons/logo-512.svg",
-  //       color: '#000000',
-  //     }
-  //   ],
-  //   shortcut: [
-  //     {
-  //       url: "/favicon.ico",
-  //       type: "image/x-icon"
-  //     },
-  //     ...metadataIcons,
-  //   ],
-  // },
-  applicationName: "---",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        type: "image/x-icon"
+      },
+      ...metadataIcons,
+    ],
+    apple: [
+      ...metadataIcons,
+      {
+        rel: 'mask-icon',
+        url: "/icons/logo-512.svg",
+        color: '#000000',
+      }
+    ],
+    shortcut: [
+      {
+        url: "/favicon.ico",
+        type: "image/x-icon"
+      },
+      ...metadataIcons,
+    ],
+  },
+  applicationName: "Demian Portfolio",
   appLinks: {
     web: {
       url: KTextConstants.baseUrl,

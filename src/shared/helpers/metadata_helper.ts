@@ -40,21 +40,6 @@ export const metadataIcons: Icon[] = [
     sizes: "512x512",
     type: "image/png",
   },
-  {
-    url: "/icons/logo-192.svg",
-    sizes: "192x192",
-    type: "image/svg+xml"
-  },
-  {
-    url: "/icons/logo.svg",
-    sizes: "32x32",
-    type: "image/svg+xml"
-  },
-  {
-    url: "/icons/logo-512.svg",
-    sizes: "512x512",
-    type: "image/svg+xml"
-  }
 ];
 
 export function openGraph(locale: Language): OpenGraph {
@@ -65,7 +50,7 @@ export function openGraph(locale: Language): OpenGraph {
         url: KTextConstants.baseUrl + "/icons/logo-512.png",
         width: 512,
         height: 512,
-        alt: "---",
+        alt: "Demian Portfolio",
       },
     ],
     locale: grapthLocale(locale),
