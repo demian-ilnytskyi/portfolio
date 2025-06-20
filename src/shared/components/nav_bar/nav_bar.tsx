@@ -44,7 +44,10 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
         )}>
             <Link
                 href={`/#${AppLinks.homePage}`}
-                className="flex items-center p-2 hover:scale-105 duration-200 drop-shadow-md active:scale-90 cursor-pointer"
+                className={cn(
+                    "flex items-center p-2 hover:scale-110 hover:underline",
+                    "duration-200 drop-shadow-md active:scale-90 cursor-pointer"
+                )}
                 aria-label={t('home')}
                 prefetch={false}>
                 {t('logo')}
@@ -89,14 +92,13 @@ function _Button(props: ButtonProps) {
         href={props.path}
         className={cn(
             AppTextStyle.titleMedium,
-            "flex items-center justify-center group text-base"
+            "flex items-center justify-center group text-base hover:scale-105 duration-200"
         )}
         prefetch={props.prefetch}>
         <div className={"h-full py-0 not-small-mobile:px-0 px-3 flex flex-row justify-center items-center"}>
             {props.icon && props.icon}
-            <div className="flex-col flex items-center ml-2">
+            <div className="flex-col flex items-center ml-2 hover:underline duration-200">
                 <span>{props.text}</span>
-                <div className={"w-0 h-0.5 relative top-1 transition-width duration-400 ease group-hover:w-full group-active:w-0"} />
             </div>
         </div>
     </Link>;
