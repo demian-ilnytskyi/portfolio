@@ -10,23 +10,24 @@ import CookieKey, { getCookieBooleanValue } from "@/shared/constants/variables/c
 // import { getTranslations } from "@/shared/localization/server";
 import LocationzationProvider from "@/shared/localization/server_provider";
 import Footer from "@/shared/components/footer";
+import { getTranslations } from "@/shared/localization/server";
 
 
 export async function generateMetadata({ params }: {
   params: Promise<{ locale: Language }>;
 }): Promise<Metadata> {
   const locale = await setPageLocaleAsync(params);
-  // const t = await getTranslations('Metadata.Main', locale);
+  const t = await getTranslations('Metadata.Main', locale);
 
   return {
     ...metadataHelper({
       isMain: true,
-      t: () => '',
+      t: t,
       linkPart: '',
       locale: locale,
     }),
     openGraph: openGraph(locale),
-    category: '',//t('category'),
+    category: t('category'),
     manifest: `/${locale}/manifest.json`,
     other: {
       "Content-Language": locale,
@@ -47,7 +48,7 @@ export default async function RootLayout({
   const htmlClass = (isDark === true && { className: 'dark' });
 
   // const nonce = (await headers()).get('x-nonce') ?? undefined;
-  return <html suppressHydrationWarning={!KTextConstants.isDev} lang={locale} {...htmlClass} >
+  return <html suppressHydrationWarning={!KTextConstants.isDev || !isDarkMode} lang={locale} {...htmlClass} >
     <head>
       <meta httpEquiv="Content-Language" content={locale} />
       {!isDarkMode && <DeletectThemeScript />}

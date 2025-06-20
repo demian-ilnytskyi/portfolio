@@ -1,5 +1,5 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import profileImage from "../../../../public/images/profile.jpg"
+import profileImage from "../../../../public/images/profile.png"
 import Image from 'next/image';
 import { cn } from "@/lib/utils";
 import { getTranslations } from "@/shared/localization/server";

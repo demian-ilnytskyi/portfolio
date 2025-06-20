@@ -5,7 +5,12 @@ import KIcons from "@/shared/constants/components/icons";
 import CookieKey from "@/shared/constants/variables/cookie_key";
 import { useEffect, useState } from "react";
 
-export default function ThemeSwticher({ isDark, className }: { className?: string, isDark?: boolean }): Component {
+export default function ThemeSwticher({ isDark, className, lightText, darkText }: {
+    className?: string;
+    isDark?: boolean;
+    lightText: string;
+    darkText: string;
+}): Component {
     const [isDarkMode, setDarkMode] = useState(isDark ?? false);
 
     useEffect(() => {
@@ -28,6 +33,7 @@ export default function ThemeSwticher({ isDark, className }: { className?: strin
 
     return <button
         onClick={changeTheme}
+        aria-label={isDarkMode ? lightText : darkText}
         className={cn(
             "relative flex items-center justify-center", // Base flex container for centering content
             "h-11.5 w-11.5 rounded-full", // Fixed size and rounded shape

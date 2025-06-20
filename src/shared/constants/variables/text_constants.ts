@@ -15,7 +15,7 @@ export default abstract class KTextConstants {
         KTextConstants.isDevENV
             ? "http://localhost:3000"
             : process.env.NEXT_PUBLIC_FLAVOUR == 'development'
-                ? "https://dev.--.info"
-                : "https://--.info";
+                ? "https://dev.---.info"
+                : "https://---.info";
     // static readonly discountsLink = '/discounts';
 }
