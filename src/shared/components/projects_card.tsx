@@ -32,14 +32,14 @@ export default function ProjectsCard({ description, image, title, viewDetailText
                 {title}
             </h2>
             <CustomMarkdown className={cn(AppTextStyle.bodyLarge, 'line-clamp-4')} content={description} />
-            <div className="flex flex-row justify-between items-center mt-2">
+            <div className="flex flex-row justify-between items-center mt-3">
                 <span className="px-2 py-1 bg-blue-100 dark:bg-cyan-900 rounded-4xl dark:text-gray-200 text-gray-500">
                     {period}
                 </span>
                 <Link
                     href={AppLinks.projectsPage}
                     className={cn(
-                        "mt-3 px-3 py-1 dark:bg-cyan-700 rounded-4xl self-end w-max dark:hover:bg-cyan-600",
+                        "px-3 py-1 dark:bg-cyan-700 rounded-4xl self-end w-max dark:hover:bg-cyan-600",
                         AppTextStyle.titleMediumBold,
                         "bg-cyan-300 hover:bg-cyan-400 font-le tracking-wider"
                     )}>
