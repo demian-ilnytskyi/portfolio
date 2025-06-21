@@ -56,7 +56,7 @@ export default async function RootLayout({
     <body
       className={cn(`bg-white dark:bg-gray-900`)}>
       <LocationzationProvider locale={locale} >
-        <div className="flex flex-col min-h-screen mx-4 desk:mx-24 tablet:mx-8 self-center">
+        <div className="flex flex-col min-h-screen mx-4 lg:mx-24 tablet:mx-8 self-center">
           <NavigationBar isDark={isDark ?? undefined} />
           {children}
           <Footer />

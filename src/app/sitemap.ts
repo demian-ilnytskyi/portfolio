@@ -1,3 +1,4 @@
+import AppLinks from '@/shared/constants/variables/links';
 import KTextConstants from '@/shared/constants/variables/text_constants';
 import { languages } from '@/shared/helpers/metadata_helper';
 import type { MetadataRoute } from 'next'
@@ -31,6 +32,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 1,
       alternates: generateAlternates(),
+    },
+    {
+      link: AppLinks.projectsPage,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+      alternates: generateAlternates(AppLinks.projectsPage),
     },
   ];
 
