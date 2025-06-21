@@ -1,3 +1,4 @@
+import KTextConstants from '@/shared/constants/variables/text_constants'
 import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/profile/',
     },
-    sitemap: "https://---/sitemap.xml",
+    sitemap: `${KTextConstants.baseUrl}/sitemap.xml`,
   }
 }

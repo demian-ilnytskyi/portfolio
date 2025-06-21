@@ -1,6 +1,8 @@
+import type { MarkdownToJSX } from 'markdown-to-jsx';
 import Markdown from 'markdown-to-jsx';
 import AppTextStyle from '../constants/styles/app_text_styles';
 import { cn } from '@/lib/utils';
+import Divider from './divider';
 
 interface MarkdownProps {
     content: string;
@@ -13,7 +15,7 @@ export default function CustomMarkdown({ content, className }: MarkdownProps): C
     </Markdown>
 
 };
-const components = {
+const components: MarkdownToJSX.Overrides = {
     h1: ({ ...props }) => (
         <h1 {...props} className={AppTextStyle.h1Tablet} />
     ),
@@ -30,16 +32,13 @@ const components = {
         <p {...props} className={cn('mb-4', AppTextStyle.bodyLarge)} />
     ),
     strong: ({ ...props }) => (
-        <strong {...props} className={AppTextStyle.bodyLargeBold} />
+        <strong {...props} className={'text-bold'} />
     ),
     ul: ({ ...props }) => (
-        <ul {...props} className={cn('mb-4 pl-8', AppTextStyle.bodyLarge)} />
+        <ul {...props} className={cn('mb-4 pl-1', AppTextStyle.bodyLarge)} />
     ),
     ol: ({ ...props }) => (
         <ol  {...props} className={cn('mb-4 pl-8', AppTextStyle.bodyLarge)} />
-    ),
-    li: ({ ...props }) => (
-        <li  {...props} className={AppTextStyle.bodyLarge} />
     ),
     a: ({ ...props }) => (
         <a
@@ -50,4 +49,11 @@ const components = {
     code: ({ ...props }) => (
         <code {...props} className={cn(AppTextStyle.bodyMedium, 'bg-neutral-variant rounded-sm')} />
     ),
+    hr: ({ ...props }) => (
+        <Divider {...props} />
+    ),
+    li: ({ ...props }) => <li {...props} className={cn(AppTextStyle.bodyLarge, 'flex flex-row items-center')}>
+        <div className='h-1 w-1 dark:bg-white bg-black mr-2 rounded-full' />
+        {props.children}
+    </li>,
 };

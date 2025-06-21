@@ -113,7 +113,7 @@ export default function metadataHelper({
     description: t('description'),
     alternates: {
       canonical: locale === KTextConstants.defaultLocale && setCanonical ? KTextConstants.baseUrl + linkPart : canonical,
-      languages: languages(KTextConstants.baseUrl),
+      languages: languages(KTextConstants.baseUrl, linkPart),
     }
   }
 }
