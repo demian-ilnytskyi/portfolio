@@ -16,8 +16,9 @@ export default function SocilaCard({
 }: SocilaCardProps): Component {
     return <li >
         <a className={cn(
-            "dark:bg-gray-800 border-2 dark:border-gray-800 shadow dark:shadow-gray-300 flex flex-row px-5 py-2 rounded-3xl",
-            "bg-gray-50 border-gray-50 shadow-gray-700 hover:scale-105"
+            "dark:bg-gray-800 border-2 dark:border-gray-800 shadow dark:shadow-gray-300",
+            "flex flex-wrap px-5 py-2 rounded-3xl",
+            "bg-gray-50 border-gray-50 shadow-gray-700 hover:scale-105 duration-300"
         )}
             href={link}
             target="_blank"
