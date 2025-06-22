@@ -35,10 +35,6 @@ export async function generateMetadata({ params }: {
     };
 };
 
-export function generateStaticParams(): { name: string }[] {
-    return projects.map(project => ({ name: project.name }));
-};
-
 async function fetchProjectDetails({ locale, projectName }: { locale: Language, projectName: string }): Promise<string | null> {
     const path = `./${locale}/${projectName}.md`;
 

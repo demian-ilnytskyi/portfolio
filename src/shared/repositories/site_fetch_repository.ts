@@ -1,8 +1,6 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import KTextConstants from "../constants/variables/text_constants";
 
-
-const IS_DEV = process.env.NODE_ENV === "development";
 interface FetchRepositoryInterface {
     path: string;
     header?: HeadersInit;
@@ -31,7 +29,7 @@ export class SiteFetchRepository {
             // const baseUrl = await this.getBaseUrl();
             const fetchUrl = new URL(path, KTextConstants.baseUrl).toString();
 
-            if (IS_DEV) {
+            if (KTextConstants.isDev) {
                 const response = await fetch(fetchUrl, {
                     cache: "no-store",
                     headers: header,
