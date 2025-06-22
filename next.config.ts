@@ -45,13 +45,13 @@ const nextConfig: NextConfig = {
                     },
                     // Set the Cache-Control header to manage how the response is cached.
                     // 'public': Response can be cached by any cache.
-                    // 'max-age=86400': Response is fresh for 24 hours.
+                    // 'max-age=86400': Response is fresh for 7 days.
                     // 'must-revalidate': Cache must revalidate stale responses with the server.
                     // 'stale-while-revalidate=120': Allows serving stale content for up to 120 seconds while revalidating in the background.
                     // 'stale-if-error=86400': Allows serving stale content for up to 1 day if the server is unreachable or returns an error.
                     {
                         key: 'Cache-Control',
-                        value: cacheHeader(86400),
+                        value: cacheHeader(604800),
                     },
                     // Set the X-DNS-Prefetch-Control header to 'on'.
                     // This enables DNS prefetching, allowing the browser to resolve domain names in advance, improving perceived performance.
@@ -66,6 +66,26 @@ const nextConfig: NextConfig = {
                         value: 'origin-when-cross-origin'
                     }
                 ],
+            },
+            {
+                source: `/:locale([a-z]{2})?/projects`,
+                headers: [
+                    {
+                        // Cache for 1 day (86400 seconds).
+                        key: 'Cache-Control',
+                        value: cacheHeader(86400),
+                    },
+                ]
+            },
+            {
+                source: `/:locale([a-z]{2})?/projects/:path*`,
+                headers: [
+                    {
+                        // Cache for 30 days (2592000 seconds).
+                        key: 'Cache-Control',
+                        value: cacheHeader(2592000),
+                    },
+                ]
             },
             {
                 // Apply specific cache-control for the favicon.
