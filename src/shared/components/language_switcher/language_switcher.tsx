@@ -20,7 +20,7 @@ export default function LanguageSwitcher({ className, englishSwitcherText, ukrai
     englishSwitcherText: string
 }): Component {
     const pathname = usePathname(); // Get the current path to maintain navigation context
-    const nextLocale: Language = pathname.includes('en') ? 'uk' : 'en';
+    const nextLocale: Language = pathname.includes('uk') ? 'en' : 'uk';
     const ariaLabelText = nextLocale === 'uk' ? ukraineSwitcherText : englishSwitcherText;
     const cleanPath = pathname.replace(/^\/(uk|en)/, '');
     return <Link
