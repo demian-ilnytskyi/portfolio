@@ -1,4 +1,5 @@
 import AppLinks from '@/shared/constants/variables/links';
+import projects from '@/shared/constants/variables/projects';
 import KTextConstants from '@/shared/constants/variables/text_constants';
 import { languages } from '@/shared/helpers/metadata_helper';
 import type { MetadataRoute } from 'next'
@@ -41,6 +42,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+
+  for (const project of projects) {
+    const link = `${AppLinks.projectsPage}/${project.name}`;
+    customRoutes.push({
+      link: link,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: generateAlternates(link),
+    });
+  }
+
   const routes = KTextConstants.locales.reduce(
     (currentValue: MetadataRoute.Sitemap, locale: string) => {
       const localeValue = locale === KTextConstants.defaultLocale ? '' : `/${locale}`;
@@ -60,5 +72,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   routes.sort((a, b) => a.url.localeCompare(b.url));
 
-  return [];
+  return routes;
 }

@@ -16,6 +16,7 @@ export default async function HomeImagePart(): Promise<Component> {
             priority
             width={400}
             height={400}
+            fetchPriority="high"
             className="rounded-full border-gray-200 dark:border-0 border-2" />
         <h1 className={cn(AppTextStyle.h1, 'text-center not-tablet:text-5xl mt-5')}>
             {t('title')}

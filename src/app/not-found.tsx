@@ -49,8 +49,9 @@ async function PageContent() {
       <Link
         href="/"
         className={cn(
-          'p-2 flex w-max justify-self-center mt-5',
-          'rounded-xl hover:brightness-110 active:brightness-90',
+          'py-2 px-5 flex w-max justify-self-center mt-5',
+          'rounded-4xl dark:hover:bg-gray-400 hover:bg-gray-500',
+          "dark:bg-gray-300 dark:text-gray-700 bg-gray-600 text-gray-200",
         )} >
         {t('goToHomePage')}
       </Link>

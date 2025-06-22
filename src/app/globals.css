@@ -7,54 +7,38 @@
   --breakpoint-tablet: 48rem;
   --breakpoint-small-mobile: 30rem;
 
-  /* --animate-loading: loading-animation 1.5s ease-in-out infinite; */
+  
+  --animate-loading: loading-animation 1.5s ease-in-out infinite;
 
-  /* @keyframes loading-animation {
+  @keyframes loading-animation {
     0% {
       transform: rotate(360deg);
-      border-top: 0.56rem dashed var(--color-source-seed);
-      border-bottom: 0.56rem dashed var(--color-ref-error-error-60);
+      border-top: 0.56rem dashed var(--color-green-300);
+      border-bottom: 0.56rem dashed var(--color-red-700);
     }
 
     25% {
-      border-top: 0.56rem dashed var(--color-sys-dark-tertiary);
-      border-bottom: 0.56rem dashed var(--color-sys-dark-on-tertiary-container);
+      border-top: 0.56rem dashed var(--color-sky-400);
+      border-bottom: 0.56rem dashed var(--color-sky-700);
     }
 
     50% {
-      border-top: 0.56rem dashed var(--color-sys-dark-tertiary);
-      border-bottom: 0.56rem dashed var(--color-sys-dark-on-tertiary-container);
+      border-top: 0.56rem dashed var(--color-cyan-300);
+      border-bottom: 0.56rem dashed var(--color-cyan-700);
     }
 
     75% {
-      border-top: 0.56rem dashed var(--color-sys-dark-tertiary);
-      border-bottom: 0.56rem dashed var(--color-sys-dark-on-tertiary-container);
+      border-top: 0.56rem dashed var(--color-pink-300);
+      border-bottom: 0.56rem dashed var(--color-pink-700);
     }
 
     100% {
-      border-top: 0.56rem dashed var(--color-source-seed);
-      border-bottom: 0.56rem dashed var(--color-ref-error-error-60);
+      border-top: 0.56rem dashed var(--color-yellow-300);
+      border-bottom: 0.56rem dashed var(--color-yellow-700);
     }
   }
-
-  --animate-loading-screen: loading-screen-animation 1.5s ease-in-out infinite;
-
-
-  @keyframes loading-screen-animation {
-    0% {
-        left: -5%;
-        right: 105%;
-    }
-
-    100% {
-        left: 100%;
-        right: 0%;
-    }
-  } */
 }
-/* @theme inline {
-  --font-: var(--font--icons);
-} */
+
 @layer base {
   body{
     color:black;

@@ -115,29 +115,31 @@
         "title": "My projects",
         "details": "Details"
     },
+    "ProjectPage": {
+        "links": "Links",
+        "emptyLinks": "While I'm unable to provide live links for this project at the moment, please feel free to contact me for more details."
+    },
     "Projects": {
-        "list": [
-            {
-                "title": "Veteranam Info",
-                "description": "This app centralizes discounts and offers for war veterans in Ukraine, prioritizing ease of use and inclusivity for all tech skill levels. Built with Flutter, it includes mobile (Android/iOS) and web versions, designed for accessibility. A dedicated business portal allows companies to independently manage their discount offerings, streamlining the process for both veterans and service providers. The platform connects veterans with businesses, enhancing community support and improving access to benefits.",
-                "period": "May 2024 - Present"
-            },
-            {
-                "title": "Check My Building",
-                "description": "Check My Building is a mobile app developed with Flutter to streamline audits and improve house inspections. The app features photo-based confirmations, real-time updates, item-specific comments, and tools for planning audits, assigning responsibilities, and creating custom templates. By replacing email-based reports with this specialized solution, the business boosted efficiency, improved tracking, and reduced administrative workload, ultimately saving time and increasing operational clarity.",
-                "period": "October 2024 - May 2024"
-            },
-            {
-                "title": "Liva Clinic",
-                "description": "Liva Clinic is a comprehensive healthcare platform designed for both doctors and patients. It allows users to register in either role, book or offer appointments, and conduct consultations online or offline. Featuring integrated online payments, notification reminders, and real-time updates, the platform ensures seamless and accessible healthcare experiences across mobile and web. Built with Flutter for a consistent cross-platform interface and powered by a custom JavaScript backend on AWS, Liva Clinic streamlines the management of medical interactions for all users.",
-                "period": "October 2024 - April 2025"
-            },
-            {
-                "title": "Hunger Quest",
-                "description": "As a freelance developer for an agency, I utilized FlutterFlow to contribute to building and enhancing various features. My work included implementing functionality for adding and editing truck information, loading and displaying items from Firebase in a list view, integrating Google Maps for location selection, supporting two distinct user roles with separate access and behavior, and integrating Stripe for payment processing, including a user trial period.",
-                "period": "May 2025 - Present"
-            }
-        ]
+        "veteranam-info": {
+            "title": "Veteranam Info",
+            "description": "This app centralizes discounts and offers for war veterans in Ukraine, prioritizing ease of use and inclusivity for all tech skill levels. Built with Flutter, it includes mobile (Android/iOS) and web versions, designed for accessibility. A dedicated business portal allows companies to independently manage their discount offerings, streamlining the process for both veterans and service providers. The platform connects veterans with businesses, enhancing community support and improving access to benefits.",
+            "period": "May 2024 - Present"
+        },
+        "check-my-building": {
+            "title": "Check My Building",
+            "description": "Check My Building is a mobile app developed with Flutter to streamline audits and improve house inspections. The app features photo-based confirmations, real-time updates, item-specific comments, and tools for planning audits, assigning responsibilities, and creating custom templates. By replacing email-based reports with this specialized solution, the business boosted efficiency, improved tracking, and reduced administrative workload, ultimately saving time and increasing operational clarity.",
+            "period": "October 2024 - May 2024"
+        },
+        "liva-clinic": {
+            "title": "Liva Clinic",
+            "description": "Liva Clinic is a comprehensive healthcare platform designed for both doctors and patients. It allows users to register in either role, book or offer appointments, and conduct consultations online or offline. Featuring integrated online payments, notification reminders, and real-time updates, the platform ensures seamless and accessible healthcare experiences across mobile and web. Built with Flutter for a consistent cross-platform interface and powered by a custom JavaScript backend on AWS, Liva Clinic streamlines the management of medical interactions for all users.",
+            "period": "October 2024 - April 2025"
+        },
+        "hunger-quest": {
+            "title": "Hunger Quest",
+            "description": "As a freelance developer for an agency, I utilized FlutterFlow to contribute to building and enhancing various features. My work included implementing functionality for adding and editing truck information, loading and displaying items from Firebase in a list view, integrating Google Maps for location selection, supporting two distinct user roles with separate access and behavior, and integrating Stripe for payment processing, including a user trial period.",
+            "period": "May 2025 - Present"
+        }
     },
     "NotFound": {
         "General": {

@@ -14,19 +14,29 @@ export interface ProjectsProps {
 
 export interface ProjectsCardProps extends ProjectsProps {
     viewDetailText: string;
-    image?: StaticImageData;
+    image: StaticImageData;
     imagePriority?: boolean;
+    path: string;
 }
 
-export default function ProjectsCard({ description, image, title, viewDetailText, imagePriority, period }: ProjectsCardProps): Component {
+export default function ProjectsCard({
+    description,
+    image,
+    title,
+    viewDetailText,
+    imagePriority,
+    period,
+    path,
+}: ProjectsCardProps): Component {
     return <li className="pb-3 dark:bg-blue-950 bg-blue-200 rounded-2xl flex flex-col">
-        {image && <Image
+        <Image
             src={image}
             alt={'Veteranam'}
             loading={'eager'}
             placeholder="blur"
             className="rounded-t-2xl bg-zinc-800"
-            priority={imagePriority} />}
+            fetchPriority={imagePriority ? "high" : 'auto'}
+            priority={imagePriority} />
         <div className="px-5 mt-2 flex flex-col">
             <h2 className={cn(AppTextStyle.titleLargeBold, 'text-center')}>
                 {title}
@@ -37,7 +47,7 @@ export default function ProjectsCard({ description, image, title, viewDetailText
                     {period}
                 </span>
                 <Link
-                    href={AppLinks.projectsPage}
+                    href={`${AppLinks.projectsPage}/${path}`}
                     className={cn(
                         "px-3 py-1 dark:bg-cyan-700 rounded-4xl self-end w-max dark:hover:bg-cyan-600",
                         AppTextStyle.titleMediumBold,
