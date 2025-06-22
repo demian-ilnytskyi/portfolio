@@ -11,6 +11,7 @@ import CookieKey, { getCookieBooleanValue } from "@/shared/constants/variables/c
 import LocationzationProvider from "@/shared/localization/server_provider";
 import Footer from "@/shared/components/footer";
 import { getTranslations } from "@/shared/localization/server";
+import { PersonScheme } from "@/shared/components/shems";
 
 
 export async function generateMetadata({ params }: {
@@ -52,6 +53,7 @@ export default async function RootLayout({
     <head>
       <meta httpEquiv="Content-Language" content={locale} />
       {!isDarkMode && <DeletectThemeScript />}
+      <PersonScheme />
     </head>
     <body
       className={cn(`bg-white dark:bg-gray-900`)}>

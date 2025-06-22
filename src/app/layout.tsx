@@ -43,7 +43,7 @@ export const metadata: Metadata = {
       ...metadataIcons,
     ],
   },
-  applicationName: "Demian Portfolio",
+  applicationName: KTextConstants.appName,
   appLinks: {
     web: {
       url: KTextConstants.baseUrl,

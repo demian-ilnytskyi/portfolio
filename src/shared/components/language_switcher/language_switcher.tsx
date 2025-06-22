@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import languageSwitchFunction from "../language_switcher/language_swticher_function";
 import { EnglishFlag, UkraineFlag } from "./flags";
 import { usePathname } from "next/navigation";
-import { useLocale } from "@/shared/localization/client_provider";
 
 
 /**
@@ -20,14 +19,12 @@ export default function LanguageSwitcher({ className, englishSwitcherText, ukrai
     ukraineSwitcherText: string,
     englishSwitcherText: string
 }): Component {
-    const locale = useLocale() as Language; // Get the current locale
-    const pathname = usePathname().replace(`/${locale}`, ''); // Get the current path to maintain navigation context
-    // Determine the next locale to switch to
-    const nextLocale: Language = locale === 'uk' ? 'en' : 'uk';
+    const pathname = usePathname(); // Get the current path to maintain navigation context
+    const nextLocale: Language = pathname.includes('en') ? 'uk' : 'en';
     const ariaLabelText = nextLocale === 'uk' ? ukraineSwitcherText : englishSwitcherText;
-
+    const cleanPath = pathname.replace(/^\/(uk|en)/, '');
     return <Link
-        href={pathname} // Link to the current path
+        href={cleanPath} // Link to the current path
         locale={nextLocale} // Set the target locale for the link
         className={cn(
             "flex flex-row bg-blue-50 rounded-4xl group dark:bg-gray-400", // Styling for the switcher container
@@ -36,7 +33,7 @@ export default function LanguageSwitcher({ className, englishSwitcherText, ukrai
         prefetch={false} // Disable prefetching for better control over locale switching
         onClick={() => languageSwitchFunction(nextLocale)}
         aria-label={ariaLabelText}> {/* Call a function on click for additional logic if needed */}
-        <UkraineFlag isActive={locale === 'uk'} />
-        <EnglishFlag isActive={locale === 'en'} />
+        <UkraineFlag isActive={nextLocale === 'en'} />
+        <EnglishFlag isActive={nextLocale === 'uk'} />
     </Link>
 }

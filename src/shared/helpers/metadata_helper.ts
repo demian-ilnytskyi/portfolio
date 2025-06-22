@@ -50,7 +50,7 @@ export function openGraph(locale: Language, imageUrl?: string): OpenGraph {
         url: KTextConstants.baseUrl + (imageUrl ?? "/icons/logo-512.png"),
         width: 512,
         height: 512,
-        alt: "Demian Portfolio",
+        alt: KTextConstants.appName,
       },
     ],
     locale: grapthLocale(locale),
