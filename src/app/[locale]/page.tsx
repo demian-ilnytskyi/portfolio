@@ -7,6 +7,7 @@ import ContactSection from "./home_components/contact_section";
 import CardDivider from "@/shared/components/card_divider";
 import ContactFormContent from "./home_components/contact_form/contact_form_content";
 import Divider from "@/shared/components/divider";
+import { HomeBreadcrumbScheme } from "@/shared/components/shems";
 
 export default async function Home({
   params
@@ -15,6 +16,9 @@ export default async function Home({
 }): Promise<Component> {
   await setPageLocaleAsync(params);
   return <main className="flex-1 flex flex-col">
+    {/* Site Scheme For SEO Bots */}
+    <HomeBreadcrumbScheme />
+
     <HomeImagePart />
     <Divider id={AppLinks.aboutMe} />
     <AboutMe />

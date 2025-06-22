@@ -8,6 +8,7 @@ import ProjectsCard from "@/shared/components/projects_card";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import { cn } from "@/lib/utils";
 import projects from "@/shared/constants/variables/projects";
+import { ProjectsBreadcrumbScheme } from "@/shared/components/shems";
 
 export async function generateMetadata({ params }: {
     params: Promise<{ locale: Language }>;
@@ -36,6 +37,9 @@ export default async function Projects({
 
 
     return <main className="flex-1 flex flex-col">
+        {/* Site Scheme For SEO Bots */}
+        <ProjectsBreadcrumbScheme />
+
         <h1 className={cn(AppTextStyle.h1Tablet, 'text-center my-4')}>{t('title')}</h1>
         <ul className="grid grid-flow-row big-desk:grid-cols-2 grid-cols-1 gap-x-5 md:gap-y-10 big-desk:gap-y-5 gap-y-5">
             {projects.map((projectInfo, index) => {

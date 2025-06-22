@@ -8,6 +8,7 @@ import {
     Linkedin,
     Github,
     Users,
+    ArrowLeft,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -19,6 +20,7 @@ const baseClass = 'select-none cursor-default inline-block text-2xl';
 
 const KIcons = {
     sun: (props: IconProps): Component => <Sun {...props} className={cn(baseClass, props?.className)} />,
+    arrowBack: (props: IconProps): Component => <ArrowLeft {...props} className={cn(baseClass, props?.className)} />,
     moon: (props: IconProps): Component => <Moon {...props} className={cn(baseClass, props?.className)} />,
     aboutMe: (props: IconProps): Component => <Info {...props} className={cn(baseClass, props?.className)} />,
     workExpirience: (props: IconProps): Component => <Briefcase {...props} className={cn(baseClass, props?.className)} />,

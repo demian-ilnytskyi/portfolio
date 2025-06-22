@@ -117,7 +117,8 @@
     },
     "ProjectPage": {
         "links": "Links",
-        "emptyLinks": "While I'm unable to provide live links for this project at the moment, please feel free to contact me for more details."
+        "emptyLinks": "While I'm unable to provide live links for this project at the moment, please feel free to contact me for more details.",
+        "backToProjects": "Back to projects"
     },
     "Projects": {
         "veteranam-info": {

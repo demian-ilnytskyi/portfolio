@@ -11,6 +11,9 @@ import { setPageLocale } from "@/shared/constants/variables/locale_helper";
 import { languages, openGraph } from "@/shared/helpers/metadata_helper";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import AppLinks from "@/shared/constants/variables/links";
+import Link from "@/shared/components/custom_link";
+import KIcons from "@/shared/constants/components/icons";
+import { ProjectBreadcrumbScheme } from "@/shared/components/shems";
 
 export async function generateMetadata({ params }: {
     params: Promise<{ name: string, locale: Language }>
@@ -70,43 +73,58 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
     const t = await getTranslations(`ProjectPage`);
 
     return <main className="flex-1 flex flex-col max-w-5xl mt-5">
-        <Image
-            src={projectInfo.image}
-            alt={'Veteranam'}
-            loading={'eager'}
-            placeholder="blur"
-            width={1024}
-            height={576}
-            fetchPriority="high"
-            className="rounded-t-2xl bg-zinc-800"
-            priority />
-        <div className="px-5 mt-5 flex flex-col">
-            <h1 className={cn(AppTextStyle.h1, 'text-center not-md:text-4xl font-bold')}>
-                {project('title')}
-            </h1>
-            <CustomMarkdown className={cn(AppTextStyle.bodyLarge, 'mt-5')} content={fetchPolicyContent} />
+        {/* Site Scheme For SEO Bots */}
+        <ProjectBreadcrumbScheme name={name} />
 
-            {projectInfo.links.length > 0 && <>
-                <h3 className={cn(AppTextStyle.titleLargeBold, 'text-center')}>
-                    {t('links')}
-                </h3> <div className="flex flex-wrap justify-center gap-4 self-center mt-5">
-                    {projectInfo.links.map(
-                        (linkModel) =>
-                            <a
-                                key={linkModel.value}
-                                href={linkModel.value}
-                                className="inline-block link-block-2 w-inline-block"
-                                target="_blank"
-                                rel="noopener noreferrer"> {/* Added link-block-2 and w-inline-block */}
-                                <Image src={linkModel.image} width={180} height={54} alt={linkModel.value} />
-                            </a>
-                    )}
-                </div>
-            </>}
-            {(projectInfo.links.length <= 0 || !(projectInfo.hasCodeLink ?? true)) && <h4
-                className={cn(AppTextStyle.bodyMedium, 'text-center mt-5')}>
-                {t('emptyLinks')}
-            </h4>}
+        <Link href={AppLinks.projectsPage} className="flex flex-wrap items-center gap-2 w-max pr-5 group">
+            <div
+                className={cn(
+                    "p-2 rounded-full dark:bg-green-800 w-max dark:group-hover:bg-green-700",
+                    "bg-green-600 group-hover:bg-green-400 duration-200"
+                )}>
+                <KIcons.arrowBack className="dark:text-black text-white cursor-pointer" />
+            </div>
+            {t('backToProjects')}
+        </Link>
+        <div className="flex-1 flex flex-col max-w-5xl mt-5">
+            <Image
+                src={projectInfo.image}
+                alt={'Veteranam'}
+                loading={'eager'}
+                placeholder="blur"
+                width={1024}
+                height={576}
+                fetchPriority="high"
+                className="rounded-t-2xl bg-zinc-800"
+                priority />
+            <div className="px-5 mt-5 flex flex-col">
+                <h1 className={cn(AppTextStyle.h1, 'text-center not-md:text-4xl font-bold')}>
+                    {project('title')}
+                </h1>
+                <CustomMarkdown className={cn(AppTextStyle.bodyLarge, 'mt-5')} content={fetchPolicyContent} />
+
+                {projectInfo.links.length > 0 && <>
+                    <h3 className={cn(AppTextStyle.titleLargeBold, 'text-center')}>
+                        {t('links')}
+                    </h3> <div className="flex flex-wrap justify-center gap-4 self-center mt-5">
+                        {projectInfo.links.map(
+                            (linkModel) =>
+                                <a
+                                    key={linkModel.value}
+                                    href={linkModel.value}
+                                    className="inline-block link-block-2 w-inline-block"
+                                    target="_blank"
+                                    rel="noopener noreferrer"> {/* Added link-block-2 and w-inline-block */}
+                                    <Image src={linkModel.image} width={180} height={54} alt={linkModel.value} />
+                                </a>
+                        )}
+                    </div>
+                </>}
+                {(projectInfo.links.length <= 0 || !(projectInfo.hasCodeLink ?? true)) && <h4
+                    className={cn(AppTextStyle.bodyMedium, 'text-center mt-5')}>
+                    {t('emptyLinks')}
+                </h4>}
+            </div>
         </div>
     </main>
 }
