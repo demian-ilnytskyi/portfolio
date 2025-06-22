@@ -19,5 +19,4 @@ export default abstract class KTextConstants {
             : process.env.NEXT_PUBLIC_FLAVOUR == 'development'
                 ? "https://dev.---.info"
                 : "https://---.info";
-    // static readonly discountsLink = '/discounts';
 }
