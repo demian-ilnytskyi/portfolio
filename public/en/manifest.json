@@ -1,16 +1,18 @@
 {
-    "name": "",
+    "name": "Demian Portfolio",
     "id": "/",
-    "short_name": "",
+    "short_name": "Demian Portfolio",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
-    "description": "",
+    "description": "I'm an Associate Flutter Developer crafting intuitive, high-performance cross-platform applications that deliver seamless user experiences.",
     "orientation": "portrait-primary",
     "lang": "en",
     "dir": "ltr",
-    "categories": [],
+    "categories": [
+        "Portfolio"
+    ],
     "scope": "/",
     "icons": [
         {

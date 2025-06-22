@@ -1,16 +1,18 @@
 {
-    "name": "",
+    "name": "Дем'ян портфоліо",
     "id": "/",
-    "short_name": "",
+    "short_name": "Дем'ян портфоліо",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
-    "description": "",
+    "description": "Я молодший Flutter-розробник створюю інтуїтивно зрозумілі, високопродуктивні кросплатформенні додатки, що забезпечують безперебійний користувацький досвід.",
     "orientation": "portrait-primary",
     "lang": "uk",
     "dir": "ltr",
-    "categories": [],
+    "categories": [
+        "Портфоліо"
+    ],
     "scope": "/",
     "icons": [
         {
