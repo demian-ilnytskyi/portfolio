@@ -1,6 +1,6 @@
 {
-	"name": "veteran-web-new",
-	"version": "0.1.0",
+	"name": "demian-portfolio",
+	"version": "1.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack",
