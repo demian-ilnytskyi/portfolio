@@ -42,12 +42,12 @@ export const metadataIcons: Icon[] = [
   },
 ];
 
-export function openGraph(locale: Language): OpenGraph {
+export function openGraph(locale: Language, imageUrl?: string): OpenGraph {
   return {
     url: KTextConstants.baseUrl,
     images: [
       {
-        url: KTextConstants.baseUrl + "/icons/logo-512.png",
+        url: KTextConstants.baseUrl + (imageUrl ?? "/icons/logo-512.png"),
         width: 512,
         height: 512,
         alt: "Demian Portfolio",

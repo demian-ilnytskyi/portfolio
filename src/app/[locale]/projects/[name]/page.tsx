@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import CustomMarkdown from "@/shared/components/markdown";
 import siteFetchRepository from "@/shared/repositories/site_fetch_repository";
 import { setPageLocale } from "@/shared/constants/variables/locale_helper";
-import { languages } from "@/shared/helpers/metadata_helper";
+import { languages, openGraph } from "@/shared/helpers/metadata_helper";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import AppLinks from "@/shared/constants/variables/links";
 
@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: {
         alternates: {
             canonical: locale === KTextConstants.defaultLocale ? KTextConstants.baseUrl + link : undefined,
             languages: languages(KTextConstants.baseUrl, link),
-        }
+        },
+        openGraph: openGraph(locale, `/images/${name}.png`)
     };
 };
 

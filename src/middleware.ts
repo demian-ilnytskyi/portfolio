@@ -204,7 +204,7 @@ export const config = {
         {
             // Apply to all paths except API routes, Next.js static files,
             // Next.js image optimization URLs, and the favicon.ico
-            source: '/((?!api|_next/static|_next/image|favicon\\.ico|icons|ads\\.txt|sitemap\\.xml|robots\\.txt|\\.well-known|healthz|.*\\/manifest\\.json$).*)',
+            source: '/((?!api|_next/static|_next/image|favicon\\.ico|icons|images|uk|en|sitemap\\.xml|robots\\.txt|\\.well-known|healthz|.*\\/manifest\\.json$).*)',
             // Also exclude requests that are typically for prefetching
             // This prevents the middleware from running unnecessarily for prefetched links
             missing: [

@@ -1,8 +1,9 @@
 import type { StaticImageData } from "next/image";
 
-import veteranam from "../../../../public/images/veteranam_image.png";
-import checkMyBuilding from "../../../../public/images/check_my_building_image.png";
-import livaClinicImage from "../../../../public/images/liva_clinic_image.png";
+import veteranam from "../../../../public/images/veteranam-info.png";
+import checkMyBuilding from "../../../../public/images/check-my-building.png";
+import livaClinicImage from "../../../../public/images/liva-clinic.png";
+import hungerQuestImage from "../../../../public/images/hunger-quest.png";
 
 import appStoreIcon from "../../../../public/icons/app_store.svg";
 import googlePlayIcon from "../../../../public/icons/play_market.svg";
@@ -61,7 +62,7 @@ const projects: ProjectProps[] = [
         links: [],
     },
     {
-        image: livaClinicImage,
+        image: hungerQuestImage,
         name: 'hunger-quest',
         links: [
             {
