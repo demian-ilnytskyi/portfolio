@@ -112,7 +112,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
                                 <a
                                     key={linkModel.value}
                                     href={linkModel.value}
-                                    className="inline-block link-block-2 w-inline-block"
+                                    className="inline-block link-block-2 w-inline-block hover:scale-105 duration-200"
                                     target="_blank"
                                     rel="noopener noreferrer"> {/* Added link-block-2 and w-inline-block */}
                                     <Image src={linkModel.image} width={180} height={54} alt={linkModel.value} />
