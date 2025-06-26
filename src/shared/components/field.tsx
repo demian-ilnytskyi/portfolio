@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "optimized-next-intl";
 import AppTextStyle from "../constants/styles/app_text_styles";
 
 export default function Field({

@@ -1,12 +1,8 @@
 "use client";
 
-// import { usePathname } from "@/l18n/navigation";
-import Link from "@/shared/components/custom_link";
-import { cn } from "@/lib/utils";
-// import { useLocale } from "next-intl";
-import languageSwitchFunction from "../language_switcher/language_swticher_function";
+import KTextConstants from "@/shared/constants/variables/text_constants";
 import { EnglishFlag, UkraineFlag } from "./flags";
-import { usePathname } from "next/navigation";
+import { LanguageSwitcher as LanguageSwitcherComponent, useLocale, cn } from "optimized-next-intl";
 
 
 /**
@@ -19,21 +15,17 @@ export default function LanguageSwitcher({ className, englishSwitcherText, ukrai
     ukraineSwitcherText: string,
     englishSwitcherText: string
 }): Component {
-    const pathname = usePathname(); // Get the current path to maintain navigation context
-    const nextLocale: Language = pathname.includes('uk') ? 'en' : 'uk';
+    const locale = useLocale(); // Get the current path to maintain navigation context
+    const nextLocale: Language = locale === KTextConstants.defaultLocale ? 'uk' : 'en';
     const ariaLabelText = nextLocale === 'uk' ? ukraineSwitcherText : englishSwitcherText;
-    const cleanPath = pathname.replace(/^\/(uk|en)/, '');
-    return <Link
-        href={cleanPath} // Link to the current path
+    return <LanguageSwitcherComponent
         locale={nextLocale} // Set the target locale for the link
         className={cn(
             "flex flex-row bg-blue-50 rounded-4xl group dark:bg-gray-400", // Styling for the switcher container
             className
         )}
-        prefetch={false} // Disable prefetching for better control over locale switching
-        onClick={() => languageSwitchFunction(nextLocale)}
         aria-label={ariaLabelText}> {/* Call a function on click for additional logic if needed */}
         <UkraineFlag isActive={nextLocale === 'en'} />
         <EnglishFlag isActive={nextLocale === 'uk'} />
-    </Link>
+    </LanguageSwitcherComponent>
 }

@@ -1,10 +1,8 @@
-import Link from "@/shared/components/custom_link";
-import { cn } from "@/lib/utils";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import type { Metadata } from "next";
 import RootLayout from "./[locale]/layout";
 import metadataHelper from "@/shared/helpers/metadata_helper";
-import { getLocale, getTranslations } from "@/shared/localization/server";
+import { getLocale, getTranslations, Link, cn } from "optimized-next-intl";
 
 // Generate this page dynamic because we get language from cookie
 export const dynamic = 'force-dynamic';

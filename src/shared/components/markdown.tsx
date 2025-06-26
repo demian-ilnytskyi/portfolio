@@ -1,7 +1,7 @@
 import type { MarkdownToJSX } from 'markdown-to-jsx';
 import Markdown from 'markdown-to-jsx';
 import AppTextStyle from '../constants/styles/app_text_styles';
-import { cn } from '@/lib/utils';
+import { cn } from 'optimized-next-intl';
 import Divider from './divider';
 
 interface MarkdownProps {

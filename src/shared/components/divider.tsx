@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "optimized-next-intl";
 
 export default function Divider({ id }: { id?: string }): Component {
     return <>

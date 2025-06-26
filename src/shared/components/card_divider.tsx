@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "optimized-next-intl";
 
 export default function CardDivider({ className }: { className?: string }): Component {
     const dividerClass = "flex-grow h-0.5 bg-gradient-to-r rounded-full";

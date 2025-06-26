@@ -1,6 +1,5 @@
 import HomeImagePart from "./home_components/image_part";
 import AboutMe from "./home_components/about_me";
-import { setPageLocaleAsync } from "@/shared/constants/variables/locale_helper";
 import AppLinks from "@/shared/constants/variables/links";
 import WorkExperience from "./home_components/work_experience";
 import ContactSection from "./home_components/contact_section";
@@ -9,12 +8,7 @@ import ContactFormContent from "./home_components/contact_form/contact_form_cont
 import Divider from "@/shared/components/divider";
 import { HomeBreadcrumbScheme } from "@/shared/components/shems";
 
-export default async function Home({
-  params
-}: {
-  params: Promise<{ locale: Language }>;
-}): Promise<Component> {
-  await setPageLocaleAsync(params);
+export default function Home(): Component {
   return <main className="flex-1 flex flex-col">
     {/* Site Scheme For SEO Bots */}
     <HomeBreadcrumbScheme />

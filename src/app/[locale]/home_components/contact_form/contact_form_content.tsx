@@ -1,7 +1,6 @@
-import { cn } from "@/lib/utils";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import ContactForm from "./contact_form";
-import { getTranslations } from "@/shared/localization/server";
+import { getTranslations, cn } from "optimized-next-intl";
 
 export default async function ContactFormContent(): Promise<Component> {
     const t = await getTranslations('HomePage.ContactForm');

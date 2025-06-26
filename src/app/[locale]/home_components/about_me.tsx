@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
+
 import AppLinks from "@/shared/constants/variables/links";
-import { getTranslations } from "@/shared/localization/server";
+import { getTranslations, cn } from "optimized-next-intl";
 import TitleSection from "./title_section";
 
 export default async function AboutMe(): Promise<Component> {

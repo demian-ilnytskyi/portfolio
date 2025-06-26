@@ -1,9 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import Field from "@/shared/components/field";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import { useTranslations } from "@/shared/localization/client_provider";
+import { useTranslations, cn } from "optimized-next-intl";
 import { sendContact, type ContactProps } from "@/shared/repositories/contact_repository";
 import type { FormEvent } from "react";
 import { useActionState } from "react";

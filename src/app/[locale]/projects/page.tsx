@@ -1,12 +1,10 @@
-import { setPageLocale, setPageLocaleAsync } from "@/shared/constants/variables/locale_helper";
 import AppLinks from "@/shared/constants/variables/links";
 import metadataHelper from "@/shared/helpers/metadata_helper";
-import { getTranslations } from "@/shared/localization/server";
+import { getTranslations, cn } from "optimized-next-intl";
 import type { Metadata } from "next";
 import type { ProjectsProps } from "@/shared/components/projects_card";
 import ProjectsCard from "@/shared/components/projects_card";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import { cn } from "@/lib/utils";
 import projects from "@/shared/constants/variables/projects";
 import { ProjectsBreadcrumbScheme } from "@/shared/components/shems";
 
@@ -14,8 +12,6 @@ export async function generateMetadata({ params }: {
     params: Promise<{ locale: Language }>;
 }): Promise<Metadata> {
     const { locale } = await params;
-
-    setPageLocale({ locale });
 
     const t = await getTranslations('Metadata.Projects', locale,);
     return metadataHelper({
@@ -25,13 +21,7 @@ export async function generateMetadata({ params }: {
     });
 };
 
-export default async function Projects({
-    params
-}: {
-    params: Promise<{ locale: Language }>;
-}): Promise<Component> {
-    await setPageLocaleAsync(params);
-
+export default async function Projects(): Promise<Component> {
     const tProjects = await getTranslations('Projects');
     const t = await getTranslations('ProjectsPage');
 

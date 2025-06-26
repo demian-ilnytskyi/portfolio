@@ -2,7 +2,7 @@
 
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import TryAgainButton from "./try_again_button"
-import { cn } from "@/lib/utils";
+import { cn } from "optimized-next-intl";
 import errorPageTranslation from "./translations";
 import KIcons from "@/shared/constants/components/icons";
 

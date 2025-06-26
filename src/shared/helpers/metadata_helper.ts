@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import KTextConstants from "../constants/variables/text_constants";
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
-import type { TranslatorReturnType } from "../localization/server";
+import type { TranslatorReturnType } from "optimized-next-intl";
 
 export const metadataIcons: Icon[] = [
   {

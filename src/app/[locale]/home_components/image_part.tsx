@@ -1,7 +1,6 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import Image from 'next/image';
-import { cn } from "@/lib/utils";
-import { getTranslations } from "@/shared/localization/server";
+import { getTranslations, cn } from "optimized-next-intl";
 
 import profileImage from "../../../../public/images/profile.png"
 

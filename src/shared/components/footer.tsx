@@ -1,8 +1,7 @@
-import { cn } from "@/lib/utils";
 import AppTextStyle from "../constants/styles/app_text_styles";
 import KIcons from "../constants/components/icons";
 import KTextConstants from "../constants/variables/text_constants";
-import { getTranslations } from "../localization/server";
+import { getTranslations, cn } from "optimized-next-intl";
 
 export default async function Footer(): Promise<Component> {
     const t = await getTranslations('Footer');

@@ -1,17 +1,14 @@
 import projects from "@/shared/constants/variables/projects";
-import { getTranslations } from "@/shared/localization/server";
+import { getTranslations, Link, cn } from "optimized-next-intl";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from 'next/image';
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import { cn } from "@/lib/utils";
 import CustomMarkdown from "@/shared/components/markdown";
 import siteFetchRepository from "@/shared/repositories/site_fetch_repository";
-import { setPageLocale } from "@/shared/constants/variables/locale_helper";
 import { languages, openGraph } from "@/shared/helpers/metadata_helper";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import AppLinks from "@/shared/constants/variables/links";
-import Link from "@/shared/components/custom_link";
 import KIcons from "@/shared/constants/components/icons";
 import { ProjectBreadcrumbScheme } from "@/shared/components/shems";
 
@@ -19,8 +16,6 @@ export async function generateMetadata({ params }: {
     params: Promise<{ name: string, locale: Language }>
 }): Promise<Metadata> {
     const { name, locale } = await params;
-
-    setPageLocale({ locale });
 
     const t = await getTranslations('Projects');
 
@@ -49,8 +44,6 @@ async function fetchProjectDetails({ locale, projectName }: { locale: Language, 
 
 export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component> {
     const { name, locale } = await params;
-
-    setPageLocale({ locale });
 
     const fetchPolicyContent = await fetchProjectDetails({ locale, projectName: name });
 

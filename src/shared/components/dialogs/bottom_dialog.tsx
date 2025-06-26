@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "optimized-next-intl";
 import { type DetailedHTMLProps, type InputHTMLAttributes, useId } from "react";
 import BottomDialogScrollHelper from "./bottom_dialog_hidde_scroll";
 

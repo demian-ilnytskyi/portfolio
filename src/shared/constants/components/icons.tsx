@@ -10,7 +10,7 @@ import {
     Users,
     ArrowLeft,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from 'optimized-next-intl';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
     className?: string;
