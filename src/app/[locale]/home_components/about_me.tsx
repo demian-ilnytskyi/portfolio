@@ -1,7 +1,8 @@
 
 import AppLinks from "@/shared/constants/variables/links";
-import { getTranslations, cn } from "optimized-next-intl";
+import { getTranslations } from "optimized-next-intl";
 import TitleSection from "./title_section";
+import { cn } from "@/lib/utils";
 
 export default async function AboutMe(): Promise<Component> {
     const t = await getTranslations('HomePage.AboutMe');

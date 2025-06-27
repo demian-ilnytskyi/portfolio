@@ -2,7 +2,8 @@
 
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import { EnglishFlag, UkraineFlag } from "./flags";
-import { LanguageSwitcher as LanguageSwitcherComponent, useLocale, cn } from "optimized-next-intl";
+import { LanguageSwitcher as LanguageSwitcherComponent, useLocale } from "optimized-next-intl";
+import { cn } from "@/lib/utils";
 
 
 /**

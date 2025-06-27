@@ -1,5 +1,5 @@
 import projects from "@/shared/constants/variables/projects";
-import { getTranslations, Link, cn } from "optimized-next-intl";
+import { getTranslations, Link } from "optimized-next-intl";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from 'next/image';
@@ -11,6 +11,7 @@ import KTextConstants from "@/shared/constants/variables/text_constants";
 import AppLinks from "@/shared/constants/variables/links";
 import KIcons from "@/shared/constants/components/icons";
 import { ProjectBreadcrumbScheme } from "@/shared/components/shems";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({ params }: {
     params: Promise<{ name: string, locale: Language }>

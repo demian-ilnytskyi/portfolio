@@ -3,7 +3,8 @@ import NavigationBar from "@/shared/components/nav_bar/nav_bar";
 import metadataHelper, { openGraph } from "@/shared/helpers/metadata_helper";
 import Footer from "@/shared/components/footer";
 import { PersonScheme } from "@/shared/components/shems";
-import { DetectThemeScript, getCurrentTheme, getTranslations, IntlProvider, cn } from "optimized-next-intl";
+import { DetectThemeScript, getCurrentTheme, getTranslations, IntlProvider } from "optimized-next-intl";
+import { cn } from "@/lib/utils";
 
 
 export async function generateMetadata({ params }: {

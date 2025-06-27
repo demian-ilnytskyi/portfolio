@@ -2,10 +2,11 @@
 import AppTextStyle from "../../constants/styles/app_text_styles";
 import NavigationMobDialog from "./nav_mob_dialog";
 import LanguageSwitcher from "../language_switcher/language_switcher";
-import { getTranslations, Link, cn } from "optimized-next-intl";
+import { getTranslations, Link } from "optimized-next-intl";
 import AppLinks from "@/shared/constants/variables/links";
 import KIcons from "@/shared/constants/components/icons";
 import ThemeSwticher from "optimized-next-intl/ThemeSwitcher";
+import { cn } from "@/lib/utils";
 
 export default async function NavigationBar({ isDark }: { isDark?: boolean }): Promise<Component> {
     const t = await getTranslations('NavigationBar');

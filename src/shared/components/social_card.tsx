@@ -1,4 +1,5 @@
-import { cn } from "optimized-next-intl";
+
+import { cn } from "@/lib/utils";
 import AppTextStyle from "../constants/styles/app_text_styles";
 
 export interface SocilaCardProps {

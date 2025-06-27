@@ -1,8 +1,9 @@
 import AppLinks from "@/shared/constants/variables/links";
 import TitleSection from "./title_section";
-import { getTranslations, Link, cn } from "optimized-next-intl";
+import { getTranslations, Link } from "optimized-next-intl";
 import type { ExperienceModel } from "@/shared/components/experience_card";
 import ExperienceCard from "@/shared/components/experience_card";
+import { cn } from "@/lib/utils";
 
 export default async function WorkExperience(): Promise<Component> {
     const t = await getTranslations('HomePage.WorkExperience');

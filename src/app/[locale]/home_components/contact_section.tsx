@@ -3,8 +3,9 @@ import TitleSection from "./title_section";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import SocilaCard from "@/shared/components/social_card";
 import KIcons from "@/shared/constants/components/icons";
-import { getTranslations, cn } from "optimized-next-intl";
+import { getTranslations } from "optimized-next-intl";
 import KTextConstants from "@/shared/constants/variables/text_constants";
+import { cn } from "@/lib/utils";
 
 export interface ContactListProps {
     link: string;

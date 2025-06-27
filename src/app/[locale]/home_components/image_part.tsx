@@ -1,8 +1,8 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import Image from 'next/image';
-import { getTranslations, cn } from "optimized-next-intl";
-
+import { getTranslations } from "optimized-next-intl";
 import profileImage from "../../../../public/images/profile.png"
+import { cn } from "@/lib/utils";
 
 export default async function HomeImagePart(): Promise<Component> {
     const t = await getTranslations('HomePage.ImagePart');

@@ -1,4 +1,5 @@
-import { cn } from "optimized-next-intl";
+import { cn } from "@/lib/utils";
+
 
 // Common classes for the flag container
 const flagClass = cn(

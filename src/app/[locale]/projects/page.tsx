@@ -1,12 +1,13 @@
 import AppLinks from "@/shared/constants/variables/links";
 import metadataHelper from "@/shared/helpers/metadata_helper";
-import { getTranslations, cn } from "optimized-next-intl";
+import { getTranslations } from "optimized-next-intl";
 import type { Metadata } from "next";
 import type { ProjectsProps } from "@/shared/components/projects_card";
 import ProjectsCard from "@/shared/components/projects_card";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import projects from "@/shared/constants/variables/projects";
 import { ProjectsBreadcrumbScheme } from "@/shared/components/shems";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({ params }: {
     params: Promise<{ locale: Language }>;
