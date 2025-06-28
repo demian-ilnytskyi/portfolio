@@ -1,5 +1,5 @@
 import projects from "@/shared/constants/variables/projects";
-import { getTranslations, Link } from "optimized-next-intl";
+import { getTranslations, Link, setLocale } from "optimized-next-intl";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from 'next/image';
@@ -45,6 +45,7 @@ async function fetchProjectDetails({ locale, projectName }: { locale: Language, 
 
 export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component> {
     const { name, locale } = await params;
+    await setLocale(locale);
 
     const fetchPolicyContent = await fetchProjectDetails({ locale, projectName: name });
 

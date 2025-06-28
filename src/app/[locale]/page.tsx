@@ -7,8 +7,13 @@ import CardDivider from "@/shared/components/card_divider";
 import ContactFormContent from "./home_components/contact_form/contact_form_content";
 import Divider from "@/shared/components/divider";
 import { HomeBreadcrumbScheme } from "@/shared/components/shems";
+import { setLocaleAsync } from "optimized-next-intl";
 
-export default function Home(): Component {
+export default async function Home({ params }: {
+  params: Promise<{ locale: Language }>;
+}): Promise<Component> {
+  await setLocaleAsync(params);
+
   return <main className="flex-1 flex flex-col">
     {/* Site Scheme For SEO Bots */}
     <HomeBreadcrumbScheme />

@@ -1,6 +1,6 @@
 import AppLinks from "@/shared/constants/variables/links";
 import metadataHelper from "@/shared/helpers/metadata_helper";
-import { getTranslations } from "optimized-next-intl";
+import { getTranslations, setLocaleAsync } from "optimized-next-intl";
 import type { Metadata } from "next";
 import type { ProjectsProps } from "@/shared/components/projects_card";
 import ProjectsCard from "@/shared/components/projects_card";
@@ -22,7 +22,10 @@ export async function generateMetadata({ params }: {
     });
 };
 
-export default async function Projects(): Promise<Component> {
+export default async function Projects({ params }: {
+    params: Promise<{ locale: Language }>;
+}): Promise<Component> {
+    await setLocaleAsync(params);
     const tProjects = await getTranslations('Projects');
     const t = await getTranslations('ProjectsPage');
 
