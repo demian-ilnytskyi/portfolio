@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import { Link } from "optimized-next-intl";
 
