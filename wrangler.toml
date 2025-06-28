@@ -2,7 +2,7 @@
 
 # General Worker settings
 main = ".open-next/worker.js"
-name = "demian-portfolio"
+name = "portfolio"
 compatibility_date = "2025-06-13"
 
 # Compatibility Flags
