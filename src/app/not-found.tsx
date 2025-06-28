@@ -4,6 +4,7 @@ import RootLayout from "./[locale]/layout";
 import metadataHelper from "@/shared/helpers/metadata_helper";
 import { getLocale, getTranslations, Link } from "optimized-next-intl";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "optimized-next-intl/use";
 
 // Generate this page dynamic because we get language from cookie
 export const dynamic = 'force-dynamic';
@@ -31,8 +32,8 @@ export default async function NotFound(): Promise<Component> {
   </RootLayout>;
 }
 
-async function PageContent() {
-  const t = await getTranslations('NotFound.General');
+function PageContent(): Component {
+  const t = useTranslations('NotFound.General');
   return <main className="flex-1 flex flex-col items-center justify-center p-4 text-center">
     <h1 className={cn(AppTextStyle.h1Tablet, 'font-bold not-small-mobile:text-4xl')}>
       {t('title')}

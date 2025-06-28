@@ -30,7 +30,7 @@ export default function GlobalError({
     }
 
     return <html lang={locale}>
-        <body className='flex justify-center'>
+        <body className='flex justify-center bg-white'>
             <GlobalErrorBody locale={locale} />
         </body>
     </html>

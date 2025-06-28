@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from "@/lib/utils";
 import clearCookiesAndCache from "@/shared/helpers/clear_data_helper";
 
 export default function TryAgainButton({ buttonText }: { buttonText: string }): Component {
@@ -11,7 +12,10 @@ export default function TryAgainButton({ buttonText }: { buttonText: string }): 
 
     return <button
         onClick={handleTryAgain}
-        className="px-4 py-2 text-lg font-medium text-white bg-ref-error-error-50 rounded-md hover:bg-ref-error-error-60 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ref-error-error-50"
+        className={cn(
+            "px-4 py-2 text-lg font-medium text-white bg-red-500 rounded-md hover:bg-red-400",
+            "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400"
+        )}
     >
         {buttonText}
     </button>;

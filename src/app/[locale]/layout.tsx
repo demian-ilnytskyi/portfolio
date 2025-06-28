@@ -3,8 +3,7 @@ import NavigationBar from "@/shared/components/nav_bar/nav_bar";
 import metadataHelper, { openGraph } from "@/shared/helpers/metadata_helper";
 import Footer from "@/shared/components/footer";
 import { PersonScheme } from "@/shared/components/shems";
-import { DetectThemeScript, getCurrentTheme, getTranslations, IntlProvider } from "optimized-next-intl";
-import { cn } from "@/lib/utils";
+import { DetectThemeScript, getCurrentTheme, getMessage, getTranslations, IntlProvider } from "optimized-next-intl";
 
 
 export async function generateMetadata({ params }: {
@@ -35,6 +34,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>): Promise<Component> {
   const { locale, isDark, htmlParam } = await getCurrentTheme();
+  const messages = await getMessage(locale);
 
   return <html {...htmlParam} >
     <head>
@@ -42,9 +42,8 @@ export default async function RootLayout({
       <DetectThemeScript isDark={isDark} />
       <PersonScheme />
     </head>
-    <body
-      className={cn(`bg-white dark:bg-gray-900`)}>
-      <IntlProvider language={locale} >
+    <body className={`bg-white dark:bg-gray-900`}>
+      <IntlProvider language={locale} messages={messages} >
         <div className="flex flex-col min-h-screen mx-4 lg:mx-24 tablet:mx-8 self-center">
           <NavigationBar isDark={isDark ?? undefined} />
           {children}

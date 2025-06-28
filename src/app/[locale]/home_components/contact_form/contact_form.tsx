@@ -2,7 +2,7 @@
 
 import Field from "@/shared/components/field";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import { useTranslations } from "optimized-next-intl";
+import { useTranslations } from "optimized-next-intl/use";
 import { sendContact, type ContactProps } from "@/shared/repositories/contact_repository";
 import type { FormEvent } from "react";
 import { useActionState } from "react";

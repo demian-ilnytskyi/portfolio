@@ -1,11 +1,6 @@
-import type { NextRequest } from 'next/server';
-import type { NextResponse } from 'next/server';
 import { intlMiddleware } from 'optimized-next-intl';
 
-// This middleware function runs for every incoming request
-export async function middleware(request: NextRequest): Promise<NextResponse<unknown>> {
-    return await intlMiddleware(request);
-}
+export const middleware = intlMiddleware;
 
 // Configuration for the middleware
 export const config = {

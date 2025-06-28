@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: {
 }): Promise<Metadata> {
     const { name, locale } = await params;
 
-    const t = await getTranslations('Projects');
+    const t = await getTranslations('Projects', locale);
 
     const project = t(name);
 
@@ -45,7 +45,7 @@ async function fetchProjectDetails({ locale, projectName }: { locale: Language, 
 
 export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component> {
     const { name, locale } = await params;
-    await setLocale(locale);
+    setLocale(locale);
 
     const fetchPolicyContent = await fetchProjectDetails({ locale, projectName: name });
 
@@ -53,7 +53,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
         notFound();
     }
 
-    const project = await getTranslations(`Projects.${name}`);
+    const project = await getTranslations(`Projects.${name}`, locale);
 
     if (!project) {
         notFound();
@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
         notFound();
     }
 
-    const t = await getTranslations(`ProjectPage`);
+    const t = await getTranslations(`ProjectPage`, locale);
 
     return <main className="flex-1 flex flex-col max-w-5xl mt-5">
         {/* Site Scheme For SEO Bots */}

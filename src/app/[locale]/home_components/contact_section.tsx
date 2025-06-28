@@ -3,9 +3,9 @@ import TitleSection from "./title_section";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import SocilaCard from "@/shared/components/social_card";
 import KIcons from "@/shared/constants/components/icons";
-import { getTranslations } from "optimized-next-intl";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "optimized-next-intl/use";
 
 export interface ContactListProps {
     link: string;
@@ -32,8 +32,8 @@ const contactList: ContactListProps[] = [
     },
 ]
 
-export default async function ContactSection(): Promise<Component> {
-    const t = await getTranslations('HomePage.Connect');
+export default function ContactSection(): Component {
+    const t = useTranslations('HomePage.Connect');
 
     const contactText: ContactListTextProps[] = t('social');
 
