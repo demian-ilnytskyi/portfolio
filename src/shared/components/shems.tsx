@@ -98,7 +98,7 @@ function projectBreadcrumbJsonLd({
 
 export function PersonScheme(): Component {
     return <Script
-        id="json-ld-product"
+        id="json-person-scheme"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: personJsonLd }}
     />
@@ -106,14 +106,14 @@ export function PersonScheme(): Component {
 
 export function ProjectsBreadcrumbScheme({ language }: { language: Language }): Component {
     return <Script
-        id="json-ld-product"
+        id="json-products-scheme"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: projectsBreadcrumbJsonLd(language) }}
     />
 }
 export function ProjectBreadcrumbScheme(props: { name: string, language: Language, title: string }): Component {
     return <Script
-        id="json-ld-product"
+        id={`json-${name}-scheme`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: projectBreadcrumbJsonLd(props) }}
     />
