@@ -18,7 +18,15 @@ const pageName: Record<string, TranslateModel> = {
     },
 }
 
-const personJsonLd = {
+function getBaseUrl(language: Language) {
+    if (language !== KTextConstants.defaultLocale) {
+        return `${KTextConstants.baseUrl}/${language}`;
+    } else {
+        return KTextConstants.baseUrl;
+    }
+}
+
+const personJsonLd = JSON.stringify({
     "@context": "https://schema.org/",
     "@type": "Person",
     "name": KTextConstants.owner,
@@ -33,19 +41,11 @@ const personJsonLd = {
         "@type": "Organization",
         "name": KTextConstants.currentCompany
     }
-}
+});
 
-function getBaseUrl(language: Language) {
-    if (language !== KTextConstants.defaultLocale) {
-        return `${KTextConstants.baseUrl}/${language}`;
-    } else {
-        return KTextConstants.baseUrl;
-    }
-}
-
-function projectsBreadcrumbJsonLd(language: Language) {
+function projectsBreadcrumbJsonLd(language: Language): string {
     const baseUrl = getBaseUrl(language);
-    return {
+    const map = {
         "@context": "https://schema.org/",
         "@type": "BreadcrumbList",
         "itemListElement": [{
@@ -60,6 +60,7 @@ function projectsBreadcrumbJsonLd(language: Language) {
             "item": `${baseUrl}${AppLinks.projectsPage}`
         }]
     }
+    return JSON.stringify(map);
 }
 
 function projectBreadcrumbJsonLd({
@@ -70,9 +71,9 @@ function projectBreadcrumbJsonLd({
     title: string,
     name: string,
     language: Language
-}) {
+}): string {
     const baseUrl = getBaseUrl(language);
-    return {
+    const map = {
         "@context": "https://schema.org/",
         "@type": "BreadcrumbList",
         "itemListElement": [{
@@ -92,6 +93,7 @@ function projectBreadcrumbJsonLd({
             "item": `${baseUrl}${AppLinks.projectsPage}/${name}`
         }]
     };
+    return JSON.stringify(map);
 }
 
 export function PersonScheme(): Component {
