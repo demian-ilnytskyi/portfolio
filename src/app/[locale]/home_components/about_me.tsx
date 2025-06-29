@@ -1,10 +1,11 @@
-import { cn } from "@/lib/utils";
-import AppLinks from "@/shared/constants/variables/links";
-import { getTranslations } from "@/shared/localization/server";
-import TitleSection from "./title_section";
 
-export default async function AboutMe(): Promise<Component> {
-    const t = await getTranslations('HomePage.AboutMe');
+import AppLinks from "@/shared/constants/variables/links";
+import TitleSection from "./title_section";
+import { cn } from "@/lib/utils";
+import { useTranslations } from "optimized-next-intl/use";
+
+export default function AboutMe(): Component {
+    const t = useTranslations('HomePage.AboutMe');
     const paragraphClass = cn("text-lg leading-relaxed");
 
     return <section className="items-center flex flex-col p-4 md:p-8">

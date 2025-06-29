@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import {
     Info,
     Menu,
@@ -10,7 +11,6 @@ import {
     Users,
     ArrowLeft,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
     className?: string;

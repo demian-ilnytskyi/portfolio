@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 
+
 // Common classes for the flag container
 const flagClass = cn(
     'min-w-10 min-h-10 bg-neutral rounded-full m-1 text-center flex flex-col',

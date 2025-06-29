@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import Link from "@/shared/components/custom_link";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
+import { Link } from "optimized-next-intl";
 
 export default async function TitleSection({ title, link }: { title: string, link: string }): Promise<Component> {
     return <Link href={`#${link}`}>

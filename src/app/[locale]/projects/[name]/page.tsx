@@ -1,28 +1,24 @@
 import projects from "@/shared/constants/variables/projects";
-import { getTranslations } from "@/shared/localization/server";
+import { alternatesLinks, getTranslations, Link, setLocale } from "optimized-next-intl";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from 'next/image';
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import { cn } from "@/lib/utils";
 import CustomMarkdown from "@/shared/components/markdown";
 import siteFetchRepository from "@/shared/repositories/site_fetch_repository";
-import { setPageLocale } from "@/shared/constants/variables/locale_helper";
-import { languages, openGraph } from "@/shared/helpers/metadata_helper";
+import { openGraph } from "@/shared/helpers/metadata_helper";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import AppLinks from "@/shared/constants/variables/links";
-import Link from "@/shared/components/custom_link";
 import KIcons from "@/shared/constants/components/icons";
 import { ProjectBreadcrumbScheme } from "@/shared/components/shems";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({ params }: {
     params: Promise<{ name: string, locale: Language }>
 }): Promise<Metadata> {
     const { name, locale } = await params;
 
-    setPageLocale({ locale });
-
-    const t = await getTranslations('Projects');
+    const t = await getTranslations('Projects', locale);
 
     const project = t(name);
 
@@ -31,10 +27,7 @@ export async function generateMetadata({ params }: {
     return {
         title: project?.title,
         description: project?.description,
-        alternates: {
-            canonical: locale === KTextConstants.defaultLocale ? KTextConstants.baseUrl + link : undefined,
-            languages: languages(KTextConstants.baseUrl, link),
-        },
+        alternates: alternatesLinks({ locale, url: KTextConstants.baseUrl, linkPart: link }),
         openGraph: openGraph(locale, `/images/${name}.png`)
     };
 };
@@ -49,8 +42,7 @@ async function fetchProjectDetails({ locale, projectName }: { locale: Language, 
 
 export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component> {
     const { name, locale } = await params;
-
-    setPageLocale({ locale });
+    setLocale(locale);
 
     const fetchPolicyContent = await fetchProjectDetails({ locale, projectName: name });
 
@@ -58,7 +50,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
         notFound();
     }
 
-    const project = await getTranslations(`Projects.${name}`);
+    const project = await getTranslations(`Projects.${name}`, locale);
 
     if (!project) {
         notFound();
@@ -70,7 +62,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
         notFound();
     }
 
-    const t = await getTranslations(`ProjectPage`);
+    const t = await getTranslations(`ProjectPage`, locale);
 
     return <main className="flex-1 flex flex-col max-w-5xl mt-5">
         {/* Site Scheme For SEO Bots */}

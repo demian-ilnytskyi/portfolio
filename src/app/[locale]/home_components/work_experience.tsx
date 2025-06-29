@@ -1,13 +1,13 @@
 import AppLinks from "@/shared/constants/variables/links";
 import TitleSection from "./title_section";
-import { getTranslations } from "@/shared/localization/server";
+import { Link } from "optimized-next-intl";
 import type { ExperienceModel } from "@/shared/components/experience_card";
 import ExperienceCard from "@/shared/components/experience_card";
-import Link from "@/shared/components/custom_link";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "optimized-next-intl/use";
 
-export default async function WorkExperience(): Promise<Component> {
-    const t = await getTranslations('HomePage.WorkExperience');
+export default function WorkExperience(): Component {
+    const t = useTranslations('HomePage.WorkExperience');
 
     const projects: ExperienceModel[] = t('jobs');
 

@@ -1,10 +1,10 @@
 import AppTextStyle from "../constants/styles/app_text_styles";
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
-import { cn } from "@/lib/utils";
-import Link from "./custom_link";
+import { Link } from "optimized-next-intl";
 import AppLinks from "../constants/variables/links";
 import CustomMarkdown from "./markdown";
+import { cn } from "@/lib/utils";
 
 export interface ProjectsProps {
     title: string;

@@ -1,16 +1,16 @@
 // import { useTranslations } from "next-intl";
 import AppTextStyle from "../../constants/styles/app_text_styles";
-import { cn } from "@/lib/utils";
 import NavigationMobDialog from "./nav_mob_dialog";
-import Link from "@/shared/components/custom_link";
 import LanguageSwitcher from "../language_switcher/language_switcher";
-import { getTranslations } from "@/shared/localization/server";
-import ThemeSwticher from "../theme_switcher/theme_switcher";
+import { Link } from "optimized-next-intl";
 import AppLinks from "@/shared/constants/variables/links";
 import KIcons from "@/shared/constants/components/icons";
+import ThemeSwticher from "optimized-next-intl/ThemeSwitcher";
+import { cn } from "@/lib/utils";
+import { useTranslations } from "optimized-next-intl/use";
 
-export default async function NavigationBar({ isDark }: { isDark?: boolean }): Promise<Component> {
-    const t = await getTranslations('NavigationBar');
+export default function NavigationBar({ isDark }: { isDark?: boolean }): Component {
+    const t = useTranslations('NavigationBar');
 
     function Buttons() {
         return <>
@@ -59,8 +59,8 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
                 <ThemeSwticher
                     isDark={isDark}
                     className="hidden tablet:flex mr-3"
-                    lightText={lightModeText}
-                    darkText={darkModeText} />
+                    lightLabelText={lightModeText}
+                    darkLabelText={darkModeText} />
                 <LanguageSwitcher
                     className="hidden tablet:flex"
                     ukraineSwitcherText={ukSwitchText}
@@ -72,7 +72,7 @@ export default async function NavigationBar({ isDark }: { isDark?: boolean }): P
                             className="mr-3"
                             ukraineSwitcherText={ukSwitchText}
                             englishSwitcherText={enSwitchText} />
-                        <ThemeSwticher isDark={isDark} lightText={lightModeText} darkText={darkModeText} />
+                        <ThemeSwticher isDark={isDark} lightLabelText={lightModeText} darkLabelText={darkModeText} />
                     </div>
                 </NavigationMobDialog>
             </div>

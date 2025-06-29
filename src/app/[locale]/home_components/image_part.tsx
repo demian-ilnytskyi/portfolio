@@ -1,12 +1,11 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import Image from 'next/image';
-import { cn } from "@/lib/utils";
-import { getTranslations } from "@/shared/localization/server";
-
 import profileImage from "../../../../public/images/profile.png"
+import { cn } from "@/lib/utils";
+import { useTranslations } from "optimized-next-intl/use";
 
-export default async function HomeImagePart(): Promise<Component> {
-    const t = await getTranslations('HomePage.ImagePart');
+export default function HomeImagePart(): Component {
+    const t = useTranslations('HomePage.ImagePart');
     return <section className="items-center flex flex-col mt-10 min-h-[77vh]">
         <Image
             src={profileImage}
