@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import KTextConstants from "../constants/variables/text_constants";
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
-import type { TranslatorReturnType } from "optimized-next-intl";
+import { alternatesLinks, type TranslatorReturnType } from "optimized-next-intl";
 
 export const metadataIcons: Icon[] = [
   {
@@ -72,29 +72,12 @@ export const twitter = {
   images: KTextConstants.baseUrl + "/icons/512.png",
 };
 
-export function languages(link: string, linkPart?: string): Record<string, string> {
-  try {
-    return KTextConstants.locales.reduce(
-      (acc: Record<string, string>, locale: Language) => {
-        const localeValue = locale === KTextConstants.defaultLocale ? '' : `/${locale}`;
-        acc[locale] = link + localeValue + (linkPart ?? '');
-        return acc;
-      },
-      { 'x-default': link + (linkPart ?? '') }
-    );
-  } catch (e) {
-    console.error(`Language Helper error for Metadata, link: ${link}, linkPart: ${linkPart}`, e);
-    return {};
-  }
-}
-
 interface MetadataHelperProps {
   t: TranslatorReturnType;
   locale: Language;
   isMain?: boolean;
   canonical?: string
   linkPart: string;
-  setCanonical?: boolean;
 }
 
 export default function metadataHelper({
@@ -103,7 +86,6 @@ export default function metadataHelper({
   linkPart,
   locale,
   canonical,
-  setCanonical = true,
 }: MetadataHelperProps): Partial<Metadata> {
   return {
     title: isMain ? {
@@ -111,9 +93,6 @@ export default function metadataHelper({
       template: t('title.template'),
     } : t('title'),
     description: t('description'),
-    alternates: {
-      canonical: locale === KTextConstants.defaultLocale && setCanonical ? KTextConstants.baseUrl + linkPart : canonical,
-      languages: languages(KTextConstants.baseUrl, linkPart),
-    }
+    alternates: alternatesLinks({ locale, url: KTextConstants.baseUrl, canonical, linkPart })
   }
 }

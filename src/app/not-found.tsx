@@ -17,7 +17,6 @@ export async function generateMetadata(): Promise<Metadata> {
       t: t,
       linkPart: '',
       locale: locale,
-      setCanonical: false,
     }),
     robots: {
       index: false,
