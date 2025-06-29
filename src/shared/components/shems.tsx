@@ -96,11 +96,65 @@ function projectBreadcrumbJsonLd({
     return JSON.stringify(map);
 }
 
+function homeImageJsonLd(title: string): string {
+    const map = {
+        "@context": "https://schema.org/",
+        "@type": "ImageObject",
+        "contentUrl": KTextConstants.profileImageUrl,
+        "creditText": title,
+        "acquireLicensePage": `${KTextConstants.baseUrl}/#${AppLinks.connect}`,
+        "copyrightNotice": KTextConstants.owner,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+            "@type": "Person",
+            "name": KTextConstants.owner,
+            "url": KTextConstants.baseUrl,
+            "image": KTextConstants.profileImageUrl,
+        },
+    }
+    return JSON.stringify(map);
+}
+
+function projectImageJsonLd({ name, title }: { title: string, name: string }): string {
+    const map = {
+        "@context": "https://schema.org/",
+        "@type": "ImageObject",
+        "contentUrl": `${KTextConstants.baseUrl}/images/${name}.png`,
+        "creditText": title,
+        "acquireLicensePage": `${KTextConstants.baseUrl}/#${AppLinks.connect}`,
+        "copyrightNotice": KTextConstants.owner,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+            "@type": "Person",
+            "name": KTextConstants.owner,
+            "url": KTextConstants.baseUrl,
+            "image": KTextConstants.profileImageUrl,
+        },
+    }
+    return JSON.stringify(map);
+}
+
 export function PersonScheme(): Component {
     return <Script
         id="json-person-scheme"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: personJsonLd }}
+    />
+}
+
+export function HomeImageScheme({ title }: { title: string }): Component {
+    return <Script
+        id="json-home-image-scheme"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: homeImageJsonLd(title) }}
+    />
+}
+
+export function ProjectImageScheme(props: { name: string, title: string }): Component {
+    return <Script
+        id={`json-${props.name}-image-scheme`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: projectImageJsonLd(props) }}
     />
 }
 

@@ -5,14 +5,15 @@ import type { MetadataRoute } from 'next'
 import type { IntlSitemap } from 'optimized-next-intl';
 import { generateIntlSitemap } from 'optimized-next-intl';
 
-const lastModified = new Date(2025, 5, 29);
+const lastModified = new Date(2025, 5, 30);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const intlSitemap: IntlSitemap[] = [
     {
       changeFrequency: 'monthly',
       priority: 1,
-      lastModified: lastModified
+      lastModified: lastModified,
+      images: [KTextConstants.profileImageUrl],
     },
     {
       link: AppLinks.projectsPage,
@@ -30,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
       lastModified: lastModified,
+      images: [`${KTextConstants.baseUrl}/images/${project.name}.png`],
     });
   }
 

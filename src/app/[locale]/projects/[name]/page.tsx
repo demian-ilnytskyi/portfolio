@@ -10,7 +10,7 @@ import { openGraph } from "@/shared/helpers/metadata_helper";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import AppLinks from "@/shared/constants/variables/links";
 import KIcons from "@/shared/constants/components/icons";
-import { ProjectBreadcrumbScheme } from "@/shared/components/shems";
+import { ProjectBreadcrumbScheme, ProjectImageScheme } from "@/shared/components/shems";
 import { cn } from "@/lib/utils";
 
 export async function generateMetadata({ params }: {
@@ -67,8 +67,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
     const title = project('title');
 
     return <main className="flex-1 flex flex-col max-w-5xl mt-5">
-        {/* Site Scheme For SEO Bots */}
+        {/* Site and Image Scheme For SEO Bots */}
         <ProjectBreadcrumbScheme name={name} language={locale} title={title} />
+        <ProjectImageScheme name={name} title={title} />
 
         <Link href={AppLinks.projectsPage} className="flex flex-wrap items-center gap-2 w-max pr-5 group">
             <div
