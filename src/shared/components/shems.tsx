@@ -113,7 +113,7 @@ export function ProjectsBreadcrumbScheme({ language }: { language: Language }): 
 }
 export function ProjectBreadcrumbScheme(props: { name: string, language: Language, title: string }): Component {
     return <Script
-        id={`json-${name}-scheme`}
+        id={`json-${props.name}-scheme`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: projectBreadcrumbJsonLd(props) }}
     />
