@@ -33,7 +33,7 @@ const projects: ProjectProps[] = [
             },
             {
                 image: webIcon,
-                value: "https://veteranam.info/en",
+                value: "https://veteranam.info",
             },
             {
                 image: githubIcon,
@@ -41,7 +41,7 @@ const projects: ProjectProps[] = [
             },
             {
                 image: figmaIcon,
-                value: "https://www.figma.com/design/zY5Oqp6f6UDrtyAzKXX4eg/CheckMyBuilding?node-id=114-3&t=v73XkFNC9f6D0QZs-1",
+                value: "https://www.figma.com/design/W9Xbu0ajz9LTH1hxXpQFgy/Veteran?node-id=10-102&p=f&t=eceU352NjGy7x9Ok-0",
             },
         ],
     },
@@ -51,7 +51,7 @@ const projects: ProjectProps[] = [
         links: [
             {
                 image: figmaIcon,
-                value: "https://www.figma.com/design/XiL7F7s1qF1lCheckMyBuildingPreview?t=dummy",
+                value: "https://www.figma.com/design/zY5Oqp6f6UDrtyAzKXX4eg/CheckMyBuilding?node-id=114-3&t=v73XkFNC9f6D0QZs-1",
             },
         ],
         hasCodeLink: false,
