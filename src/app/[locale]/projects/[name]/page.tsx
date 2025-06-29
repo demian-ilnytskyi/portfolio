@@ -1,12 +1,12 @@
 import projects from "@/shared/constants/variables/projects";
-import { getTranslations, Link, setLocale } from "optimized-next-intl";
+import { alternatesLinks, getTranslations, Link, setLocale } from "optimized-next-intl";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from 'next/image';
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import CustomMarkdown from "@/shared/components/markdown";
 import siteFetchRepository from "@/shared/repositories/site_fetch_repository";
-import { languages, openGraph } from "@/shared/helpers/metadata_helper";
+import { openGraph } from "@/shared/helpers/metadata_helper";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import AppLinks from "@/shared/constants/variables/links";
 import KIcons from "@/shared/constants/components/icons";
@@ -27,10 +27,7 @@ export async function generateMetadata({ params }: {
     return {
         title: project?.title,
         description: project?.description,
-        alternates: {
-            canonical: locale === KTextConstants.defaultLocale ? KTextConstants.baseUrl + link : undefined,
-            languages: languages(KTextConstants.baseUrl, link),
-        },
+        alternates: alternatesLinks({ locale, url: KTextConstants.baseUrl, linkPart: link }),
         openGraph: openGraph(locale, `/images/${name}.png`)
     };
 };
