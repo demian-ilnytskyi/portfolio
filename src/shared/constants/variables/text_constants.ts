@@ -14,9 +14,9 @@ export default abstract class KTextConstants {
     static readonly projectGitHubLink = KTextConstants.ownerGitHub + '/portfolio';
     static readonly currentCompany = 'Coding House Studio LLC';
     static readonly baseUrl =
-        KTextConstants.isDevENV
+        KTextConstants.isDev
             ? "http://localhost:3000"
-            : process.env.NEXT_PUBLIC_FLAVOUR == 'development'
+            : KTextConstants.isDevENV
                 ? "https://portfolio-development.demien-ilnutskiy.workers.dev"
                 : "https://portfolio.demien-ilnutskiy.workers.dev";
     static readonly profileImageUrl = `${KTextConstants.baseUrl}/images/profile.png`;
