@@ -1,6 +1,5 @@
 "use client";
 
-// import { usePathname } from "@/l18n/navigation";
 import { useEffect, useState } from "react";
 
 export default function BottomDialogScrollHelper({ checkedBoxId }: { checkedBoxId: string }): Component {

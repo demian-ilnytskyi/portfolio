@@ -5,6 +5,7 @@ import TryAgainButton from "./try_again_button"
 import errorPageTranslation from "./translations";
 import KIcons from "@/shared/constants/components/icons";
 import { cn } from "@/lib/utils";
+import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export default function GlobalErrorBody({ locale }: { locale: Language }): Component {
 
@@ -22,6 +23,12 @@ export default function GlobalErrorBody({ locale }: { locale: Language }): Compo
             {t['subtitle']}
         </h2>
         <TryAgainButton buttonText={t['tryAgain']} />
-        <p className="mt-4 text-sm text-gray-600">{t['info']}</p>
+        <p className="mt-4 text-base text-gray-400">
+            {t['support']}{' '}
+            <a href={`mailto:${KTextConstants.ownerEmail}`} className="text-gray-500 hover:underline">
+                {t['contactMe']}
+            </a>
+        </p>
+        <p className="mt-4 text-sm text-gray-400">{t['info']}</p>
     </main>;
 }

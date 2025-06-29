@@ -5,7 +5,7 @@ class ErrorPageTranslation {
         "tryAgain": "Спробувати ще раз",
         "info": "Натискання 'Спробувати ще раз' оновить сторінку та скине налаштування сайту.",
         "support": "Якщо проблема не зникає, будь ласка,",
-        "contactSupport": "зверніться до підтримки"
+        "contactMe": "зверніться до мене"
     };
     readonly en: Record<string, string> = {
         "title": "Something Went Wrong",
@@ -13,7 +13,7 @@ class ErrorPageTranslation {
         "tryAgain": "Try Again",
         "info": "Clicking 'Try Again' will refresh the page and reset site setting.",
         "support": "If the issue persists, please",
-        "contactSupport": "contact support"
+        "contactMe": "contact me"
     };
     getLocale(locale: Language): Record<string, string> {
         switch (locale) {

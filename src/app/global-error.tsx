@@ -3,9 +3,9 @@
 import KTextConstants from '@/shared/constants/variables/text_constants';
 import { usePathname } from 'next/navigation';
 import GlobalErrorBody from './global-error/body';
+import { useEffect } from 'react';
 
 import "./globals.css";
-import { useEffect } from 'react';
 
 export default function GlobalError({
     error,
@@ -17,13 +17,12 @@ export default function GlobalError({
     let locale: Language;
 
     useEffect(() => {
-        // Log the error to an error reporting service
         console.error(error)
     }, [error])
 
     switch (path.split('/').filter(Boolean).at(0)) {
-        case 'en':
-            locale = 'en';
+        case 'uk':
+            locale = 'uk';
             break;
         default:
             locale = KTextConstants.defaultLocale;
