@@ -19,4 +19,5 @@ export default abstract class KTextConstants {
             : process.env.NEXT_PUBLIC_FLAVOUR == 'development'
                 ? "https://portfolio-development.demien-ilnutskiy.workers.dev"
                 : "https://portfolio.demien-ilnutskiy.workers.dev";
+    static readonly profileImageUrl = `${KTextConstants.baseUrl}/images/profile.png`;
 }
