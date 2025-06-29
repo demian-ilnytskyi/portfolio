@@ -23,10 +23,9 @@ const personJsonLd = {
     "@type": "Person",
     "name": KTextConstants.owner,
     "url": KTextConstants.baseUrl,
-    "image": `${KTextConstants.owner}/images/profile.png`,
+    "image": `${KTextConstants.baseUrl}/images/profile.png`,
     "sameAs": [
         KTextConstants.ownerGitHub,
-        KTextConstants.baseUrl,
         "https://www.linkedin.com/in/demian-ilnytskyi-54367a268/"
     ],
     "jobTitle": "Flutter Developer",
