@@ -64,9 +64,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
 
     const t = await getTranslations(`ProjectPage`, locale);
 
+    const title = project('title');
+
     return <main className="flex-1 flex flex-col max-w-5xl mt-5">
         {/* Site Scheme For SEO Bots */}
-        <ProjectBreadcrumbScheme name={name} />
+        <ProjectBreadcrumbScheme name={name} language={locale} title={title} />
 
         <Link href={AppLinks.projectsPage} className="flex flex-wrap items-center gap-2 w-max pr-5 group">
             <div
@@ -91,7 +93,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
                 priority />
             <div className="px-5 mt-5 flex flex-col">
                 <h1 className={cn(AppTextStyle.h1, 'text-center not-md:text-4xl font-bold')}>
-                    {project('title')}
+                    {title}
                 </h1>
                 <CustomMarkdown className={cn(AppTextStyle.bodyLarge, 'mt-5')} content={fetchPolicyContent} />
 

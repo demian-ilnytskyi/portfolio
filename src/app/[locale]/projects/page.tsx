@@ -1,6 +1,6 @@
 import AppLinks from "@/shared/constants/variables/links";
 import metadataHelper from "@/shared/helpers/metadata_helper";
-import { getTranslations, setLocaleAsync } from "optimized-next-intl";
+import { getTranslations, setLocale } from "optimized-next-intl";
 import type { Metadata } from "next";
 import type { ProjectsProps } from "@/shared/components/projects_card";
 import ProjectsCard from "@/shared/components/projects_card";
@@ -25,14 +25,15 @@ export async function generateMetadata({ params }: {
 export default async function Projects({ params }: {
     params: Promise<{ locale: Language }>;
 }): Promise<Component> {
-    await setLocaleAsync(params);
+    const { locale } = await params;
+    setLocale(locale);
     const tProjects = await getTranslations('Projects');
     const t = await getTranslations('ProjectsPage');
 
 
     return <main className="flex-1 flex flex-col">
         {/* Site Scheme For SEO Bots */}
-        <ProjectsBreadcrumbScheme />
+        <ProjectsBreadcrumbScheme language={locale} />
 
         <h1 className={cn(AppTextStyle.h1Tablet, 'text-center my-4')}>{t('title')}</h1>
         <ul className="grid grid-flow-row big-desk:grid-cols-2 grid-cols-1 gap-x-5 md:gap-y-10 big-desk:gap-y-5 gap-y-5">

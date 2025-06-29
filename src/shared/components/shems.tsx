@@ -1,7 +1,22 @@
 import Script from "next/script";
 import KTextConstants from "../constants/variables/text_constants";
 import AppLinks from "../constants/variables/links";
-import projects from "../constants/variables/projects";
+
+interface TranslateModel {
+    uk: string;
+    en: string;
+}
+
+const pageName: Record<string, TranslateModel> = {
+    home: {
+        uk: "Головна",
+        en: "Home",
+    },
+    projects: {
+        uk: "Проєкти",
+        en: "Projects",
+    },
+}
 
 const personJsonLd = {
     "@context": "https://schema.org/",
@@ -21,57 +36,61 @@ const personJsonLd = {
     }
 }
 
-const homeBreadcrumbJsonLd = {
-    "@context": "https://schema.org/",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home Page",
-        "item": `${KTextConstants.baseUrl}/`
-    }, {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Projects Page",
-        "item": `${KTextConstants.baseUrl}${AppLinks.projectsPage}`
-    }, {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Veteranam Info Page",
-        "item": `${KTextConstants.baseUrl}${AppLinks.projectsPage}/${projects.at(0)?.name}`
-    }]
+function getBaseUrl(language: Language) {
+    if (language !== KTextConstants.defaultLocale) {
+        return `${KTextConstants.baseUrl}/${language}`;
+    } else {
+        return KTextConstants.baseUrl;
+    }
 }
 
-const projectsBreadcrumbJsonLd = {
-    "@context": "https://schema.org/",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Projects Page",
-        "item": `${KTextConstants.baseUrl}${AppLinks.projectsPage}`
-    }, {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Veteranam Info Page",
-        "item": `${KTextConstants.baseUrl}${AppLinks.projectsPage}/${projects.at(0)?.name}`
-    }]
-}
-
-function projectBreadcrumbJsonLd(name: string) {
+function projectsBreadcrumbJsonLd(language: Language) {
+    const baseUrl = getBaseUrl(language);
     return {
         "@context": "https://schema.org/",
         "@type": "BreadcrumbList",
         "itemListElement": [{
             "@type": "ListItem",
             "position": 1,
-            "name": "Projects Page",
-            "item": `${KTextConstants.baseUrl}${AppLinks.projectsPage}/${name}`
+            "name": pageName.home[language],
+            "item": `${baseUrl}${language !== KTextConstants.defaultLocale ? '' : '/'}`
         }, {
             "@type": "ListItem",
             "position": 2,
-            "name": "Veteranam Info Page",
-            "item": `${KTextConstants.baseUrl}${AppLinks.projectsPage}`
+            "name": pageName.projects[language],
+            "item": `${baseUrl}${AppLinks.projectsPage}`
+        }]
+    }
+}
+
+function projectBreadcrumbJsonLd({
+    language,
+    name,
+    title
+}: {
+    title: string,
+    name: string,
+    language: Language
+}) {
+    const baseUrl = getBaseUrl(language);
+    return {
+        "@context": "https://schema.org/",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": pageName.home[language],
+            "item": `${baseUrl}${language !== KTextConstants.defaultLocale ? '' : '/'}`
+        }, {
+            "@type": "ListItem",
+            "position": 2,
+            "name": pageName.projects[language],
+            "item": `${baseUrl}${AppLinks.projectsPage}`
+        }, {
+            "@type": "ListItem",
+            "position": 3,
+            "name": title,
+            "item": `${baseUrl}${AppLinks.projectsPage}/${name}`
         }]
     };
 }
@@ -83,24 +102,18 @@ export function PersonScheme(): Component {
         dangerouslySetInnerHTML={{ __html: personJsonLd }}
     />
 }
-export function HomeBreadcrumbScheme(): Component {
+
+export function ProjectsBreadcrumbScheme({ language }: { language: Language }): Component {
     return <Script
         id="json-ld-product"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: homeBreadcrumbJsonLd }}
+        dangerouslySetInnerHTML={{ __html: projectsBreadcrumbJsonLd(language) }}
     />
 }
-export function ProjectsBreadcrumbScheme(): Component {
+export function ProjectBreadcrumbScheme(props: { name: string, language: Language, title: string }): Component {
     return <Script
         id="json-ld-product"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: projectsBreadcrumbJsonLd }}
-    />
-}
-export function ProjectBreadcrumbScheme({ name }: { name: string }): Component {
-    return <Script
-        id="json-ld-product"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: projectBreadcrumbJsonLd(name) }}
+        dangerouslySetInnerHTML={{ __html: projectBreadcrumbJsonLd(props) }}
     />
 }
