@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+import path from 'path';
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -13,6 +14,52 @@ function cacheHeader(seconds: number) {
 }
 
 const nextConfig: NextConfig = {
+    images: {
+        /**
+         * Defines a list of device widths that Next.js should use to generate responsive image sizes.
+         * When an image is requested, Next.js selects the closest `deviceSize` or `imageSize` to the request's width.
+         * This ensures users download an image optimized for their screen, not an unnecessarily large one.
+         * The current values are standard and cover a wide range of devices, including desktops, tablets, and phones.
+         */
+        deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+
+        /**
+         * Defines a list of image widths that Next.js should use to generate additional responsive image sizes.
+         * These are typically smaller sizes useful for elements like avatars, icons, or small thumbnails.
+         * They are combined with `deviceSizes` to form the complete set of widths for srcset generation.
+         */
+        imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+
+        /**
+         * Specifies the modern image formats Next.js should attempt to convert images to.
+         * Browsers supporting these formats (like AVIF and WebP) will receive them,
+         * significantly reducing file size while maintaining visual quality.
+         * This improves loading performance and reduces bandwidth consumption.
+         */
+        formats: ['image/avif', 'image/webp'],
+
+        /**
+         * Sets the minimum time (in seconds) for which optimized image responses can be cached.
+         * A higher value means optimized images are cached longer by browsers and CDNs,
+         * reducing server load and improving load times for repeat visitors.
+         * Here, optimized images will be cached for 7 days (604800 seconds).
+         */
+        minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
+    },
+    turbopack: {
+        resolveAlias: {
+            "@intl-config": "./src/l18n/intl_config.ts",
+            "@locale-file/*.json": "./messages/*.json",
+        },
+    },
+    webpack(config) {
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            "@intl-config": path.resolve(__dirname, "src/l18n/intl_config"),
+            "@locale-file": path.resolve(__dirname, "messages"),
+        };
+        return config;
+    },
     compiler: {
         removeConsole: isDev ? undefined : {
             exclude: ["error", "warn"],

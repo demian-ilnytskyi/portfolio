@@ -32,11 +32,9 @@
     }
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/l18n/intl_config.ts"
+    "./**/*.d.ts",
+    "./**/*.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
