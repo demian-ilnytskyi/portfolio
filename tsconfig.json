@@ -28,15 +28,19 @@
       ],
       "@/fonts": [
         "./src/shared/constants/theme/fonts"
+      ],
+      "@intl-config": [
+        "./src/l18n/intl_config"
+      ],
+      "@locale-file": [
+        "./messages"
       ]
     }
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/l18n/intl_config.ts"
+    "./**/*.d.ts",
+    "./**/*.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

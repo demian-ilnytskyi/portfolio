@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+import path from 'path';
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -13,6 +14,14 @@ function cacheHeader(seconds: number) {
 }
 
 const nextConfig: NextConfig = {
+    webpack(config) {
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            "@intl-config": path.resolve(__dirname, "src/l18n/intl_config"),
+            "@locale-file": path.resolve(__dirname, "messages"),
+        };
+        return config;
+    },
     compiler: {
         removeConsole: isDev ? undefined : {
             exclude: ["error", "warn"],
