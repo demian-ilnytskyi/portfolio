@@ -28,12 +28,6 @@
       ],
       "@/fonts": [
         "./src/shared/constants/theme/fonts"
-      ],
-      "@intl-config": [
-        "./src/l18n/intl_config"
-      ],
-      "@locale-file": [
-        "./messages"
       ]
     }
   },
