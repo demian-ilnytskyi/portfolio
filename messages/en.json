@@ -1,7 +1,7 @@
 {
     "HomePage": {
         "ImagePart": {
-            "title": "Demian Ilnutskiy",
+            "title": "Demian Ilnytskyi",
             "description1": "I'm an",
             "description2": "Associate Flutter Developer",
             "description3": "crafting intuitive, high-performance",
@@ -89,7 +89,7 @@
                 },
                 {
                     "title": "GitHub",
-                    "description": "DemienIlnutskiy"
+                    "description": "DemienIlnytskyi"
                 }
             ]
         },
@@ -159,18 +159,18 @@
         "Main": {
             "category": "Portfolio",
             "title": {
-                "default": "Demian Ilnutskiy - Associate Flutter Developer Portfolio",
-                "template": "%s | Demian Ilnutskiy"
+                "default": "Demian Ilnytskyi - Associate Flutter Developer Portfolio",
+                "template": "%s | Demian Ilnytskyi"
             },
-            "description": "Demian Ilnutskiy is an Associate Flutter Developer specializing in crafting intuitive, high-performance cross-platform mobile and web applications. With expertise in Flutter, Next.js, Firebase, PostgreSQL, and a range of back-end technologies, he delivers comprehensive and seamless user experiences, backed by experience in bug fixing, optimization, and code reviews."
+            "description": "Demian Ilnytskyi is an Associate Flutter Developer specializing in crafting intuitive, high-performance cross-platform mobile and web applications. With expertise in Flutter, Next.js, Firebase, PostgreSQL, and a range of back-end technologies, he delivers comprehensive and seamless user experiences, backed by experience in bug fixing, optimization, and code reviews."
         },
         "Projects": {
             "title": "Associate Flutter Developer Projects",
-            "description": "Demian Ilnutskiy is an Associate Flutter Developer specializing in crafting intuitive, high-performance cross-platform mobile and web applications. With expertise in Flutter, Next.js, Firebase, PostgreSQL, and a range of back-end technologies, he delivers comprehensive and seamless user experiences, backed by experience in bug fixing, optimization, and code reviews."
+            "description": "Demian Ilnytskyi is an Associate Flutter Developer specializing in crafting intuitive, high-performance cross-platform mobile and web applications. With expertise in Flutter, Next.js, Firebase, PostgreSQL, and a range of back-end technologies, he delivers comprehensive and seamless user experiences, backed by experience in bug fixing, optimization, and code reviews."
         }
     },
     "NavigationBar": {
-        "logo": "Demian Ilnutskiy",
+        "logo": "Demian Ilnytskyi",
         "home": "Home",
         "aboutMe": "About me",
         "workExperience": "Work experience",
@@ -182,7 +182,7 @@
         "dialogLabel": "Navigation Menu"
     },
     "Footer": {
-        "content": "Demian Ilnutskiy. All rights reserved.",
+        "content": "Demian Ilnytskyi. All rights reserved.",
         "viewSource": "View Source"
     }
 }
