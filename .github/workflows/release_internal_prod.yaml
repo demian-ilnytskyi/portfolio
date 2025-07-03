@@ -4,7 +4,6 @@ name: PRODUCTION build
 # Controls when the workflow will run
 on:
   workflow_dispatch:
-    branches: [ main ]
 concurrency:
   group: prod-$
   cancel-in-progress: true
