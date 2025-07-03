@@ -13,7 +13,7 @@ permissions:
   contents: read # This is required for actions/checkout
 jobs:
   web_build:
-    uses: DemienIlnytskyi/workflows/.github/workflows/next_js_build.yml@main
+    uses: DemianIlnytskyi/workflows/.github/workflows/next_js_build.yml@main
     secrets: inherit
     with:
       FLAVOUR: "production"

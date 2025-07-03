@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   web_build:
-    uses: DemienIlnytskyi/workflows/.github/workflows/next_js_build.yml@main
+    uses: DemianIlnytskyi/workflows/.github/workflows/next_js_build.yml@main
     secrets: inherit
     with:
       FLAVOUR: "development"
