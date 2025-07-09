@@ -4,7 +4,7 @@ export default abstract class KTextConstants {
     static readonly currentDate = new Date();
     static readonly owner = "Demian Ilnytskyi";
     static readonly appName = "Demian Portfolio";
-    static readonly ownerUrl = "https://portfolio.demian-ilnytskyi-site.workers.dev";
+    static readonly ownerUrl = "https://portfolio.demian-ilnytskyi.workers.dev";
     static readonly defaultLocale: Language = "en";
     static readonly locales: Language[] = ["uk", "en"];
     static readonly localesSet = new Set(KTextConstants.locales);
@@ -17,7 +17,7 @@ export default abstract class KTextConstants {
         KTextConstants.isDev
             ? "http://localhost:3000"
             : KTextConstants.isDevENV
-                ? "https://portfolio-development.demian-ilnytskyi-site.workers.dev"
-                : "https://portfolio.demian-ilnytskyi-site.workers.dev";
+                ? "https://portfolio-development.demian-ilnytskyi.workers.dev"
+                : "https://portfolio.demian-ilnytskyi.workers.dev";
     static readonly profileImageUrl = `${KTextConstants.baseUrl}/images/profile.png`;
 }
