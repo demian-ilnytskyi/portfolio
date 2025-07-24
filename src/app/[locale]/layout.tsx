@@ -3,7 +3,7 @@ import NavigationBar from "@/shared/components/nav_bar/nav_bar";
 import metadataHelper, { openGraph } from "@/shared/helpers/metadata_helper";
 import Footer from "@/shared/components/footer";
 import { PersonScheme } from "@/shared/components/shems";
-import { DetectThemeScript, getCurrentTheme, getMessage, getTranslations, IntlProvider } from "optimized-next-intl";
+import { DetectThemeScript, getLayoutStates, getMessage, getTranslations, IntlProvider } from "optimized-next-intl";
 
 
 export async function generateMetadata({ params }: {
@@ -33,8 +33,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>): Promise<Component> {
-  const { locale, isDark, htmlParam } = await getCurrentTheme();
+  const { locale, isDark, htmlParam } = await getLayoutStates();
   const messages = await getMessage(locale);
+  console.log('fdsdfsdfsfds ##### ', locale, isDark, htmlParam);
 
   return <html {...htmlParam} >
     <head>
