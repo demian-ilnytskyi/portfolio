@@ -7,7 +7,6 @@ export default abstract class KTextConstants {
     static readonly ownerUrl = "https://portfolio.demian-ilnytskyi.workers.dev";
     static readonly defaultLocale: Language = "en";
     static readonly locales: Language[] = ["uk", "en"];
-    static readonly localesSet = new Set(KTextConstants.locales);
     static readonly ownerEmail = "demian.ilnytskyi@gmail.com";
     static readonly ownerLinkedIn = "https://www.linkedin.com/in/demian-ilnytskyi-54367a268";
     static readonly ownerGitHub = "https://github.com/demian-ilnytskyi";

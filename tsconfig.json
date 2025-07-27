@@ -25,15 +25,13 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "@/fonts": [
-        "./src/shared/constants/theme/fonts"
       ]
     }
   },
   "include": [
-    "./**/*.d.ts",
-    "./**/*.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [

@@ -1,4 +1,3 @@
-// import { useTranslations } from "next-intl";
 import AppTextStyle from "../../constants/styles/app_text_styles";
 import NavigationMobDialog from "./nav_mob_dialog";
 import LanguageSwitcher from "../language_switcher/language_switcher";

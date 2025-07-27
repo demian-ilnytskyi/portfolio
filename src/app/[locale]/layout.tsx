@@ -35,7 +35,6 @@ export default async function RootLayout({
 }>): Promise<Component> {
   const { locale, isDark, htmlParam } = await getLayoutStates();
   const messages = await getMessage(locale);
-  console.log('fdsdfsdfsfds ##### ', locale, isDark, htmlParam);
 
   return <html {...htmlParam} >
     <head>
