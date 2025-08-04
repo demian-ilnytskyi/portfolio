@@ -21,7 +21,7 @@
 		"markdown-to-jsx": "^7.7.6",
 		"next": "15.3.5",
 		"optimized-next-intl": "https://gitpkg.vercel.app/demian-ilnytskyi/optimized-next-intl/package?main",
-		"react": "^19.1.0",
+		"react": "^19.1.1",
 		"react-dom": "^19.1.0",
 		"tailwind-merge": "^3.2.0",
 		"tw-animate-css": "^1.3.4"
