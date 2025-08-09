@@ -15,7 +15,7 @@
 		"check-size": "wrangler deploy --outdir boundled/ --dry-run"
 	},
 	"dependencies": {
-		"@next/third-parties": "^15.3.2",
+		"@next/third-parties": "^15.4.5",
 		"clsx": "^2.1.1",
 		"lucide-react": "^0.525.0",
 		"markdown-to-jsx": "^7.7.6",
