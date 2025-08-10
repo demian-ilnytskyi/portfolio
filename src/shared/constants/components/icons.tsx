@@ -2,8 +2,6 @@ import { cn } from '@/lib/utils';
 import {
     Info,
     Menu,
-    Moon,
-    Sun,
     Briefcase,
     Mail,
     Linkedin,
