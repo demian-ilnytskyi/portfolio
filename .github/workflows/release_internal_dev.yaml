@@ -2,10 +2,6 @@ name: DEVELOPMENT build
 
 on:
   workflow_dispatch:
-    # inputs:
-    #   new_engine:
-    #     description: 'Enable new engine (true/false)'
-    #     required: false
 
 concurrency:
   group: dev-$
@@ -17,4 +13,6 @@ jobs:
     secrets: inherit
     with:
       FLAVOUR: "development"
-      # new_engine: ${{ github.event.inputs.new_engine }}
+      cloudflare_secrets: |
+        NEXT_PUBLIC_TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        NEXT_PUBLIC_TELEGRAM_SEND_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
