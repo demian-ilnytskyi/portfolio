@@ -17,4 +17,7 @@ jobs:
     secrets: inherit
     with:
       FLAVOUR: "production"
+      secrets_map: |
+        TELEGRAM_BOT_TOKEN: NEXT_PUBLIC_TELEGRAM_BOT_TOKEN
+        TELEGRAM_CHAT_ID: NEXT_PUBLIC_TELEGRAM_SEND_CHAT_ID
 
