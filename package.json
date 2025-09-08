@@ -19,7 +19,7 @@
 		"clsx": "^2.1.1",
 		"lucide-react": "^0.525.0",
 		"markdown-to-jsx": "^7.7.6",
-		"next": "15.4.5",
+		"next": "15.5.2",
 		"optimized-next-intl": "https://gitpkg.vercel.app/demian-ilnytskyi/optimized-next-intl/package?main",
 		"react": "^19.1.1",
     "react-dom": "^19.1.1",
