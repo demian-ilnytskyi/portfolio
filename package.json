@@ -17,7 +17,7 @@
 	"dependencies": {
 		"@next/third-parties": "^15.4.5",
 		"clsx": "^2.1.1",
-		"lucide-react": "^0.525.0",
+		"lucide-react": "^0.544.0",
 		"markdown-to-jsx": "^7.7.6",
 		"next": "15.4.5",
 		"optimized-next-intl": "https://gitpkg.vercel.app/demian-ilnytskyi/optimized-next-intl/package?main",
