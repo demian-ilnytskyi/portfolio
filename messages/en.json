@@ -140,6 +140,11 @@
             "title": "Hunger Quest",
             "description": "As a freelance developer for an agency, I utilized FlutterFlow to contribute to building and enhancing various features. My work included implementing functionality for adding and editing truck information, loading and displaying items from Firebase in a list view, integrating Google Maps for location selection, supporting two distinct user roles with separate access and behavior, and integrating Stripe for payment processing, including a user trial period.",
             "period": "May 2025 - Present"
+        },
+        "ice-cream-time": {
+            "title": "Ice Cream Time",
+            "description": "Ice Cream Time is a mobile app for ice cream trucks, developed with Flutter. The app allows users to view trucks on a real-time map, supports multiple user roles, and uses background location to automatically send vendor coordinates to the database and push notifications to users when a truck is nearby.",
+            "period": "July 2025 - Present"
         }
     },
     "NotFound": {
