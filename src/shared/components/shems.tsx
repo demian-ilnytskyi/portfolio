@@ -1,6 +1,7 @@
 import Script from "next/script";
 import KTextConstants from "../constants/variables/text_constants";
 import AppLinks from "../constants/variables/links";
+import { getBaseUrl } from "../helpers/metadata_helper";
 
 interface TranslateModel {
     uk: string;
@@ -16,14 +17,6 @@ const pageName: Record<string, TranslateModel> = {
         uk: "Проєкти",
         en: "Projects",
     },
-}
-
-function getBaseUrl(language: Language) {
-    if (language !== KTextConstants.defaultLocale) {
-        return `${KTextConstants.baseUrl}/${language}`;
-    } else {
-        return KTextConstants.baseUrl;
-    }
 }
 
 const personJsonLd = JSON.stringify({

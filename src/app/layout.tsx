@@ -5,7 +5,7 @@ import { metadataIcons, twitter } from "@/shared/helpers/metadata_helper";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  twitter: twitter,
+  twitter: twitter(),
   authors: [{ name: KTextConstants.owner, url: KTextConstants.ownerUrl }],
   creator: KTextConstants.owner,
   formatDetection: { email: true, telephone: true, url: true, },

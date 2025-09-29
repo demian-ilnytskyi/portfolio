@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import NavigationBar from "@/shared/components/nav_bar/nav_bar";
-import metadataHelper, { openGraph } from "@/shared/helpers/metadata_helper";
+import metadataHelper from "@/shared/helpers/metadata_helper";
 import Footer from "@/shared/components/footer";
 import { PersonScheme } from "@/shared/components/shems";
 import { DetectThemeScript, getLayoutStates, getMessage, getTranslations, IntlProvider } from "optimized-next-intl";
@@ -19,7 +19,6 @@ export async function generateMetadata({ params }: {
       linkPart: '',
       locale: locale,
     }),
-    openGraph: openGraph(locale),
     category: t('category'),
     manifest: `/${locale}/manifest.json`,
     other: {

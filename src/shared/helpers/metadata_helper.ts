@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import KTextConstants from "../constants/variables/text_constants";
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
+import type { Twitter } from "next/dist/lib/metadata/types/twitter-types";
 import { alternatesLinks, type TranslatorReturnType } from "optimized-next-intl";
 
 export const metadataIcons: Icon[] = [
@@ -42,9 +43,9 @@ export const metadataIcons: Icon[] = [
   },
 ];
 
-export function openGraph(locale: Language, imageUrl?: string): OpenGraph {
+export function openGraph(linkPart: string, locale: Language, imageUrl?: string): OpenGraph {
   return {
-    url: KTextConstants.baseUrl,
+    url: getBaseUrl(locale) + linkPart,
     images: [
       {
         url: KTextConstants.baseUrl + (imageUrl ?? "/icons/logo-512.png"),
@@ -58,6 +59,14 @@ export function openGraph(locale: Language, imageUrl?: string): OpenGraph {
   };
 }
 
+export function getBaseUrl(language: Language): string {
+  if (language !== KTextConstants.defaultLocale) {
+    return `${KTextConstants.baseUrl}/${language}`;
+  } else {
+    return KTextConstants.baseUrl;
+  }
+}
+
 function grapthLocale(locale: Language): string {
   switch (locale) {
     case 'uk':
@@ -67,9 +76,12 @@ function grapthLocale(locale: Language): string {
   }
 }
 
-export const twitter = {
-  card: "summary_large_image",
-  images: KTextConstants.baseUrl + "/icons/512.png",
+export function twitter(imageUrl?: string): Twitter {
+  return {
+    creator: KTextConstants.owner,
+    card: "summary_large_image",
+    images: KTextConstants.baseUrl + (imageUrl ?? "/icons/512.png"),
+  }
 };
 
 interface MetadataHelperProps {
@@ -78,6 +90,7 @@ interface MetadataHelperProps {
   isMain?: boolean;
   canonical?: string
   linkPart: string;
+  imageUrl?: string,
 }
 
 export default function metadataHelper({
@@ -86,6 +99,7 @@ export default function metadataHelper({
   linkPart,
   locale,
   canonical,
+  imageUrl,
 }: MetadataHelperProps): Partial<Metadata> {
   return {
     title: isMain ? {
@@ -93,6 +107,7 @@ export default function metadataHelper({
       template: t('title.template'),
     } : t('title'),
     description: t('description'),
-    alternates: alternatesLinks({ locale, url: KTextConstants.baseUrl, canonical, linkPart })
+    alternates: alternatesLinks({ locale, url: KTextConstants.baseUrl, canonical, linkPart }),
+    openGraph: openGraph(linkPart, locale, imageUrl),
   }
 }
