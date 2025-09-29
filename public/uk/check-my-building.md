@@ -4,7 +4,7 @@
 ---
 
 ## **Рішення**
-Ми розробили **Check My Building**, зручний мобільний додаток, створений за допомогою **Flutter**, призначений для спрощення аудиторських процесів. Ключові функції включають візуальні підтвердження на основі фотографій, оновлення статусу в реальному часі та коментарі до конкретних елементів. Крім того, ми інтегрували функціональність для планування аудитів, призначення відповідальних членів команди та створення власних шаблонів для нових аудитів. Для підвищення зручності використання ми ретельно розробили користувацький шлях та провели суворе тестування, щоб забезпечити безперебійний досвід.
+I worked as part of a team on the development of **Check My Building**, a user-friendly mobile application built with **Flutter** to simplify the audit process. Key features included photo-based visual confirmations, real-time status updates, and item-specific comments. In addition, we integrated functionality for scheduling audits, assigning responsible team members, and creating custom templates for new audits. To enhance usability, our team carefully designed the user journey and conducted thorough testing to ensure a seamless experience.
 
 ---
 

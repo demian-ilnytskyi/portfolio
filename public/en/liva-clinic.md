@@ -1,19 +1,22 @@
-## **Challenge**
-The project involved a critical need to stabilize and enhance an existing Liva Clinic application, which required immediate attention to resolve bugs, improve performance, and integrate new functionalities across both its Flutter mobile application and PostgreSQL-based backend.
+# Challenge
+
+Stabilize and improve the existing **Liva Clinic** app: fix critical bugs, boost performance, and add new features in the Flutter app and PostgreSQL backend.
 
 ---
 
-## **Solution**
-As a freelance developer for an agency, I focused on comprehensive bug resolution and the implementation of new features within the Flutter application, significantly enhancing its performance and usability. On the backend, built with PostgreSQL and Sequelize, I integrated robust communication solutions like SendGrid for email and Twilio for SMS notifications, alongside the Google Maps API for precise address validation. I also utilized Amazon AWS for in-depth log review and proactive issue resolution, ensuring the system's stability and reliability.
+# Solution
+
+As a freelance developer, I fixed major bugs and optimized the mobile app. On the backend (PostgreSQL + Sequelize), I integrated SendGrid for email, Twilio for SMS, Google Maps API for address verification, and AWS for log monitoring. Also added Stripe Connect for payments and Agora for video calls.
 
 ---
 
-## **Result**
-Through targeted bug fixes and strategic feature additions, the Liva Clinic application achieved greater stability and reliability. The enhanced backend integrations improved communication workflows and data accuracy, leading to a more robust and user-friendly system that effectively supports clinic operations and patient interactions.
+# Result
+
+The app became more stable, faster, and user-friendly. New integrations improved communication with patients, data accuracy, and overall clinic operations.
 
 ---
 
-**Technologies Used:**
+**Technologies:**
 - Flutter
 - JavaScript
 - PostgreSQL
@@ -22,6 +25,6 @@ Through targeted bug fixes and strategic feature additions, the Liva Clinic appl
 - SendGrid
 - Twilio
 - Google Maps API
-- Amazon AWS
+- AWS
 - Workflow Management
 - Agora

@@ -4,6 +4,7 @@ import veteranam from "../../../../public/images/veteranam-info.png";
 import checkMyBuilding from "../../../../public/images/check-my-building.png";
 import livaClinicImage from "../../../../public/images/liva-clinic.png";
 import hungerQuestImage from "../../../../public/images/hunger-quest.png";
+import IceCreamTimeImage from "../../../../public/images/ice-cream-time.png";
 
 import appStoreIcon from "../../../../public/icons/app_store.svg";
 import googlePlayIcon from "../../../../public/icons/play_market.svg";
@@ -54,6 +55,12 @@ const projects: ProjectProps[] = [
                 value: "https://www.figma.com/design/zY5Oqp6f6UDrtyAzKXX4eg/CheckMyBuilding?node-id=114-3&t=v73XkFNC9f6D0QZs-1",
             },
         ],
+        hasCodeLink: false,
+    },
+    {
+        image: IceCreamTimeImage,
+        name: 'ice-cream-time',
+        links: [],
         hasCodeLink: false,
     },
     {
