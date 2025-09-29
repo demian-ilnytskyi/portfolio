@@ -90,7 +90,7 @@ interface MetadataHelperProps {
   isMain?: boolean;
   canonical?: string
   linkPart: string;
-  imageUrl?: string,
+  imageUrl?: string;
 }
 
 export default function metadataHelper({
