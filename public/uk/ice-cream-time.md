@@ -16,7 +16,7 @@
 
 ---
 
-**Технології:** 
+**Використані Технології:** 
 - Flutter
 - Firebase
 - Google Maps API

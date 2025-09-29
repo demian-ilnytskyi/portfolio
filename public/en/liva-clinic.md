@@ -16,7 +16,7 @@ The app became more stable, faster, and user-friendly. New integrations improved
 
 ---
 
-**Technologies:**
+**Technologies Used:**
 - Flutter
 - JavaScript
 - PostgreSQL

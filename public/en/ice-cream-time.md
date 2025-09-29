@@ -16,7 +16,7 @@ Customers can quickly find the closest ice cream vans, while vendors can attract
 
 ---
 
-**Technologies:** 
+**Technologies Used:** 
 - Flutter
 - Firebase
 - Google Maps API
