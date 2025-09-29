@@ -6,7 +6,7 @@ Stabilize and improve the existing **Liva Clinic** app: fix critical bugs, boost
 
 # Solution
 
-As a freelance developer, I fixed major bugs and optimized the mobile app. On the backend (PostgreSQL + Sequelize), I integrated SendGrid for email, Twilio for SMS, Google Maps API for address verification, and AWS for log monitoring. Also added Stripe Connect for payments and Agora for video calls.
+As a freelance developer, I fixed major bugs and optimized the mobile app. On the backend (PostgreSQL + Sequelize), I improve SendGrid for email, Twilio for SMS, Google Maps API for address verification, and AWS for log monitoring.
 
 ---
 

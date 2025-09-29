@@ -18,14 +18,14 @@ The app provided veterans with a centralized, easy-to-use platform to access dis
 
 **Technologies Used:**
 
-* Flutter
-* UX & UI Design
-* Firebase
-* Testing
-* Mobile App Development
-* Web Application
-* Analytics
-* Application Security
-* Clean Architecture
-* Cloudflare
-* App Store Upload
+- Flutter
+- UX & UI Design
+- Firebase
+- Testing
+- Mobile App Development
+- Web Application
+- Analytics
+- Application Security
+- Clean Architecture
+- Cloudflare
+- App Store Upload
