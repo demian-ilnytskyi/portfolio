@@ -1,7 +1,7 @@
 # Hi, I'm Demian! 👋
 
 <p align="center">
-  <a href="https://portfolio.demian-ilnytskyi.workers.dev/"><img id="avatar" src='read_me/images/avatar.png' width="500px" alt="Demian Ilnytskyi"/></a>
+  <a href="https://demian.inflalite.com/"><img id="avatar" src='read_me/images/avatar.png' width="500px" alt="Demian Ilnytskyi"/></a>
 </p>
 
 ---
