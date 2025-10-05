@@ -45,7 +45,6 @@ async function fetchProjectDetails({ locale, projectName }: { locale: Language, 
 
 export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component> {
     const { name, locale } = await params;
-    console.error('TEST ', name, locale);
     setLocale(locale);
 
     const fetchPolicyContent = await fetchProjectDetails({ locale, projectName: name });
