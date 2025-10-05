@@ -25,7 +25,7 @@ export default function GlobalErrorBody({ locale }: { locale: Language }): Compo
         <TryAgainButton buttonText={t['tryAgain']} />
         <p className="mt-4 text-base text-gray-400">
             {t['support']}{' '}
-            <a href={`mailto:${KTextConstants.ownerEmail}`} className="text-gray-500 hover:underline">
+            <a href={`mailto:${KTextConstants.ownerEmail}`} className="text-gray-500 underline hover:text-black">
                 {t['contactMe']}
             </a>
         </p>
