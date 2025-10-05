@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 };
 
-export default async function NotFound(): Promise<Component> {
+export default function NotFound(): Component {
   return <RootLayout>
     <PageContent />
   </RootLayout>;
