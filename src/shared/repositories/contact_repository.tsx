@@ -1,11 +1,11 @@
 "use server";
 
+import Secrets from "../constants/variables/secrets";
+import { sendErrorReport } from "./error_repository";
+
 export interface ContactProps {
     isError?: boolean;
 }
-
-const telegramBotToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
-const telegramChatId = process.env.NEXT_PUBLIC_TELEGRAM_SEND_CHAT_ID;
 
 export async function sendContact(
     _prevState: ContactProps,
@@ -30,7 +30,7 @@ export async function sendContact(
         const text = textArray.join('\n');
 
         // Telegram Bot API URL for sending messages
-        const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+        const telegramApiUrl = `https://api.telegram.org/bot${Secrets.telegramBotToken}/sendMessage`;
 
         // Send the HTTP request to Telegram Bot API
         const response = await fetch(telegramApiUrl, {
@@ -39,7 +39,7 @@ export async function sendContact(
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                chat_id: telegramChatId,
+                chat_id: Secrets.telegramChatId,
                 text: text,
                 parse_mode: 'Markdown', // Use 'Markdown' for bolding text, or 'HTML' if you prefer HTML formatting
             }),
@@ -50,7 +50,11 @@ export async function sendContact(
 
         // Check if the request was successful
         if (!response.ok || ('ok' in data && !data.ok)) {
-            console.error('Error sending message:', response.body, data);
+            sendErrorReport({
+                error: response.body,
+                classOrMethodName: 'sendContact',
+                params: { data }
+            });
             return {
                 isError: true,
             };
@@ -61,8 +65,10 @@ export async function sendContact(
             isError: false,
         };
     } catch (error) {
-        // Catch any unexpected errors during the process
-        console.error('An unknown error occurred while sending the message:', error);
+        sendErrorReport({
+            error,
+            classOrMethodName: 'sendContact',
+        });
         return {
             isError: true,
         };
