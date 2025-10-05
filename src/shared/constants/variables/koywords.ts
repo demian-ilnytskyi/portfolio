@@ -1,4 +1,7 @@
 // Define an interface for the average search volume.
+
+import { sendErrorReport } from "@/shared/repositories/error_repository";
+
 // It contains separate 'min' and 'max' fields.
 interface Avg {
     min: number;
@@ -54,7 +57,7 @@ const filterKeywordsByAvg = (
         // console.info('Current keywords length: ', filteredAndSorted.length);
         return filteredAndSorted;
     } catch (e) {
-        console.error(`Keywords filter error, keywords: ${keywords}, minAvg: ${minAvg} `, e);
+        sendErrorReport({ error: e, params: { keywords, minAvg }, classOrMethodName: 'filterKeywordsByAvg' });
         return [];
     }
 };
