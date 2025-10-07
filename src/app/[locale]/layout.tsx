@@ -41,7 +41,7 @@ export default async function RootLayout({
       <DetectThemeScript isDark={isDark} />
       <PersonScheme />
     </head>
-    <body className={`bg-white dark:bg-gray-900`}>
+    <body className="bg-white dark:bg-gray-900 text-black dark:text-white">
       <IntlProvider language={locale} messages={messages} >
         <div className="flex flex-col min-h-screen mx-4 lg:mx-24 tablet:mx-8 self-center">
           <NavigationBar isDark={isDark ?? undefined} />

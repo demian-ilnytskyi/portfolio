@@ -9,7 +9,7 @@
   --breakpoint-tablet: 48rem;
   --breakpoint-small-mobile: 30rem;
 
-  
+
   --animate-loading: loading-animation 1.5s ease-in-out infinite;
 
   @keyframes loading-animation {
@@ -42,12 +42,9 @@
 }
 
 @layer base {
-  body{
-    color:black;
-  }
-
-  .dark body{
-    color:white;
+  body {
+    transition: background-color 0.5s ease, color 0.5s ease;
+    will-change: background-color, color;
   }
 
   /* Button Theme (General) */
@@ -66,25 +63,25 @@
     color: var(--color-secondary);
   }
 
-  main{
+  main {
     max-width: 90rem;
     width: 100%;
     align-self: center;
   }
 
   .dialog-scrollbar::-webkit-scrollbar {
-    width: 8px; 
+    width: 8px;
   }
 
   .dialog-scrollbar::-webkit-scrollbar-track {
-    background: transparent; 
+    background: transparent;
   }
 
   .dialog-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(136, 136, 136, 0.8); 
+    background-color: rgba(136, 136, 136, 0.8);
     border-radius: 10px;
-    border: 2px solid transparent; 
-    background-clip: padding-box; 
+    border: 2px solid transparent;
+    background-clip: padding-box;
   }
 
   .dialog-scrollbar::-webkit-scrollbar-thumb:hover {
@@ -92,7 +89,7 @@
   }
 
   .dialog-scrollbar {
-    scrollbar-width: thin; 
-    scrollbar-color: rgba(136, 136, 136, 0.8) transparent; 
+    scrollbar-width: thin;
+    scrollbar-color: rgba(136, 136, 136, 0.8) transparent;
   }
 }

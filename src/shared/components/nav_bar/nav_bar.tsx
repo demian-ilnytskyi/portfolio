@@ -96,7 +96,7 @@ function _Button(props: ButtonProps) {
         prefetch={props.prefetch}>
         <div className={"h-full py-0 not-small-mobile:px-0 px-3 flex flex-row justify-center items-center"}>
             {props.icon && props.icon}
-            <div className="flex-col flex items-center ml-2 hover:underline duration-200">
+            <div className="flex-col flex items-center ml-2 hover:underline">
                 <span>{props.text}</span>
             </div>
         </div>
