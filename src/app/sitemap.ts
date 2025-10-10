@@ -5,7 +5,7 @@ import type { MetadataRoute } from 'next'
 import type { IntlSitemap } from 'optimized-next-intl';
 import { generateIntlSitemap } from 'optimized-next-intl';
 
-const lastModified = new Date(2025, 5, 30);
+const lastModified = new Date(2025, 9, 10);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const intlSitemap: IntlSitemap[] = [
