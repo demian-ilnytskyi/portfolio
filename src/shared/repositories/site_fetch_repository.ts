@@ -47,7 +47,7 @@ export class SiteFetchRepository {
                 const { env } = getCloudflareContext();
                 const response = await env.ASSETS?.fetch(fetchUrl, {
                     // Add cache control if needed
-                    cf: { cacheTtl: 3600 }, // Cache for 1 hour if supported
+                    cf: { cacheTtl: 86400 }, // Cache for 1 day
                     headers: header,
                 });
 
