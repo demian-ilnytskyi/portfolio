@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: {
     ...metadataHelper({
       isMain: true,
       t: t,
-      linkPart: '',
+      linkPart: '/',
       locale: locale,
     }),
     category: t('category'),
