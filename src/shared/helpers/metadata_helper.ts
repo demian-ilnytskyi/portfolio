@@ -44,8 +44,9 @@ export const metadataIcons: Icon[] = [
 ];
 
 export function openGraph(linkPart: string, locale: Language, imageUrl?: string): OpenGraph {
+  const linkPartValue = linkPart == '/' ? '' : linkPart;
   return {
-    url: getBaseUrl(locale) + linkPart,
+    url: getBaseUrl(locale) + linkPartValue,
     images: [
       {
         url: KTextConstants.baseUrl + (imageUrl ?? "/icons/logo-512.png"),
