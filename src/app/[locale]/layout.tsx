@@ -3,7 +3,8 @@ import NavigationBar from "@/shared/components/nav_bar/nav_bar";
 import metadataHelper from "@/shared/helpers/metadata_helper";
 import Footer from "@/shared/components/footer";
 import { PersonScheme } from "@/shared/components/shems";
-import { DetectThemeScript, getLayoutStates, getMessage, getTranslations, HelperScript, IntlProvider } from "optimized-next-intl";
+import { DetectThemeScript, getLayoutStates, getMessage, getTranslations, IntlProvider } from "optimized-next-intl";
+import HelperScriptTest from "@/shared/components/helper_script_test";
 
 
 export async function generateMetadata({ params }: {
@@ -40,7 +41,7 @@ export default async function RootLayout({
       <meta httpEquiv="Content-Language" content={locale} />
       <DetectThemeScript isDark={isDark} />
       <PersonScheme />
-      <HelperScript />
+      <HelperScriptTest />
     </head>
     <body className="bg-white dark:bg-gray-900 text-black dark:text-white">
       <IntlProvider language={locale} messages={messages} >

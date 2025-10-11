@@ -60,11 +60,11 @@ const nextConfig: NextConfig = {
         };
         return config;
     },
-    compiler: {
-        removeConsole: isDev ? undefined : {
-            exclude: ["error", "warn"],
-        },
-    },
+    // compiler: {
+    //     removeConsole: isDev ? undefined : {
+    //         exclude: ["error", "warn"],
+    //     },
+    // },
     async headers() {
         return [
             {
