@@ -4,6 +4,7 @@ import metadataHelper from "@/shared/helpers/metadata_helper";
 import Footer from "@/shared/components/footer";
 import { PersonScheme } from "@/shared/components/shems";
 import { DetectThemeScript, getLayoutStates, getMessage, getTranslations, IntlProvider } from "optimized-next-intl";
+import TestScript from "@/shared/components/test_script";
 
 
 export async function generateMetadata({ params }: {
@@ -38,6 +39,7 @@ export default async function RootLayout({
   return <html {...htmlParam} >
     <head>
       <meta httpEquiv="Content-Language" content={locale} />
+      <TestScript />
       <DetectThemeScript isDark={isDark} />
       <PersonScheme />
     </head>

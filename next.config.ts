@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === "development";
  * @returns A Cache-Control header string.
  */
 function cacheHeader(seconds: number) {
-    return isDev ? 'no-store' : `no-cache, public, max-age=${seconds}, must-revalidate, stale-while-revalidate=120, stale-if-error=86400`;
+    return isDev ? 'no-store' : `public, max-age=${seconds}, must-revalidate, stale-while-revalidate=120, stale-if-error=86400`;
 }
 
 const nextConfig: NextConfig = {
@@ -60,11 +60,11 @@ const nextConfig: NextConfig = {
         };
         return config;
     },
-    compiler: {
-        removeConsole: isDev ? undefined : {
-            exclude: ["error", "warn"],
-        },
-    },
+    // compiler: {
+    //     removeConsole: isDev ? undefined : {
+    //         exclude: ["error", "warn"],
+    //     },
+    // },
     async headers() {
         return [
             {
