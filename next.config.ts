@@ -157,7 +157,7 @@ const nextConfig: NextConfig = {
                 ],
             },
             {
-                // Apply specific cache-control for icons.
+                // Apply specific cache-control for images.
                 source: '/images/:path*',
                 headers: [
                     {
