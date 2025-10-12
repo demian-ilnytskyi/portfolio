@@ -56,6 +56,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>): React.ReactNode {
-  // const nonce = (await headers()).get('x-nonce') ?? undefined;
   return children;
 }

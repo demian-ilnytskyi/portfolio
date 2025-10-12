@@ -3,8 +3,13 @@ import NavigationBar from "@/shared/components/nav_bar/nav_bar";
 import metadataHelper from "@/shared/helpers/metadata_helper";
 import Footer from "@/shared/components/footer";
 import { PersonScheme } from "@/shared/components/shems";
-import { DetectThemeScript, getLayoutStates, getMessage, getTranslations, HelperScript, IntlProvider } from "optimized-next-intl";
-
+import {
+  getLayoutStates,
+  getMessage,
+  getTranslations,
+  IntlHelperScript,
+  IntlProvider
+} from "optimized-next-intl";
 
 export async function generateMetadata({ params }: {
   params: Promise<{ locale: Language }>;
@@ -35,14 +40,13 @@ export default async function RootLayout({
   const { locale, isDark, htmlParam } = await getLayoutStates();
   const messages = await getMessage(locale);
 
-  return <html {...htmlParam} >
+  return <html {...htmlParam}>
     <head>
       <meta httpEquiv="Content-Language" content={locale} />
-      <DetectThemeScript isDark={isDark} />
       <PersonScheme />
-      <HelperScript />
+      <IntlHelperScript isDark={isDark} />
     </head>
-    <body className="bg-white dark:bg-gray-900 text-black dark:text-white">
+    <body className="bg-white dark:bg-gray-900 text-black dark:text-white ease-out">
       <IntlProvider language={locale} messages={messages} >
         <div className="flex flex-col min-h-screen mx-4 lg:mx-24 tablet:mx-8 self-center">
           <NavigationBar isDark={isDark ?? undefined} />
@@ -51,5 +55,5 @@ export default async function RootLayout({
         </div>
       </IntlProvider>
     </body>
-  </html >;
+  </ html>;
 }
