@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === "development";
  * @returns A Cache-Control header string.
  */
 function cacheHeader(seconds: number) {
-    return isDev ? 'no-store' : `public, max-age=${seconds}, must-revalidate, stale-while-revalidate=120, stale-if-error=86400`;
+    return isDev ? 'no-store' : `public, max-age=${seconds}, must-revalidate, stale-while-revalidate=120, stale-if-error=604800`;
 }
 
 const nextConfig: NextConfig = {
@@ -44,7 +44,7 @@ const nextConfig: NextConfig = {
          * reducing server load and improving load times for repeat visitors.
          * Here, optimized images will be cached for 7 days (604800 seconds).
          */
-        minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
+        minimumCacheTTL: 604800, // 7 days
     },
     turbopack: {
         resolveAlias: {
@@ -92,10 +92,10 @@ const nextConfig: NextConfig = {
                     },
                     // Set the Cache-Control header to manage how the response is cached.
                     // 'public': Response can be cached by any cache.
-                    // 'max-age=86400': Response is fresh for 7 days.
+                    // 'max-age=604800': Response is fresh for 7 days.
                     // 'must-revalidate': Cache must revalidate stale responses with the server.
                     // 'stale-while-revalidate=120': Allows serving stale content for up to 120 seconds while revalidating in the background.
-                    // 'stale-if-error=86400': Allows serving stale content for up to 1 day if the server is unreachable or returns an error.
+                    // 'stale-if-error=604800': Allows serving stale content for up to 7 days if the server is unreachable or returns an error.
                     {
                         key: 'Cache-Control',
                         value: cacheHeader(604800),
