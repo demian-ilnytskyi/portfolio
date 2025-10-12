@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function BottomDialogScrollHelper({ checkedBoxId }: { checkedBoxId: string }): Component {
+export default function BottomDialogScrollHelper({ checkedBoxId }: { checkedBoxId: string }): Component | null {
     const [checkbox, setCheckbox] = useState<HTMLInputElement | null>(null);
     useEffect(() => {
         try {
@@ -30,7 +30,7 @@ export default function BottomDialogScrollHelper({ checkedBoxId }: { checkedBoxI
         }
     }, [checkbox, checkedBoxId]);
 
-    return <RouterCloseDialog checkbox={checkbox} />;
+    return checkbox ? <RouterCloseDialog checkbox={checkbox} /> : null;
 }
 
 function RouterCloseDialog({ checkbox }: { checkbox: HTMLInputElement | null }) {
