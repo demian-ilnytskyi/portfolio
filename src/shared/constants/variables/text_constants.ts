@@ -11,7 +11,7 @@ export default abstract class KTextConstants {
     static readonly ownerLinkedIn = "https://www.linkedin.com/in/demian-ilnytskyi-54367a268";
     static readonly ownerGitHub = "https://github.com/demian-ilnytskyi";
     static readonly projectGitHubLink = KTextConstants.ownerGitHub + '/portfolio';
-    static readonly currentCompany = 'Coding House Studio LLC';
+    static readonly currentCompany = '';
     static readonly baseUrl =
         KTextConstants.isDev
             ? "http://localhost:3000"
