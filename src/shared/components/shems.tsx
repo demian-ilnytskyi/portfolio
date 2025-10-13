@@ -19,20 +19,29 @@ const pageName: Record<string, TranslateModel> = {
     },
 }
 
-const personJsonLd = JSON.stringify({
-    "@context": "https://schema.org/",
-    "@type": "Person",
-    "name": KTextConstants.owner,
-    "url": KTextConstants.baseUrl,
-    "image": `${KTextConstants.baseUrl}/images/profile.png`,
-    "sameAs": [
-        KTextConstants.ownerGitHub,
-        "https://www.linkedin.com/in/demian-ilnytskyi-54367a268/"
-    ],
-    "jobTitle": "Flutter Developer",
-    "worksFor": {
-        "@type": "Organization",
-        "name": KTextConstants.currentCompany
+const profileJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "dateCreated": "2025-10-13T21:28:00-00:00",
+    "dateModified": "2025-10-13T21:28:00-00:00",
+    "mainEntity": {
+        "@type": "Person",
+        "name": KTextConstants.owner,
+        "url": KTextConstants.baseUrl,
+        "image": `${KTextConstants.baseUrl}/images/profile.png`,
+        "sameAs": [
+            KTextConstants.ownerGitHub,
+            "https://www.linkedin.com/in/demian-ilnytskyi-54367a268/"
+        ],
+        "jobTitle": "Flutter Developer",
+        ...(KTextConstants.currentCompany
+            ? {
+                "worksFor": {
+                    "@type": "Organization",
+                    "name": KTextConstants.currentCompany
+                }
+            }
+            : {})
     }
 });
 
@@ -133,7 +142,7 @@ export function PersonScheme(): Component {
     return <Script
         id="json-person-scheme"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: personJsonLd }}
+        dangerouslySetInnerHTML={{ __html: profileJsonLd }}
     />
 }
 
