@@ -41,6 +41,7 @@ function projectsBreadcrumbJsonLd(language: Language): string {
     const map = {
         "@context": "https://schema.org/",
         "@type": "BreadcrumbList",
+        "name": "Projects Breadcrumb",
         "itemListElement": [{
             "@type": "ListItem",
             "position": 1,
@@ -69,6 +70,7 @@ function projectBreadcrumbJsonLd({
     const map = {
         "@context": "https://schema.org/",
         "@type": "BreadcrumbList",
+        "name": `Project ${name} Breadcrumb`,
         "itemListElement": [{
             "@type": "ListItem",
             "position": 1,
