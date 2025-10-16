@@ -10,6 +10,7 @@ import {
   IntlHelperScript,
   IntlProvider
 } from "optimized-next-intl";
+import ClientCnsoleErrorRewrite from "@/shared/components/client_console_error_rewrite";
 
 export async function generateMetadata({ params }: {
   params: Promise<{ locale: Language }>;
@@ -54,6 +55,7 @@ export default async function RootLayout({
           <Footer />
         </div>
       </IntlProvider>
+      <ClientCnsoleErrorRewrite />
     </body>
   </ html>;
 }

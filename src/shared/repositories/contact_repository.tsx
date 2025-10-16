@@ -1,7 +1,7 @@
 "use server";
 
 import Secrets from "../constants/variables/secrets";
-import { sendErrorReport } from "./error_repository";
+import errorRepository from "./error_repository";
 
 export interface ContactProps {
     isError?: boolean;
@@ -50,7 +50,7 @@ export async function sendContact(
 
         // Check if the request was successful
         if (!response.ok || ('ok' in data && !data.ok)) {
-            sendErrorReport({
+            errorRepository.sendErrorReport({
                 error: response.body,
                 classOrMethodName: 'sendContact',
                 params: { data }
@@ -65,7 +65,7 @@ export async function sendContact(
             isError: false,
         };
     } catch (error) {
-        sendErrorReport({
+        errorRepository.sendErrorReport({
             error,
             classOrMethodName: 'sendContact',
         });

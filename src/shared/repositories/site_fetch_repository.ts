@@ -1,6 +1,6 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import KTextConstants from "../constants/variables/text_constants";
-import { sendErrorReport } from "./error_repository";
+import errorRepository from "./error_repository";
 
 interface FetchRepositoryInterface {
     path: string;
@@ -62,7 +62,7 @@ export class SiteFetchRepository {
                 return await response.text();
             }
         } catch (e) {
-            sendErrorReport({
+            errorRepository.sendErrorReport({
                 error: e,
                 classOrMethodName: 'SiteFetchRepository fetchTextData',
                 params: { path, header }

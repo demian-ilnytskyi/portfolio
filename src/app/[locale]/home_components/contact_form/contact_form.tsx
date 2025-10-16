@@ -7,7 +7,7 @@ import { sendContact, type ContactProps } from "@/shared/repositories/contact_re
 import type { FormEvent } from "react";
 import { useActionState } from "react";
 import { cn } from "@/lib/utils";
-import { sendErrorReport } from "@/shared/repositories/error_repository";
+import clientSendErrorReport from "@/shared/helpers/error_client_helper";
 
 const initialState: ContactProps = {
     isError: undefined,
@@ -38,7 +38,7 @@ export default function ContactForm(): Component {
             const message = validateField(target.name, target.value);
             return target.setCustomValidity(message ?? '');
         } catch (e) {
-            sendErrorReport({
+            clientSendErrorReport({
                 error: e,
                 classOrMethodName: 'ContactForm Component',
                 params: { value: target.value, name: target.name }

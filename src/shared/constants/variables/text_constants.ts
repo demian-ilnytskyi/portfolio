@@ -1,5 +1,6 @@
 export default abstract class KTextConstants {
-    static readonly isDevENV = process.env.NEXT_PUBLIC_FLAVOUR === "development";
+    static readonly flavour = process.env.NEXT_PUBLIC_FLAVOUR;
+    static readonly isDevENV = KTextConstants.flavour === "development";
     static readonly isDev = process.env.NODE_ENV === "development";
     static readonly currentDate = new Date();
     static readonly owner = "Demian Ilnytskyi";

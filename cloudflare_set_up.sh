@@ -11,6 +11,8 @@ if [[ -f "$ENV_PROD" ]]; then
     echo "{\"BUILD_ID\": \"$BUILD_ID\"}" > "$CONFIG_JSON"
 fi
 
+COMMANDS="${1:-}"
+
 # Run commands if provided
 if [[ -n "$COMMANDS" ]]; then
   echo "🚀 Running commands: $COMMANDS"
