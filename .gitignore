@@ -47,3 +47,5 @@ boundled/
 
 # OpenNext
 /.open-next
+
+public/config.json
