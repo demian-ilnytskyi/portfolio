@@ -12,6 +12,7 @@ import {
 } from "optimized-next-intl";
 import ClientCnsoleErrorRewrite from "@/shared/components/client_console_error_rewrite";
 import CloudflareAnalyticsScript from "@/shared/components/cloudflare_analytics_script";
+import TestScript from "@/shared/components/test_script";
 
 export async function generateMetadata({ params }: {
   params: Promise<{ locale: Language }>;
@@ -46,8 +47,9 @@ export default async function RootLayout({
     <head>
       <meta httpEquiv="Content-Language" content={locale} />
       <PersonScheme />
-      <IntlHelperScript isDark={isDark} />
+      {/* <IntlHelperSc ipt isDark={isDark} /> */}
       <CloudflareAnalyticsScript />
+      <TestScript />
     </head>
     <body className="bg-white dark:bg-gray-900 text-black dark:text-white ease-out">
       <IntlProvider language={locale} messages={messages} >
@@ -56,6 +58,7 @@ export default async function RootLayout({
           {children}
           <Footer />
         </div>
+        {/* // */}
       </IntlProvider>
       <ClientCnsoleErrorRewrite />
     </body>

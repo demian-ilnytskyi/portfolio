@@ -167,6 +167,17 @@ const nextConfig: NextConfig = {
                     },
                 ],
             },
+            {
+                // Apply specific cache-control for images.
+                source: '/test_script.js',
+                headers: [
+                    {
+                        // Cache for 1 year (31536000 seconds) and mark as immutable.
+                        key: 'Cache-Control',
+                        value: `${cacheHeader(31536000)}, immutable`,
+                    },
+                ],
+            },
             // No cache if happened error
             {
                 source: '/:path*',
