@@ -4,6 +4,7 @@ class CloudflareRepository {
     async isEUCountry(): Promise<boolean> {
         try {
             const context = await getCloudflareContext({ async: true });
+            console.warn('Test ', context.cf?.country);
             if (!context.cf) return true;
             return context.cf.isEUCountry === '1';
         } catch (error) {
