@@ -1,17 +1,15 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import errorRepository from "./error_repository";
 class CloudflareRepository {
-    async isEUCountry(): Promise<boolean> {
+    async getCountryCode(): Promise<string | undefined> {
         try {
             const context = await getCloudflareContext({ async: true });
-            if (!context.cf) return true;
-            return context.cf.isEUCountry === '1';
+            return context.cf?.country;
         } catch (error) {
             errorRepository.sendErrorReport({
                 error,
                 classOrMethodName: 'CloudflareRepository isEUCountry',
             });
-            return true;
         }
     }
 
