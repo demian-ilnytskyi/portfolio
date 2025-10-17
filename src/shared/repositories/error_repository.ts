@@ -78,13 +78,13 @@ export class ErrorRepository {
      */
     private _buildMessageText({ error, classOrMethodName, params, optionalParams, isClient }: ErrorParams): string | null {
         const errorText = this._stringifyUnknown(error, isClient);
+        const optionalParamsText = this._formatDetailsBlock("Optional Params", optionalParams, isClient);
         if (ErrorRepository.IGNORED_CONSOLE_ERRORS.some(
-            ignored => errorText.includes(ignored)
+            ignored => errorText.includes(ignored) || (optionalParams?.includes(ignored) ?? false)
         )) {
             return null;
         }
         const paramsText = this._formatDetailsBlock("Params", params, isClient);
-        const optionalParamsText = this._formatDetailsBlock("Optional Params", optionalParams, isClient);
         const flavourText = KTextConstants.flavour ? `🍦 *Flavour:* ${KTextConstants.flavour}` : "";
 
         const messageParts = [
