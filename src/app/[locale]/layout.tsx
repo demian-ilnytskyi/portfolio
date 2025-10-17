@@ -11,6 +11,7 @@ import {
   IntlProvider
 } from "optimized-next-intl";
 import ClientCnsoleErrorRewrite from "@/shared/components/client_console_error_rewrite";
+import CloudflareAnalyticsScript from "@/shared/components/cloudflare_analytics_script";
 
 export async function generateMetadata({ params }: {
   params: Promise<{ locale: Language }>;
@@ -46,6 +47,7 @@ export default async function RootLayout({
       <meta httpEquiv="Content-Language" content={locale} />
       <PersonScheme />
       <IntlHelperScript isDark={isDark} />
+      <CloudflareAnalyticsScript />
     </head>
     <body className="bg-white dark:bg-gray-900 text-black dark:text-white ease-out">
       <IntlProvider language={locale} messages={messages} >
