@@ -188,6 +188,7 @@
     },
     "Footer": {
         "content": "Demian Ilnytskyi. All rights reserved.",
+        "subtitle": "This site uses cookies and localStorage for functionality, performance, and security.",
         "viewSource": "View Source"
     }
 }
