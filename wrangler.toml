@@ -23,3 +23,7 @@ enabled = true
 
 [placement]
 mode = "smart"
+
+[env.development]
+main = ".open-next/worker.js"
+name = "portfolio-development"
