@@ -1,0 +1,26 @@
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/uk/*.md
+  Cache-Control: public, max-age=31536000, immutable
+
+/uk/manifest.json
+  Cache-Control: public, max-age=31536000, immutable
+
+/en/*.md
+  Cache-Control: public, max-age=31536000, immutable
+  
+/en/manifest.json
+  Cache-Control: public, max-age=31536000, immutable
+
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/_next/image
+  Cache-Control: public, max-age=31536000, immutable

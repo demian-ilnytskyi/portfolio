@@ -88,7 +88,7 @@ export class ErrorRepository {
         const flavourText = KTextConstants.flavour ? `🍦 *Flavour:* ${KTextConstants.flavour}` : "";
 
         const messageParts = [
-            `🚨 *InflaLite Error Report*`,
+            `🚨 *Portfolio Error Report*`,
             `🕒 *Time:* ${new Date().toLocaleString("uk-UA")}`,
             `🌐 *Environment:* ${process.env.NODE_ENV ?? "unknown"}`,
             flavourText,
