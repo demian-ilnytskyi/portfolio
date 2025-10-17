@@ -1,11 +1,25 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import errorRepository from "./error_repository";
 class CloudflareRepository {
+    async isEUCountry(): Promise<boolean> {
+        try {
+            const context = await getCloudflareContext({ async: true });
+            if (!context.cf) return true;
+            return context.cf.isEUCountry === '1';
+        } catch (error) {
+            errorRepository.sendErrorReport({
+                error,
+                classOrMethodName: 'CloudflareRepository isEUCountry',
+            });
+            return true;
+        }
+    }
+
     async fetch(
         input: RequestInfo | URL,
         init?: RequestInit
     ): Promise<Response | undefined> {
-        const context = getCloudflareContext();
+        const context = await getCloudflareContext({ async: true });
 
         return await context.env.ASSETS?.fetch(input, init);
     }
