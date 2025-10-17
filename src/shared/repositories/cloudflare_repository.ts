@@ -1,6 +1,15 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import errorRepository from "./error_repository";
 class CloudflareRepository {
+    async fetch(
+        input: RequestInfo | URL,
+        init?: RequestInit
+    ): Promise<Response | undefined> {
+        const context = getCloudflareContext();
+
+        return await context.env.ASSETS?.fetch(input, init);
+    }
+
     waitUntil({ callback, classOrMethodName, params, errorCallback }: {
         callback: () => Promise<unknown | void>;
         classOrMethodName?: string;
@@ -9,7 +18,6 @@ class CloudflareRepository {
     }): void {
         try {
             const context = getCloudflareContext();
-            if (!context) return;
 
             context.ctx.waitUntil((async () => {
                 try {

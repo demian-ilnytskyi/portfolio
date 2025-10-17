@@ -1,6 +1,6 @@
-import { getCloudflareContext } from "@opennextjs/cloudflare";
 import KTextConstants from "../constants/variables/text_constants";
 import errorRepository from "./error_repository";
+import cloudflareRepository from "./cloudflare_repository";
 
 interface FetchRepositoryInterface {
     path: string;
@@ -42,10 +42,7 @@ export class SiteFetchRepository {
 
                 return await response.text();
             } else {
-
-                // Production: Cloudflare ASSETS
-                const { env } = getCloudflareContext();
-                const response = await env.ASSETS?.fetch(fetchUrl, {
+                const response = await cloudflareRepository.fetch(fetchUrl, {
                     // Add cache control if needed
                     cf: { cacheTtl: 86400 }, // Cache for 1 day
                     headers: header,
