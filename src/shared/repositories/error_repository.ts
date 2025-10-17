@@ -80,7 +80,7 @@ export class ErrorRepository {
         const errorText = this._stringifyUnknown(error, isClient);
         const optionalParamsText = this._formatDetailsBlock("Optional Params", optionalParams, isClient);
         if (ErrorRepository.IGNORED_CONSOLE_ERRORS.some(
-            ignored => errorText.includes(ignored) || (optionalParams?.includes(ignored) ?? false)
+            ignored => errorText.includes(ignored) || optionalParamsText.includes(ignored)
         )) {
             return null;
         }
