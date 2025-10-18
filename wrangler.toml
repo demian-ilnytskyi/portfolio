@@ -4,6 +4,7 @@
 main = ".open-next/worker.js"
 name = "portfolio"
 compatibility_date = "2025-06-13"
+routes = ["demian.inflalite.com/*"]
 
 # Compatibility Flags
 # wrangler.toml supports string arrays
@@ -27,3 +28,4 @@ mode = "smart"
 [env.development]
 main = ".open-next/worker.js"
 name = "portfolio-development"
+routes = ["dev.demian.inflalite.com/*"]
