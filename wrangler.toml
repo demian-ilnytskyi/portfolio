@@ -2,10 +2,8 @@
 
 # General Worker settings
 main = ".open-next/worker.js"
-name = "portfolio"
-compatibility_date = "2025-06-13"
-routes = ["demian.inflalite.com/*"]
-workers_dev = true
+compatibility_date = "2025-06-13
+workers_dev = false
 
 # Compatibility Flags
 # wrangler.toml supports string arrays
@@ -26,7 +24,9 @@ enabled = true
 [placement]
 mode = "smart"
 
+[env.production]
+routes = ["demian.inflalite.com/*"]
+
 [env.development]
-main = ".open-next/worker.js"
 name = "portfolio-development"
 routes = ["dev.demian.inflalite.com/*"]
