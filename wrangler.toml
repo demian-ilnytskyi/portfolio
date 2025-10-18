@@ -25,9 +25,5 @@ enabled = true
 [placement]
 mode = "smart"
 
-[env.production]
-routes = ["demian.inflalite.com/*"]
-
 [env.development]
 name = "portfolio-development"
-routes = ["dev.demian.inflalite.com/*"]

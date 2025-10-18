@@ -8,10 +8,9 @@
 		"analyze": "ANALYZE=true next build",
 		"start": "next start",
 		"lint": "next lint",
-		"preview": "chmod +x ./cloudflare_set_up.sh && ./cloudflare_set_up.sh \"opennextjs-cloudflare build --env development && opennextjs-cloudflare preview --env development\"",
-		"deploy": "opennextjs-cloudflare deplo --env developmenty && wrangler deploy --env development",
-		"pre-deploy-development": "chmod +x ./cloudflare_set_up.sh && ./cloudflare_set_up.sh \"next build && opennextjs-cloudflare buil --env development\"",
-		"pre-deploy-production": "chmod +x ./cloudflare_set_up.sh && ./cloudflare_set_up.sh \"next build && opennextjs-cloudflare build --env production\"",
+		"preview": "chmod +x ./cloudflare_set_up.sh && ./cloudflare_set_up.sh \"opennextjs-cloudflare build && opennextjs-cloudflare preview\"",
+		"deploy": "opennextjs-cloudflare deploy && wrangler deploy",
+		"pre-deploy": "chmod +x ./cloudflare_set_up.sh && ./cloudflare_set_up.sh \"next build && opennextjs-cloudflare build\"",
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
 		"check-size": "wrangler deploy --outdir boundled/ --dry-run"
 	},
