@@ -1,9 +1,9 @@
 # wrangler.toml
 
 # General Worker settings
-main = ".open-next/worker.js"
-compatibility_date = "2025-06-13
+compatibility_date = "2025-06-13"
 workers_dev = false
+main = ".open-next/worker.js"
 
 # Compatibility Flags
 # wrangler.toml supports string arrays
@@ -25,6 +25,7 @@ enabled = true
 mode = "smart"
 
 [env.production]
+name = "portfolio"
 routes = ["demian.inflalite.com/*"]
 
 [env.development]
