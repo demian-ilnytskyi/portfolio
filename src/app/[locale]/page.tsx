@@ -12,6 +12,7 @@ export default async function Home({ params }: {
   params: Promise<{ locale: Language }>;
 }): Promise<Component> {
   await setLocaleAsync(params);
+  console.warn('dfsdsfdfsf 111111');
 
   return <main className="flex-1 flex flex-col">
     <HomeImagePart />

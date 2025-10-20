@@ -29,6 +29,7 @@ export default async function Projects({ params }: {
     setLocale(locale);
     const tProjects = await getTranslations('Projects');
     const t = await getTranslations('ProjectsPage');
+    console.warn('dfsdsfdfsf 2222222');
 
 
     return <main className="flex-1 flex flex-col">

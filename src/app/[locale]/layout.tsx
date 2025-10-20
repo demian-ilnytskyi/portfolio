@@ -4,7 +4,7 @@ import metadataHelper from "@/shared/helpers/metadata_helper";
 import Footer from "@/shared/components/footer";
 import { PersonScheme } from "@/shared/components/shems";
 import {
-  getLayoutStates,
+  getLocaleStaticParams,
   getMessage,
   getTranslations,
   IntlHelperScript,
@@ -12,9 +12,10 @@ import {
 } from "optimized-next-intl";
 import ClientCnsoleErrorRewrite from "@/shared/components/client_console_error_rewrite";
 import CloudflareAnalyticsScript from "@/shared/components/cloudflare_analytics_script";
+import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export async function generateMetadata({ params }: {
-  params: Promise<{ locale: Language }>;
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations('Metadata.Main', locale);
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: {
       isMain: true,
       t: t,
       linkPart: '/',
-      locale: locale,
+      locale: locale as Language,
     }),
     category: t('category'),
     manifest: `/${locale}/manifest.json`,
@@ -34,25 +35,30 @@ export async function generateMetadata({ params }: {
   }
 };
 
+export const generateStaticParams = getLocaleStaticParams;
+
 export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>): Promise<Component> {
-  const { locale, isDark, htmlParam } = await getLayoutStates();
+  const result = await params;
+  const locale = result?.locale ?? KTextConstants.defaultLocale;
   const messages = await getMessage(locale);
 
-  return <html {...htmlParam}>
+  return <html lang={locale} suppressHydrationWarning>
     <head>
       <meta httpEquiv="Content-Language" content={locale} />
       <PersonScheme />
-      <IntlHelperScript isDark={isDark} />
+      <IntlHelperScript />
       <CloudflareAnalyticsScript />
     </head>
     <body className="bg-white dark:bg-gray-900 text-black dark:text-white ease-out">
       <IntlProvider language={locale} messages={messages} >
         <div className="flex flex-col min-h-screen mx-4 lg:mx-24 tablet:mx-8 self-center">
-          <NavigationBar isDark={isDark ?? undefined} />
+          <NavigationBar />
           {children}
           <Footer />
         </div>

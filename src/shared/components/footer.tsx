@@ -2,10 +2,10 @@ import AppTextStyle from "../constants/styles/app_text_styles";
 import KIcons from "../constants/components/icons";
 import KTextConstants from "../constants/variables/text_constants";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "optimized-next-intl/use";
+import { getTranslations } from "optimized-next-intl";
 
-export default function Footer(): Component {
-    const t = useTranslations('Footer');
+export default async function Footer(): Promise<Component> {
+    const t = await getTranslations('Footer');
 
     return <footer className={cn(
         "flex flex-col rounded-t-4xl py-4 px-10 bg-blue-100 dark:bg-gray-700 mt-10",

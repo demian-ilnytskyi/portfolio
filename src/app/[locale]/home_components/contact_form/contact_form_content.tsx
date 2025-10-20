@@ -1,10 +1,10 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import ContactForm from "./contact_form";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "optimized-next-intl/use";
+import { getTranslations } from "optimized-next-intl";
 
-export default function ContactFormContent(): Component {
-    const t = useTranslations('HomePage.ContactForm');
+export default async function ContactFormContent(): Promise<Component> {
+    const t = await getTranslations('HomePage.ContactForm');
 
     return <section className="items-center flex flex-col p-4 md:p-8 max-w-3xl self-center">
         <h3 className={cn(
