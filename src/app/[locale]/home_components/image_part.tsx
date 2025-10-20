@@ -2,11 +2,11 @@ import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import Image from 'next/image';
 import profileImage from "../../../../public/images/profile.png"
 import { cn } from "@/lib/utils";
-import { useTranslations } from "optimized-next-intl/use";
 import { HomeImageScheme } from "@/shared/components/shems";
+import { getTranslations } from "optimized-next-intl";
 
-export default function HomeImagePart(): Component {
-    const t = useTranslations('HomePage.ImagePart');
+export default async function HomeImagePart(): Promise<Component> {
+    const t = await getTranslations('HomePage.ImagePart');
     const title = t('title');
     return <section className="items-center flex flex-col mt-10 min-h-[77vh]">
         {/* Image Scheme For SEO Bots */}

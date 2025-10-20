@@ -1,16 +1,14 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import type { Metadata } from "next";
-import RootLayout from "./[locale]/layout";
 import metadataHelper from "@/shared/helpers/metadata_helper";
-import { getLocale, getTranslations, Link } from "optimized-next-intl";
+import { getTranslations, Link, setLocale } from "optimized-next-intl";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "optimized-next-intl/use";
+import KTextConstants from "@/shared/constants/variables/text_constants";
 
-// Generate this page dynamic because we get language from cookie
-export const dynamic = 'force-dynamic';
-
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale() as Language;
+export async function generateMetadata({ params }: {
+  params: Promise<{ locale: Language }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations('NotFound.Metadata.General', locale);
   return {
     ...metadataHelper({
@@ -25,14 +23,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 };
 
-export default function NotFound(): Component {
-  return <RootLayout>
-    <PageContent />
-  </RootLayout>;
-}
-
-function PageContent(): Component {
-  const t = useTranslations('NotFound.General');
+export default async function NotFound({ params }: {
+  params: Promise<{ locale: Language }>;
+}): Promise<Component> {
+  const result = await params;
+  const locale = result?.locale ?? KTextConstants.defaultLocale;
+  setLocale(locale);
+  const t = await getTranslations('NotFound.General');
   return <main className="flex-1 flex flex-col items-center justify-center p-4 text-center">
     <h1 className={cn(AppTextStyle.h1Tablet, 'font-bold not-small-mobile:text-4xl')}>
       {t('title')}

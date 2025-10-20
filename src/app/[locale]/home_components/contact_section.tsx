@@ -5,7 +5,7 @@ import SocilaCard from "@/shared/components/social_card";
 import KIcons from "@/shared/constants/components/icons";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "optimized-next-intl/use";
+import { getTranslations } from "optimized-next-intl";
 
 export interface ContactListProps {
     link: string;
@@ -32,8 +32,8 @@ const contactList: ContactListProps[] = [
     },
 ]
 
-export default function ContactSection(): Component {
-    const t = useTranslations('HomePage.Connect');
+export default async function ContactSection(): Promise<Component> {
+    const t = await getTranslations('HomePage.Connect');
 
     const contactText: ContactListTextProps[] = t('social');
 

@@ -13,6 +13,11 @@ compatibility_flags = [
 	"nodejs_compat_populate_process_env",
 ]
 
+[[r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "portfolio-cache"
+preview_bucket_name = "local-prod-cache-bucket"
+
 # Assets configuration (if you have a static assets directory)
 [assets] # Note: The closing bracket was missing in your original input, I've corrected it.
 directory = ".open-next/assets"
@@ -27,3 +32,8 @@ mode = "smart"
 
 [env.development]
 name = "portfolio-development"
+
+[[env.development.r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "dev-portfolio-cache"
+preview_bucket_name = "local-dev-cache-bucket"

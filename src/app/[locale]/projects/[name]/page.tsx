@@ -35,6 +35,12 @@ export async function generateMetadata({ params }: {
     };
 };
 
+export function generateStaticParams(): { projectName: string }[] {
+    return projects.map((project) => ({
+        projectName: project.name
+    }));
+}
+
 async function fetchProjectDetails({ locale, projectName }: { locale: Language, projectName: string }): Promise<string | null> {
     const path = `./${locale}/${projectName}.md`;
 
@@ -45,6 +51,13 @@ async function fetchProjectDetails({ locale, projectName }: { locale: Language, 
 
 export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component> {
     const { name, locale } = await params;
+
+    const projectInfo = projects.find((project) => project.name === name);
+
+    if (!projectInfo) {
+        notFound();
+    }
+
     setLocale(locale);
 
     const fetchPolicyContent = await fetchProjectDetails({ locale, projectName: name });
@@ -56,12 +69,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
     const project = await getTranslations(`Projects.${name}`, locale);
 
     if (!project) {
-        notFound();
-    }
-
-    const projectInfo = projects.find((project) => project.name === name);
-
-    if (!projectInfo) {
         notFound();
     }
 

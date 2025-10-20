@@ -30,7 +30,6 @@ export default async function Projects({ params }: {
     const tProjects = await getTranslations('Projects');
     const t = await getTranslations('ProjectsPage');
 
-
     return <main className="flex-1 flex flex-col">
         {/* Site Scheme For SEO Bots */}
         <ProjectsBreadcrumbScheme language={locale} />
