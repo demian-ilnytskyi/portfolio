@@ -28,6 +28,7 @@ export class ErrorRepository {
     private static readonly IGNORED_CONSOLE_ERRORS = [
         'The `punycode` module is deprecated. Please use a userland alternative instead.',
         'failed to pipe response',
+        'Failed to fetch RSC payload',
     ];
 
     /**

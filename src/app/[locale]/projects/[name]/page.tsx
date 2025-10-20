@@ -51,7 +51,6 @@ async function fetchProjectDetails({ locale, projectName }: { locale: Language, 
 
 export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component> {
     const { name, locale } = await params;
-    console.warn('dfsdsfdfsf 3333');
 
     const projectInfo = projects.find((project) => project.name === name);
 
