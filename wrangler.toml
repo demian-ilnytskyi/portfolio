@@ -18,14 +18,6 @@ binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "portfolio-cache"
 preview_bucket_name = "local-prod-cache-bucket"
 
-[[durable_objects.bindings]]
-name = "NEXT_CACHE_DO_QUEUE"
-class_name = "DOQueueHandler"
-
-[[migrations]]
-tag = "v1"
-new_classes = ["DOQueueHandler"]
-
 # Assets configuration (if you have a static assets directory)
 [assets] # Note: The closing bracket was missing in your original input, I've corrected it.
 directory = ".open-next/assets"
@@ -45,7 +37,3 @@ name = "portfolio-development"
 binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "dev-portfolio-cache"
 preview_bucket_name = "local-dev-cache-bucket"
-
-[[env.development.durable_objects.bindings]]
-name = "NEXT_CACHE_DO_QUEUE"
-class_name = "DOQueueHandler"
