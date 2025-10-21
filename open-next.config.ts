@@ -8,5 +8,5 @@ export default defineCloudflareConfig({
   enableCacheInterception: true,
   routePreloadingBehavior: "none",
   cachePurge: cloudflareCachePurger({ type: 'direct' }),
-  queue: doQueue
+  queue: doQueue,
 });

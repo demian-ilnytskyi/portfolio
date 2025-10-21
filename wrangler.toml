@@ -19,12 +19,12 @@ bucket_name = "portfolio-cache"
 preview_bucket_name = "local-prod-cache-bucket"
 
 [[durable_objects.bindings]]
-name = "DO_QUEUE"
-class_name = "DoQueue"
+name = "NEXT_CACHE_DO_QUEUE"
+class_name = "DOQueueHandler"
 
 [[migrations]]
 tag = "v1"
-new_classes = ["DoQueue"]
+new_classes = ["DOQueueHandler"]
 
 # Assets configuration (if you have a static assets directory)
 [assets] # Note: The closing bracket was missing in your original input, I've corrected it.
@@ -47,5 +47,5 @@ bucket_name = "dev-portfolio-cache"
 preview_bucket_name = "local-dev-cache-bucket"
 
 [[env.development.durable_objects.bindings]]
-name = "DO_QUEUE"
-class_name = "DoQueue"
+name = "NEXT_CACHE_DO_QUEUE"
+class_name = "DOQueueHandler"
