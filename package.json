@@ -4,13 +4,13 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack",
-		"build": "next build",
-		"analyze": "ANALYZE=true next build",
+		"build": "IS_BUILDING=true next build",
+		"analyze": "ANALYZE=true IS_BUILDING=true next build",
 		"start": "next start",
 		"lint": "next lint",
 		"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
 		"deploy": "opennextjs-cloudflare deploy && wrangler deploy",
-		"pre-deploy": "next build && opennextjs-cloudflare build",
+		"pre-deploy": "IS_BUILDING=true next build && opennextjs-cloudflare build",
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
 		"check-size": "wrangler deploy --outdir boundled/ --dry-run"
 	},

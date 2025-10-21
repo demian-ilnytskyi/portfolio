@@ -8,6 +8,7 @@ import { generateIntlSitemap } from 'optimized-next-intl';
 const lastModified = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (KTextConstants.isBuild) return [];
   const intlSitemap: IntlSitemap[] = [
     {
       changeFrequency: 'monthly',

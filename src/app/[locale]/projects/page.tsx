@@ -8,10 +8,12 @@ import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import projects from "@/shared/constants/variables/projects";
 import { ProjectsBreadcrumbScheme } from "@/shared/components/shems";
 import { cn } from "@/lib/utils";
+import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export async function generateMetadata({ params }: {
     params: Promise<{ locale: Language }>;
-}): Promise<Metadata> {
+}): Promise<Metadata | null> {
+    if (KTextConstants.isBuild) return null;
     const { locale } = await params;
 
     const t = await getTranslations('Metadata.Projects', locale,);
@@ -24,7 +26,8 @@ export async function generateMetadata({ params }: {
 
 export default async function Projects({ params }: {
     params: Promise<{ locale: Language }>;
-}): Promise<Component> {
+}): Promise<Component | null> {
+    if (KTextConstants.isBuild) return null;
     const { locale } = await params;
     setLocale(locale);
     const tProjects = await getTranslations('Projects');

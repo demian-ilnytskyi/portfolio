@@ -15,7 +15,8 @@ import { cn } from "@/lib/utils";
 
 export async function generateMetadata({ params }: {
     params: Promise<{ name: string, locale: Language }>
-}): Promise<Metadata> {
+}): Promise<Metadata | null> {
+    if (KTextConstants.isBuild) return null;
     const { name, locale } = await params;
 
     const t = await getTranslations('Projects', locale);
@@ -49,7 +50,8 @@ async function fetchProjectDetails({ locale, projectName }: { locale: Language, 
     return text;
 }
 
-export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component> {
+export default async function ProjectPage({ params }: { params: Promise<{ name: string, locale: Language }> }): Promise<Component | null> {
+    if (KTextConstants.isBuild) return null;
     const { name, locale } = await params;
 
     const projectInfo = projects.find((project) => project.name === name);

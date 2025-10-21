@@ -1,4 +1,5 @@
 export default abstract class KTextConstants {
+    static readonly isBuild = process.env.IS_BUILDING;
     static readonly flavour = process.env.NEXT_PUBLIC_FLAVOUR;
     static readonly isDevENV = KTextConstants.flavour === "development";
     static readonly isDev = process.env.NODE_ENV === "development";
