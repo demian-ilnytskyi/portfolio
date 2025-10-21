@@ -23,9 +23,9 @@ bindings = [
   { name = "NEXT_CACHE_DO_QUEUE", class_name = "DOQueueHandler" }
 ]
 
-migrations = [
-  { tag = "v1", new_sqlite_classes = ["DOQueueHandler"] }
-]
+[[migrations]]
+tag = "v1"
+new_classes = [ "DOQueueHandler" ]
 
 # Assets configuration (if you have a static assets directory)
 [assets] # Note: The closing bracket was missing in your original input, I've corrected it.
