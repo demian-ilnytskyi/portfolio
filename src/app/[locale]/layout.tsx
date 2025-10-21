@@ -16,7 +16,8 @@ import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export async function generateMetadata({ params }: {
   params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+}): Promise<Metadata | null> {
+  if (KTextConstants.isBuild) return null;
   const { locale } = await params;
   const t = await getTranslations('Metadata.Main', locale);
 
@@ -43,7 +44,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
-}>): Promise<Component> {
+}>): Promise<Component | null> {
+  if (KTextConstants.isBuild) return null;
   const result = await params;
   const locale = result?.locale ?? KTextConstants.defaultLocale;
   const messages = await getMessage(locale);

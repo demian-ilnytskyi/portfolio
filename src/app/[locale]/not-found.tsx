@@ -7,7 +7,8 @@ import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export async function generateMetadata({ params }: {
   params: Promise<{ locale: Language }>;
-}): Promise<Metadata> {
+}): Promise<Metadata | null> {
+  if (KTextConstants.isBuild) return null;
   const { locale } = await params;
   const t = await getTranslations('NotFound.Metadata.General', locale);
   return {
@@ -25,7 +26,8 @@ export async function generateMetadata({ params }: {
 
 export default async function NotFound({ params }: {
   params: Promise<{ locale: Language }>;
-}): Promise<Component> {
+}): Promise<Component | null> {
+  if (KTextConstants.isBuild) return null;
   const result = await params;
   const locale = result?.locale ?? KTextConstants.defaultLocale;
   setLocale(locale);
