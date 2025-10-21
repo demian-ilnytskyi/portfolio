@@ -18,10 +18,9 @@ binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "portfolio-cache"
 preview_bucket_name = "local-prod-cache-bucket"
 
-[durable_objects]
-bindings = [
-  { name = "NEXT_CACHE_DO_QUEUE", class_name = "DOQueueHandler" }
-]
+[durable_objects.bindings]
+name = "NEXT_CACHE_DO_QUEUE"
+class_name = "DOQueueHandler"
 
 [[migrations]]
 tag = "v1"
