@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === "development";
  * @returns A Cache-Control header string.
  */
 function cacheHeader(seconds: number) {
-    return isDev ? 'no-store' : `no-store, public, max-age=${seconds}, must-revalidate, stale-while-revalidate=120, stale-if-error=604800`;
+    return isDev ? 'no-store' : `public, max-age=${seconds}, must-revalidate, stale-while-revalidate=120, stale-if-error=604800`;
 }
 
 const nextConfig: NextConfig = {
