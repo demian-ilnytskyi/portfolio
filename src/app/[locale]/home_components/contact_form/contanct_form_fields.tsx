@@ -32,21 +32,21 @@ export default function ContactFormFields(params: ContactFormContentProps): Comp
     } = params;
 
     return <>
-        <div className="flex  flex-wrap gap-3 mb-5">
+        <div className="flex  sm:flex-wrap gap-3 mb-5 flex-col">
             <Field
                 label={nameLabelText}
                 tooltipText={nameTooltipText}
                 type="name"
                 name="name"
                 placeholder={namePlaceholderText}
-                required className="flex-1 min-w-60" />
+                required className="flex-1 sm:min-w-60" />
             <Field
                 label={emailLabelText}
                 tooltipText={emailTooltipText}
                 type="email"
                 name="email"
                 placeholder={emailPlaceholderText}
-                required className="flex-1 min-w-60" />
+                required className="flex-1 sm:min-w-60" />
         </div>
         <Field
             label={messageLabelText}
