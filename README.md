@@ -40,4 +40,4 @@ My toolkit includes a range of technologies, with a strong focus on **Flutter** 
 
 ## 💌 Looking to Connect?
 
-Feel free to send me an email at <a href="mailto:demian.ilnutskyi@gmail.com">demian.ilnutskyi@gmail.com</a> or connect with me on <a href="https://www.linkedin.com/in/demian-ilnytskyi-54367a268/">LinkedIn</a>!
+Feel free to send me an email at <a href="mailto:demian.ilnutskyi@gmail.com">demian.ilnutskyi@gmail.com</a> or connect with me on <a href="https://www.linkedin.com/in/demian-ilnytskyi">LinkedIn</a>!
