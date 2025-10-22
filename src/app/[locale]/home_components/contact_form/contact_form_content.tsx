@@ -2,6 +2,9 @@ import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import ContactForm from "./contact_form";
 import { cn } from "@/lib/utils";
 import { getTranslations } from "optimized-next-intl";
+import ContactFormFields from "./contanct_form_fields";
+import { Suspense } from "react";
+import LoadingIndicator from "@/shared/components/loading_indicator";
 
 export default async function ContactFormContent(): Promise<Component> {
     const t = await getTranslations('HomePage.ContactForm');
@@ -19,6 +22,26 @@ export default async function ContactFormContent(): Promise<Component> {
         )}>
             {t('description')}
         </h4>
-        <ContactForm />
+        <Suspense fallback={<LoadingIndicator />}>
+            <ContactForm
+                nameErrorText={t('nameError')}
+                emailErrorText={t('emailError')}
+                emailFormatErrorText={t('emailFormatError')}
+                messageErrorText={t('messageError')}
+                errorMessage={t('errorMessage')}
+                successMessage={t('successMessage')} >
+                <ContactFormFields
+                    nameLabelText={t('nameLabel')}
+                    namePlaceholderText={t('namePlaceholder')}
+                    emailLabelText={t('emailLabel')}
+                    emailPlaceholderText={t('emailPlaceholder')}
+                    messageLabelText={t('messageLabel')}
+                    messagePlaceholderText={t('messagePlaceholder')}
+                    submitButtonText={t('submitButton')}
+                    nameTooltipText={t('nameError')}
+                    emailTooltipText={t('emailError')}
+                    messageTooltipText={t('messageError')} />
+            </ContactForm>
+        </Suspense>
     </section>;
 }

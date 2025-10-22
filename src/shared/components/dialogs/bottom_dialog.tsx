@@ -36,7 +36,7 @@ export default function BottomDialog({
                 "fixed flex left-1/2 transform -translate-x-1/2 dark:text-white",
                 "bottom-0 w-full bg-neutral z-20 rounded-t-3xl shadow-lg",
                 "max-w-200 flex-col max-h-9/10 h-full dark:bg-gray-800 bg-gray-200",
-                !buttomButton && 'overflow-y-auto dialog-scrollbar text-black opacity-0',
+                !buttomButton && 'overflow-y-auto custom-scrollbar text-black opacity-0',
                 'transition-opacity duration-100 peer-checked:opacity-100',
                 'translate-y-full ease-in-out transition-transform duration-300 peer-checked:translate-y-0',
                 dialogClassName
@@ -46,7 +46,7 @@ export default function BottomDialog({
             aria-label={arriaLabel}>
             {buttomButton
                 ? <form method="dialog" id={formIdValue} className="flex flex-col h-full" >
-                    <div className="flex-1 overflow-y-auto dialog-scrollbar p-6 pb-0">
+                    <div className="flex-1 overflow-y-auto custom-scrollbar p-6 pb-0">
                         {children}
                     </div>
                     <div className="sticky bottom-0 w-full bg-neutral p-4 flex justify-end">

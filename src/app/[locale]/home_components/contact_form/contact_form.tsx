@@ -1,8 +1,6 @@
 "use client";
 
-import Field from "@/shared/components/field";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import { useTranslations } from "optimized-next-intl/use";
 import { sendContact, type ContactProps } from "@/shared/repositories/contact_repository";
 import type { FormEvent } from "react";
 import { useActionState } from "react";
@@ -13,27 +11,46 @@ const initialState: ContactProps = {
     isError: undefined,
 };
 
-export default function ContactForm(): Component {
-    const t = useTranslations('HomePage.ContactForm');
+interface ContactFormProps {
+    nameErrorText: string;
+    emailErrorText: string;
+    emailFormatErrorText: string;
+    messageErrorText: string;
+    errorMessage: string;
+    successMessage: string;
+    children: React.ReactNode;
+}
+
+export default function ContactForm(params: ContactFormProps): Component {
+    const {
+        children,
+        emailErrorText,
+        emailFormatErrorText,
+        messageErrorText,
+        nameErrorText,
+        errorMessage,
+        successMessage,
+    } = params;
     const [state, formAction] = useActionState(sendContact, initialState);
 
     const validateField = (fieldName: string, value: string): string | null => {
         switch (fieldName) {
             case "name":
-                return value.trim() ? null : t('nameError');
+                return value?.trim() ? null : nameErrorText;
             case "email": {
-                if (!value.trim()) return t('emailError');
+                if (!value?.trim()) return emailErrorText;
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(value) ? null : t('emailFormatError');
+                return emailRegex.test(value) ? null : emailFormatErrorText;
             }
             case "message":
             default:
-                return value.trim() ? null : t('messageError');
+                return value?.trim() ? null : messageErrorText;
         }
     };
 
-    function onInput(input: FormEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        const target = input.currentTarget;
+    function onInput(input: FormEvent<HTMLFormElement>) {
+        const target = input.target as HTMLInputElement | HTMLTextAreaElement;
+        if (!target.name) return;
         try {
             const message = validateField(target.name, target.value);
             return target.setCustomValidity(message ?? '');
@@ -46,45 +63,20 @@ export default function ContactForm(): Component {
         }
     }
 
-    return <form className="flex flex-col w-full" action={formAction}>
-        <div className="flex  flex-wrap gap-3 mb-5">
-            <Field
-                label={t('nameLabel')}
-                name={"name"}
-                placeholder={t('namePlaceholder')}
-                required className="flex-1 min-w-60"
-                onInput={onInput}
-                onInvalid={onInput} />
-            <Field
-                label={t('emailLabel')}
-                name={"email"}
-                placeholder={t('emailPlaceholder')}
-                required className="flex-1 min-w-60"
-                onInput={onInput}
-                onInvalid={onInput} />
-        </div>
-        <Field
-            label={t('messageLabel')}
-            name={"message"}
-            placeholder={t('messagePlaceholder')}
-            required isLong rows={4}
-            onInput={onInput}
-            onInvalid={onInput} />
-        <button
-            type="submit"
-            className={cn(
-                "mt-8 px-6 py-2 dark:bg-blue-950 dark:text-white rounded-xl dark:hover:bg-blue-900 transition-colors",
-                "bg-blue-300 hover:bg-blue-200 text-gray-800",
-                AppTextStyle.bodyLarge,
-            )}>
-            {t('submitButton')}
-        </button>
+    return <>
+        <form
+            className="flex flex-col w-full"
+            action={formAction}
+            onInvalid={onInput}
+            onInput={onInput}>
+            {children}
+        </form>
         {state.isError !== undefined && <p className={cn(
             "mt-4 text-center",
             AppTextStyle.headlineSmall,
             state.isError ? 'text-red-600' : 'text-green-600'
         )}>
-            {state.isError ? t('errorMessage') : t('successMessage')}
+            {state.isError ? errorMessage : successMessage}
         </p>}
-    </form>;
+    </>;
 }
