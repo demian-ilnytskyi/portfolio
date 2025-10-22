@@ -9,6 +9,9 @@ import Divider from "@/shared/components/divider";
 import { setLocaleAsync } from "optimized-next-intl";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 
+
+export const revalidate = 10; // 1 day
+
 export default async function Home({ params }: {
   params: Promise<{ locale: Language }>;
 }): Promise<Component | null> {
@@ -16,6 +19,7 @@ export default async function Home({ params }: {
   await setLocaleAsync(params);
 
   return <main className="flex-1 flex flex-col">
+    {new Date().toISOString()}
     <HomeImagePart />
     <Divider id={AppLinks.aboutMe} />
     <AboutMe />
