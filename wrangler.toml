@@ -11,6 +11,7 @@ name = "portfolio"
 compatibility_flags = [
 	"nodejs_compat",
 	"nodejs_compat_populate_process_env",
+	"global_fetch_strictly_public",
 ]
 
 [[r2_buckets]]
@@ -22,9 +23,13 @@ preview_bucket_name = "local-prod-cache-bucket"
 name = "NEXT_CACHE_DO_QUEUE"
 class_name = "DOQueueHandler"
 
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "portfolio"
+
 [[migrations]]
 tag = "v1"
-new_classes = [ "DOQueueHandler" ]
+new_sqlite_classes = ["DOQueueHandler"]
 
 # Assets configuration (if you have a static assets directory)
 [assets] # Note: The closing bracket was missing in your original input, I've corrected it.
@@ -53,3 +58,7 @@ class_name = "DOQueueHandler"
 [[env.development.migrations]]
 tag = "v1"
 new_sqlite_classes = ["DOQueueHandler"]
+
+[[env.development.services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "portfolio-development"
