@@ -31,7 +31,7 @@ const profileJsonLd = JSON.stringify({
         "image": `${KTextConstants.baseUrl}/images/profile.png`,
         "sameAs": [
             KTextConstants.ownerGitHub,
-            "https://www.linkedin.com/in/demian-ilnytskyi-54367a268/"
+            "https://www.linkedin.com/in/demian-ilnytskyi"
         ],
         "jobTitle": "Flutter Developer",
         ...(KTextConstants.currentCompany
