@@ -31,10 +31,12 @@ export default function ProjectsCard({
     return <li className="pb-3 dark:bg-blue-950 bg-blue-200 rounded-2xl flex flex-col">
         <Image
             src={image}
+            width={800}
+            height={400}
             alt={'Veteranam'}
             loading={'eager'}
             placeholder="blur"
-            className="rounded-t-2xl bg-zinc-800"
+            className="rounded-t-2xl bg-zinc-800 self-center"
             fetchPriority={imagePriority ? "high" : 'auto'}
             priority={imagePriority} />
         <div className="px-5 mt-2 flex flex-col">

@@ -102,7 +102,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ name: 
                 width={1024}
                 height={576}
                 fetchPriority="high"
-                className="rounded-t-2xl bg-zinc-800"
+                className="rounded-t-2xl bg-zinc-800 self-center"
                 priority />
             <div className="px-5 mt-5 flex flex-col">
                 <h1 className={cn(AppTextStyle.h1, 'text-center not-md:text-4xl font-bold')}>
