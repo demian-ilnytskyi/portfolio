@@ -85,7 +85,7 @@
                 },
                 {
                     "title": "LinkedIn",
-                    "description": "demian-ilnytskyi-54367a268"
+                    "description": "demian-ilnytskyi"
                 },
                 {
                     "title": "GitHub",
@@ -124,7 +124,7 @@
         "veteranam-info": {
             "title": "Veteranam Info",
             "description": "This app centralizes discounts and offers for war veterans in Ukraine, prioritizing ease of use and inclusivity for all tech skill levels. Built with Flutter, it includes mobile (Android/iOS) and web versions, designed for accessibility. A dedicated business portal allows companies to independently manage their discount offerings, streamlining the process for both veterans and service providers. The platform connects veterans with businesses, enhancing community support and improving access to benefits.",
-            "period": "May 2024 - Present"
+            "period": "May 2024 - September 2025"
         },
         "check-my-building": {
             "title": "Check My Building",
@@ -139,12 +139,12 @@
         "hunger-quest": {
             "title": "Hunger Quest",
             "description": "As a freelance developer for an agency, I utilized FlutterFlow to contribute to building and enhancing various features. My work included implementing functionality for adding and editing truck information, loading and displaying items from Firebase in a list view, integrating Google Maps for location selection, supporting two distinct user roles with separate access and behavior, and integrating Stripe for payment processing, including a user trial period.",
-            "period": "May 2025 - Present"
+            "period": "May 2025 - September 2025"
         },
         "ice-cream-time": {
             "title": "Ice Cream Time",
             "description": "Ice Cream Time is a mobile app for ice cream trucks, developed with Flutter. The app allows users to view trucks on a real-time map, supports multiple user roles, and uses background location to automatically send vendor coordinates to the database and push notifications to users when a truck is nearby.",
-            "period": "July 2025 - Present"
+            "period": "July 2025 - September 2025"
         }
     },
     "NotFound": {

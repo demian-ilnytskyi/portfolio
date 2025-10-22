@@ -43,8 +43,8 @@ export default async function NavigationBar(): Promise<Component> {
             <Link
                 href={`/#${AppLinks.homePage}`}
                 className={cn(
-                    "flex items-center p-2 hover:scale-110 hover:underline",
-                    "duration-200 drop-shadow-md active:scale-90 cursor-pointer"
+                    "flex items-center p-2 hover:scale-110 hover:underline sm:text-base",
+                    "duration-200 drop-shadow-md active:scale-90 cursor-pointer text-sm"
                 )}
                 aria-label={t('home')}
                 prefetch={false}>
