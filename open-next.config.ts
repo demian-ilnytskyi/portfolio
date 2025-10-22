@@ -7,6 +7,6 @@ export default defineCloudflareConfig({
   incrementalCache: r2IncrementalCache,
   enableCacheInterception: true,
   routePreloadingBehavior: "none",
-  cachePurge: cloudflareCachePurger({ type: 'direct' }),
+  cachePurge: cloudflareCachePurger({ type: 'durableObject' }),
   queue: doQueue,
 });
