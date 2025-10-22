@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import AppTextStyle from "../constants/styles/app_text_styles";
+import AppTextStyle from "../../constants/styles/app_text_styles";
+import FieldLengthCounter from "./field_length_counter";
 
 export default function Field({
     type = "text",
@@ -10,6 +11,7 @@ export default function Field({
     autoComplete = true,
     name,
     tooltipText,
+    maxLength,
     ...params
 }: {
     label: string;
@@ -24,7 +26,10 @@ export default function Field({
     onInvalid?: (input: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     autoComplete?: boolean;
     tooltipText: string;
+    maxLength?: number;
 }): Component {
+    const maxLengthValue = maxLength ?? (isLong ? 512 : 128);
+
     const properties = {
         type,
         required,
@@ -40,6 +45,7 @@ export default function Field({
         name: name,
         id: name,
         title: tooltipText,
+        maxLength: maxLengthValue,
         ...params,
     };
     return <div className={cn('flex flex-col', className)}>
@@ -47,5 +53,6 @@ export default function Field({
             {params.label} {required && <span className="text-red-600">*</span>}
         </label>
         {isLong ? <textarea {...properties} /> : <input {...properties} />}
+        <FieldLengthCounter maxLength={maxLengthValue} inputId={name} />
     </div>
 }

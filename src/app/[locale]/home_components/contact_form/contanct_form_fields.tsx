@@ -1,6 +1,6 @@
 "use client";
 
-import Field from "@/shared/components/field";
+import Field from "@/shared/components/field/field";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import { cn } from "@/lib/utils";
 

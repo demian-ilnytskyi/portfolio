@@ -1,6 +1,5 @@
 "use client";
 
-import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import { sendContact, type ContactProps } from "@/shared/repositories/contact_repository";
 import type { FormEvent } from "react";
 import { useActionState } from "react";
@@ -73,7 +72,6 @@ export default function ContactForm(params: ContactFormProps): Component {
         </form>
         {state.isError !== undefined && <p className={cn(
             "mt-4 text-center",
-            AppTextStyle.headlineSmall,
             state.isError ? 'text-red-600' : 'text-green-600'
         )}>
             {state.isError ? errorMessage : successMessage}
