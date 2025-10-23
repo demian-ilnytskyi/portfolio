@@ -1,6 +1,10 @@
+import type { NextRequest, NextResponse } from 'next/server';
 import { intlMiddleware } from 'optimized-next-intl';
 
-export const middleware = intlMiddleware;
+export async function middleware(request: NextRequest): Promise<NextResponse<unknown>> {
+    console.warn('dfsdsfdfsdfsfdsdfsdfs ');
+    return intlMiddleware(request);
+}
 
 // Configuration for the middleware
 export const config = {
