@@ -7,7 +7,6 @@
 		"build": "IS_BUILDING=true next build",
 		"analyze": "ANALYZE=true IS_BUILDING=true next build",
 		"start": "next start",
-		"lint": "next lint",
 		"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
 		"deploy": "opennextjs-cloudflare deploy && wrangler deploy",
 		"pre-deploy": "IS_BUILDING=true next build && opennextjs-cloudflare build",
