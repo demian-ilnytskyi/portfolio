@@ -8,7 +8,7 @@ import CookieKey, { getCookieBooleanValue } from "../constants/variables/cookie_
 import setCookie from "optimized-next-intl/setCookieClient";
 
 export default function CloudflareAnalyticsScript(): Component | null {
-    const [show, setState] = useState(false);
+    const [state, setState] = useState(false);
     useEffect(() => {
         async function fetchState() {
             const result = await allowAnalytics();
@@ -16,15 +16,15 @@ export default function CloudflareAnalyticsScript(): Component | null {
 
             setCookie({ name: CookieKey.allowAnalyticsCookieKey, value: result });
         }
-        const isEU = getCookieBooleanValue(getCookie(CookieKey.allowAnalyticsCookieKey));
-        if (isEU === null) {
+        const allowAnalyticsCookieValue = getCookieBooleanValue(getCookie(CookieKey.allowAnalyticsCookieKey));
+        if (allowAnalyticsCookieValue === null) {
             fetchState();
         } else {
-            setState(isEU);
+            setState(allowAnalyticsCookieValue);
         }
     }, [])
 
-    if (show) {
+    if (state) {
         return <Script
             defer
             src='https://static.cloudflareinsights.com/beacon.min.js'
