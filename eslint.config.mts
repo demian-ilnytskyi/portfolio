@@ -1,3 +1,4 @@
+import { defineConfig, globalIgnores } from "eslint/config";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -12,7 +13,20 @@ const compat = new FlatCompat({
   recommendedConfig: js.configs.recommended, // Ensures recommendedConfig is available for FlatCompat
 });
 
-const eslintConfig = [
+const eslintConfig = defineConfig([
+  ...compat.extends('eslint:recommended'),
+  ...compat.extends('next/core-web-vitals'),
+  ...compat.extends('next/typescript'),
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    '.open-next/**',
+    '.wrangler/**',
+  ]),
   // Base ESLint recommended rules
   js.configs.recommended,
 
@@ -56,16 +70,6 @@ const eslintConfig = [
       },
     },
   },
-  {
-    // Ignore specified files/folders from linting
-    ignores: [
-      ".next/",       // Next.js build output directory
-      "node_modules/", // Third-party dependencies
-      "public/",      // Static assets directory
-      "out/",         // Next.js export output directory
-      "coverage/",    // Code coverage reports
-    ],
-  },
-];
+]);
 
 export default eslintConfig;

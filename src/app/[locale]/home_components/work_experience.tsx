@@ -15,7 +15,7 @@ export default async function WorkExperience(): Promise<Component> {
         <ul className="max-w-3xl flex flex-col">
             {projects.map(
                 (project, index) =>
-                    <ExperienceCard key={project.title} {...project} isLast={projects.length - 1 === index} />
+                    <ExperienceCard key={project.title} {...project} isLast={projects.length - 1 === index} index={index} />
             )}
         </ul>
         <Link href={AppLinks.projectsPage} className={cn(

@@ -1,21 +1,30 @@
+'use client'
+
 import Script from "next/script";
-import KTextConstants from "../constants/variables/text_constants";
-import cloudflareRepository from "../repositories/cloudflare_repository";
+import { useEffect, useState } from "react";
+import { allowAnalytics } from "../helpers/analytics_helper";
+import getCookie from "optimized-next-intl/getCookieClient";
+import CookieKey, { getCookieBooleanValue } from "../constants/variables/cookie_key";
+import setCookie from "optimized-next-intl/setCookieClient";
 
-const GDPR_APPLICABLE_COUNTRIES = new Set([
-    'AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR',
-    'GR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL',
-    'PT', 'RO', 'SE', 'SI', 'SK',
-    'IS', 'LI', 'NO',
-    'GB',
-    'CH',
-]);
+export default function CloudflareAnalyticsScript(): Component | null {
+    const [show, setState] = useState(false);
+    useEffect(() => {
+        async function fetchState() {
+            const result = await allowAnalytics();
+            setState(result);
 
-export default async function CloudflareAnalyticsScript(): Promise<Component | null> {
-    if (KTextConstants.isDevENV) return null;
-    const countryCode = await cloudflareRepository.getCountryCode();
+            setCookie({ name: CookieKey.allowAnalyticsCookieKey, value: result });
+        }
+        const isEU = getCookieBooleanValue(getCookie(CookieKey.allowAnalyticsCookieKey));
+        if (isEU === null) {
+            fetchState();
+        } else {
+            setState(isEU);
+        }
+    }, [])
 
-    if (countryCode && !GDPR_APPLICABLE_COUNTRIES.has(countryCode)) {
+    if (show) {
         return <Script
             defer
             src='https://static.cloudflareinsights.com/beacon.min.js'

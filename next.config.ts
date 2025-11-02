@@ -14,6 +14,7 @@ function cacheHeader(seconds: number) {
 }
 
 const nextConfig: NextConfig = {
+    reactCompiler: true,
     images: {
         /**
          * Defines a list of device widths that Next.js should use to generate responsive image sizes.

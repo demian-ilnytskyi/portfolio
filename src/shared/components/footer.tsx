@@ -12,7 +12,7 @@ export default async function Footer(): Promise<Component> {
     )}>
         <div className="flex not-sm:flex-wrap gap-5 sm:justify-between justify-center items-center" >
             <p className={AppTextStyle.bodyMedium}>
-                © {new Date().getFullYear()} {t('content')}
+                © {KTextConstants.buildDate.getFullYear()} {t('content')}
             </p>
             <a
                 href={KTextConstants.projectGitHubLink}

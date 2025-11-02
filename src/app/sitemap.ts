@@ -5,22 +5,20 @@ import type { MetadataRoute } from 'next'
 import type { IntlSitemap } from 'optimized-next-intl';
 import { generateIntlSitemap } from 'optimized-next-intl';
 
-const lastModified = new Date();
-
 export default function sitemap(): MetadataRoute.Sitemap {
   if (KTextConstants.isBuild) return [];
   const intlSitemap: IntlSitemap[] = [
     {
       changeFrequency: 'monthly',
       priority: 1,
-      lastModified: lastModified,
+      lastModified: KTextConstants.buildDate,
       images: [KTextConstants.profileImageUrl],
     },
     {
       link: AppLinks.projectsPage,
       changeFrequency: 'weekly',
       priority: 0.8,
-      lastModified: lastModified,
+      lastModified: KTextConstants.buildDate,
     },
   ];
 
@@ -31,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       link: link,
       changeFrequency: 'monthly',
       priority: 0.6,
-      lastModified: lastModified,
+      lastModified: KTextConstants.buildDate,
       images: [`${KTextConstants.baseUrl}/images/${project.name}.png`],
     });
   }
