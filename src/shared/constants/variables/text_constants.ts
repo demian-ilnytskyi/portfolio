@@ -3,7 +3,7 @@ export default abstract class KTextConstants {
     static readonly flavour = process.env.NEXT_PUBLIC_FLAVOUR;
     static readonly isDevENV = KTextConstants.flavour === "development";
     static readonly isDev = process.env.NODE_ENV === "development";
-    static readonly currentDate = new Date();
+    static readonly buildDate = new Date();
     static readonly owner = "Demian Ilnytskyi";
     static readonly appName = "Demian Portfolio";
     static readonly ownerUrl = "https://demian.inflalite.com";

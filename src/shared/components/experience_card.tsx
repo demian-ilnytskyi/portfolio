@@ -10,6 +10,7 @@ export interface ExperienceModel {
 
 export interface ExperienceCardProps extends ExperienceModel {
     isLast: boolean;
+    index: number;
 }
 
 const lineColors = [
@@ -29,7 +30,7 @@ export default function ExperienceCard(props: ExperienceCardProps): Component {
     const { title, position, period, description, isLast } = props;
 
     const getRandomTailwindColorClass = () => {
-        return lineColors[Math.floor(Math.random() * lineColors.length)];
+        return lineColors[Math.floor(props.index % lineColors.length)];
     };
 
     const lineColor = getRandomTailwindColorClass();

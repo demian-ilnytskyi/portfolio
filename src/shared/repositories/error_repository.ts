@@ -17,7 +17,7 @@ export interface ErrorParams {
  */
 export class ErrorRepository {
     private static readonly MAX_TELEGRAM_MESSAGE_LENGTH = 4000;
-    private static readonly MAX_ERROR_REPORTS_PER_INSTANCE = 3;
+    private static readonly MAX_ERROR_REPORTS_PER_INSTANCE = 10;
     private static readonly MAX_FUNCTION_RESOLUTION_ATTEMPTS = 5;
     private static readonly TELEGRAM_API_BASE_URL = `https://api.telegram.org/bot${Secrets.telegramBotToken}`;
 
