@@ -3,7 +3,10 @@ import type { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import KTextConstants from "../constants/variables/text_constants";
 import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 import type { Twitter } from "next/dist/lib/metadata/types/twitter-types";
-import { alternatesLinks, type TranslatorReturnType } from "optimized-next-intl";
+import {
+  alternatesLinks,
+  type TranslatorReturnType,
+} from "cloudflare-next-intl";
 
 export const metadataIcons: Icon[] = [
   {
@@ -43,8 +46,12 @@ export const metadataIcons: Icon[] = [
   },
 ];
 
-export function openGraph(linkPart: string, locale: Language, imageUrl?: string): OpenGraph {
-  const linkPartValue = linkPart == '/' ? '' : linkPart;
+export function openGraph(
+  linkPart: string,
+  locale: Language,
+  imageUrl?: string,
+): OpenGraph {
+  const linkPartValue = linkPart == "/" ? "" : linkPart;
   return {
     url: getBaseUrl(locale) + linkPartValue,
     images: [
@@ -70,10 +77,10 @@ export function getBaseUrl(language: Language): string {
 
 function grapthLocale(locale: Language): string {
   switch (locale) {
-    case 'uk':
-      return 'uk_UA'
-    case 'en':
-      return 'en_US'
+    case "uk":
+      return "uk_UA";
+    case "en":
+      return "en_US";
   }
 }
 
@@ -82,14 +89,14 @@ export function twitter(imageUrl?: string): Twitter {
     creator: KTextConstants.owner,
     card: "summary_large_image",
     images: KTextConstants.baseUrl + (imageUrl ?? "/icons/512.png"),
-  }
-};
+  };
+}
 
 interface MetadataHelperProps {
   t: TranslatorReturnType;
   locale: Language;
   isMain?: boolean;
-  canonical?: string
+  canonical?: string;
   linkPart: string;
   imageUrl?: string;
 }
@@ -103,12 +110,19 @@ export default function metadataHelper({
   imageUrl,
 }: MetadataHelperProps): Partial<Metadata> {
   return {
-    title: isMain ? {
-      default: t('title.default'),
-      template: t('title.template'),
-    } : t('title'),
-    description: t('description'),
-    alternates: alternatesLinks({ locale, url: KTextConstants.baseUrl, canonical, linkPart }),
+    title: isMain
+      ? {
+        default: t("title.default"),
+        template: t("title.template"),
+      }
+      : t("title"),
+    description: t("description"),
+    alternates: alternatesLinks({
+      locale,
+      url: KTextConstants.baseUrl,
+      canonical,
+      linkPart,
+    }),
     openGraph: openGraph(linkPart, locale, imageUrl),
-  }
+  };
 }
