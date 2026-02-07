@@ -8,8 +8,8 @@ import {
   getMessage,
   getTranslations,
   IntlHelperScript,
-  IntlProvider
-} from "optimized-next-intl";
+  IntlProvider,
+} from "cloudflare-next-intl";
 import ClientCnsoleErrorRewrite from "@/shared/components/client_console_error_rewrite";
 import CloudflareAnalyticsScript from "@/shared/components/cloudflare_analytics_script";
 import KTextConstants from "@/shared/constants/variables/text_constants";
@@ -19,22 +19,22 @@ export async function generateMetadata({ params }: {
 }): Promise<Metadata | null> {
   if (KTextConstants.isBuild) return null;
   const { locale } = await params;
-  const t = await getTranslations('Metadata.Main', locale);
+  const t = await getTranslations("Metadata.Main", locale);
 
   return {
     ...metadataHelper({
       isMain: true,
       t: t,
-      linkPart: '/',
+      linkPart: "/",
       locale: locale as Language,
     }),
-    category: t('category'),
+    category: t("category"),
     manifest: `/${locale}/manifest.json`,
     other: {
       "Content-Language": locale,
     },
-  }
-};
+  };
+}
 
 export const generateStaticParams = getLocaleStaticParams;
 
@@ -50,22 +50,24 @@ export default async function RootLayout({
   const locale = result?.locale ?? KTextConstants.defaultLocale;
   const messages = await getMessage(locale);
 
-  return <html lang={locale} suppressHydrationWarning>
-    <head>
-      <meta httpEquiv="Content-Language" content={locale} />
-      <PersonScheme />
-      <IntlHelperScript />
-      <CloudflareAnalyticsScript />
-    </head>
-    <body className="bg-white dark:bg-gray-900 text-black dark:text-white ease-out">
-      <IntlProvider language={locale} messages={messages} >
-        <div className="flex flex-col min-h-screen mx-4 lg:mx-24 tablet:mx-8 self-center">
-          <NavigationBar />
-          {children}
-          <Footer />
-        </div>
-      </IntlProvider>
-      <ClientCnsoleErrorRewrite />
-    </body>
-  </ html>;
+  return (
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <meta httpEquiv="Content-Language" content={locale} />
+        <PersonScheme />
+        <IntlHelperScript />
+        <CloudflareAnalyticsScript />
+      </head>
+      <body className="bg-white dark:bg-gray-900 text-black dark:text-white ease-out">
+        <IntlProvider language={locale} messages={messages}>
+          <div className="flex flex-col min-h-screen mx-4 lg:mx-24 tablet:mx-8 self-center">
+            <NavigationBar />
+            {children}
+            <Footer />
+          </div>
+        </IntlProvider>
+        <ClientCnsoleErrorRewrite />
+      </body>
+    </html>
+  );
 }

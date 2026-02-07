@@ -9,9 +9,7 @@ const isDev = process.env.NODE_ENV === "development";
  * @param seconds The maximum age for the cache in seconds.
  * @returns A Cache-Control header string.
  */
-function cacheHeader(seconds: number) {
-    return isDev ? 'no-store' : `public, max-age=${seconds}, must-revalidate, stale-while-revalidate=120, stale-if-error=604800`;
-}
+const cacheHeader = isDev ? 'no-store' : `public, max-age=3600, must-revalidate, stale-while-revalidate=120, stale-if-error=604800`;
 
 const nextConfig: NextConfig = {
     reactCompiler: true,
@@ -99,7 +97,7 @@ const nextConfig: NextConfig = {
                     // 'stale-if-error=604800': Allows serving stale content for up to 7 days if the server is unreachable or returns an error.
                     {
                         key: 'Cache-Control',
-                        value: cacheHeader(604800),
+                        value: cacheHeader,
                     },
                     // Set the X-DNS-Prefetch-Control header to 'on'.
                     // This enables DNS prefetching, allowing the browser to resolve domain names in advance, improving perceived performance.
@@ -113,59 +111,6 @@ const nextConfig: NextConfig = {
                         key: 'Referrer-Policy',
                         value: 'origin-when-cross-origin'
                     }
-                ],
-            },
-            {
-                source: `/:locale([a-z]{2})?/projects`,
-                headers: [
-                    {
-                        // Cache for 1 day (86400 seconds).
-                        key: 'Cache-Control',
-                        value: cacheHeader(86400),
-                    },
-                ]
-            },
-            {
-                source: `/:locale([a-z]{2})?/projects/:path*`,
-                headers: [
-                    {
-                        // Cache for 30 days (2592000 seconds).
-                        key: 'Cache-Control',
-                        value: cacheHeader(2592000),
-                    },
-                ]
-            },
-            {
-                // Apply specific cache-control for the favicon.
-                source: '/favicon.ico',
-                headers: [
-                    {
-                        // Cache for 1 year (31536000 seconds) and mark as immutable (content will not change).
-                        key: 'Cache-Control',
-                        value: `${cacheHeader(31536000)}, immutable`,
-                    },
-                ],
-            },
-            {
-                // Apply specific cache-control for icons.
-                source: '/icons/:path*',
-                headers: [
-                    {
-                        // Cache for 1 year (31536000 seconds) and mark as immutable.
-                        key: 'Cache-Control',
-                        value: `${cacheHeader(31536000)}, immutable`,
-                    },
-                ],
-            },
-            {
-                // Apply specific cache-control for images.
-                source: '/images/:path*',
-                headers: [
-                    {
-                        // Cache for 1 year (31536000 seconds) and mark as immutable.
-                        key: 'Cache-Control',
-                        value: `${cacheHeader(31536000)}, immutable`,
-                    },
                 ],
             },
             // No cache if happened error
