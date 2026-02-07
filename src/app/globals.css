@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@source "../../node_modules/optimized-next-intl/";
+@source "../../node_modules/cloudflare-next-intl/";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -9,34 +9,33 @@
   --breakpoint-tablet: 48rem;
   --breakpoint-small-mobile: 30rem;
 
-
   --animate-loading: loading-animation 1.5s ease-in-out infinite;
 
   @keyframes loading-animation {
     0% {
       transform: rotate(360deg);
-      border-top: 0.56rem dashed theme('colors.green.300');
-      border-bottom: 0.56rem dashed theme('colors.red.700');
+      border-top: 0.56rem dashed theme("colors.green.300");
+      border-bottom: 0.56rem dashed theme("colors.red.700");
     }
 
     25% {
-      border-top: 0.56rem dashed theme('colors.sky.400');
-      border-bottom: 0.56rem dashed theme('colors.sky.700');
+      border-top: 0.56rem dashed theme("colors.sky.400");
+      border-bottom: 0.56rem dashed theme("colors.sky.700");
     }
 
     50% {
-      border-top: 0.56rem dashed theme('colors.cyan.300');
-      border-bottom: 0.56rem dashed theme('colors.cyan.700');
+      border-top: 0.56rem dashed theme("colors.cyan.300");
+      border-bottom: 0.56rem dashed theme("colors.cyan.700");
     }
 
     75% {
-      border-top: 0.56rem dashed theme('colors.pink.300');
-      border-bottom: 0.56rem dashed theme('colors.pink.700');
+      border-top: 0.56rem dashed theme("colors.pink.300");
+      border-bottom: 0.56rem dashed theme("colors.pink.700");
     }
 
     100% {
-      border-top: 0.56rem dashed theme('colors.yellow.300');
-      border-bottom: 0.56rem dashed theme('colors.yellow.700');
+      border-top: 0.56rem dashed theme("colors.yellow.300");
+      border-bottom: 0.56rem dashed theme("colors.yellow.700");
     }
   }
 }

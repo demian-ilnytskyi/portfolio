@@ -6,7 +6,7 @@ import ContactSection from "./home_components/contact_section";
 import CardDivider from "@/shared/components/card_divider";
 import ContactFormContent from "./home_components/contact_form/contact_form_content";
 import Divider from "@/shared/components/divider";
-import { setLocaleAsync } from "optimized-next-intl";
+import { setLocaleAsync } from "cloudflare-next-intl";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export default async function Home({ params }: {
@@ -15,16 +15,17 @@ export default async function Home({ params }: {
   if (KTextConstants.isBuild) return null;
   await setLocaleAsync(params);
 
-  return <main className="flex-1 flex flex-col">
-    <HomeImagePart />
-    <Divider id={AppLinks.aboutMe} />
-    <AboutMe />
-    <Divider id={AppLinks.workExperience} />
-    <WorkExperience />
-    <Divider id={AppLinks.connect} />
-    <ContactSection />
-    <CardDivider className="max-w-3xl self-center" />
-    <ContactFormContent />
-  </main>
-
+  return (
+    <main className="flex-1 flex flex-col">
+      <HomeImagePart />
+      <Divider id={AppLinks.aboutMe} />
+      <AboutMe />
+      <Divider id={AppLinks.workExperience} />
+      <WorkExperience />
+      <Divider id={AppLinks.connect} />
+      <ContactSection />
+      <CardDivider className="max-w-3xl self-center" />
+      <ContactFormContent />
+    </main>
+  );
 }
