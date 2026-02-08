@@ -1,7 +1,7 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import type { Metadata } from "next";
 import metadataHelper from "@/shared/helpers/metadata_helper";
-import { getTranslations, Link, setLocale } from "cloudflare-next-intl";
+import { getTranslations, Link } from "cloudflare-next-intl";
 import { cn } from "@/lib/utils";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 
@@ -30,7 +30,6 @@ export default async function NotFound({ params }: {
   if (KTextConstants.isBuild) return null;
   const result = await params;
   const locale = result?.locale ?? KTextConstants.defaultLocale;
-  setLocale(locale);
   const t = await getTranslations("NotFound.General");
   return (
     <main className="flex-1 flex flex-col items-center justify-center p-4 text-center">
