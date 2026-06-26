@@ -31,6 +31,14 @@ export default function CloudflareAnalyticsScript(): Component | null {
         }
     }, []);
 
+    useEffect(() => {
+        if (!state) return;
+        import("@microsoft/clarity").then(({ default: Clarity }) => {
+            Clarity.init("xd837xknfq");
+            Clarity.consent();
+        });
+    }, [state]);
+
     if (state) {
         return (
             <Script
