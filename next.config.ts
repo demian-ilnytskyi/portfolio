@@ -23,8 +23,8 @@ const dynamicCacheHeader = isDev ? 'no-store' : 'private, no-cache, must-revalid
 
 const nextConfig: NextConfig = {
     reactCompiler: true,
-    compress: false,
-    poweredByHeader: false,
+    // compress: false,
+    // poweredByHeader: false,
     experimental: {
         optimizePackageImports: [
             "lucide-react",
