@@ -43,7 +43,7 @@ export default async function Projects({ params }: {
             </h1>
             <ul className="grid grid-flow-row big-desk:grid-cols-2 grid-cols-1 gap-x-5 md:gap-y-10 big-desk:gap-y-5 gap-y-5">
                 {projects.map((projectInfo, index) => {
-                    const projectDetail = tProjects(
+                    const projectDetail = tProjects.raw(
                         projectInfo?.name,
                     ) as unknown as ProjectsProps;
                     return (

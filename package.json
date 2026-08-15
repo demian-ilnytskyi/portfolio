@@ -15,7 +15,7 @@
 		"check-size": "wrangler deploy --outdir boundled/ --dry-run"
 	},
 	"dependencies": {
-		"cloudflare-next-intl": "^0.7.0",
+    	"cloudflare-next-intl": "^0.7.1",
 		"clsx": "^2.1.1",
 		"lucide-react": "^0.552.0",
 		"markdown-to-jsx": "^8.0.0",

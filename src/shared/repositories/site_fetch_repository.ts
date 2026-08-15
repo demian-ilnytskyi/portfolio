@@ -1,5 +1,5 @@
 import KTextConstants from "../constants/variables/text_constants";
-import errorRepository from "./error_repository";
+import { reportError } from "cloudflare-next-intl/errorHandling";
 import cloudflareRepository from "./cloudflare_repository";
 
 interface FetchRepositoryInterface {
@@ -59,7 +59,7 @@ export class SiteFetchRepository {
                 return await response.text();
             }
         } catch (e) {
-            errorRepository.sendErrorReport({
+            void reportError(undefined, {
                 error: e,
                 classOrMethodName: 'SiteFetchRepository fetchTextData',
                 params: { path, header }

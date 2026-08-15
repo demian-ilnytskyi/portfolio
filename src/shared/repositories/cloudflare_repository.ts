@@ -1,6 +1,12 @@
 import type { CloudflareContext } from "@opennextjs/cloudflare";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
-import errorRepository from "./error_repository";
+import { reportError } from "cloudflare-next-intl/errorHandling";
+import onError from "../error_handling/on_error";
+
+// Reports directly with just { onError } rather than importing the full
+// intl_config (which binds generate.getCloudflareContext to THIS module) —
+// avoids a circular import between cloudflare_repository and intl_config.
+const errorHandlingConfig = { errorHandling: { onError: onError } };
 
 type Context = CloudflareContext<CfProperties, ExecutionContext>;
 
@@ -30,7 +36,7 @@ class CloudflareRepository {
         async: boolean;
         notSendError?: boolean;
         fresh?: boolean;
-    }): Context | null | Promise<Context | null> {
+    },): Context | null | Promise<Context | null> {
         try {
             if (options?.fresh === true) {
                 if (options.async === true) {
@@ -41,7 +47,7 @@ class CloudflareRepository {
                             if (options.notSendError === true) {
                                 console.warn(`CloudflareRepository getContext error(async, fresh): ${error}`);
                             } else {
-                                errorRepository.sendErrorReport({
+                                void reportError(errorHandlingConfig, {
                                     error,
                                     classOrMethodName: 'CloudflareRepository getContext(async, fresh)',
                                 });
@@ -63,14 +69,14 @@ class CloudflareRepository {
                             if (options.notSendError === true) {
                                 console.warn(`CloudflareRepository getContext error(async): ${error}`);
                             } else {
-                                errorRepository.sendErrorReport({
+                                void reportError(errorHandlingConfig, {
                                     error,
                                     classOrMethodName: 'CloudflareRepository getContext(async)',
                                 });
                             }
                             return this.context;
                         }
-                    })();
+                    })()
                 } else {
                     this.context = getCloudflareContext();
                 }
@@ -79,11 +85,12 @@ class CloudflareRepository {
             if (options?.notSendError === true) {
                 console.warn(`CloudflareRepository getContext error: ${error}`);
             } else {
-                errorRepository.sendErrorReport({
+                void reportError(errorHandlingConfig, {
                     error,
                     classOrMethodName: 'CloudflareRepository getContext',
                 });
             }
+
         }
         return this.context;
     }
@@ -95,10 +102,10 @@ class CloudflareRepository {
             if (typeof context.cf?.country === 'string') {
                 return context.cf.country;
             } else {
-                return undefined;
+                return undefined
             }
         } catch (error) {
-            errorRepository.sendErrorReport({
+            void reportError(errorHandlingConfig, {
                 error,
                 classOrMethodName: 'CloudflareRepository isEUCountry',
             });
@@ -131,7 +138,7 @@ class CloudflareRepository {
                     await callback();
                 } catch (error) {
                     if (classOrMethodName) {
-                        errorRepository.sendErrorReport({
+                        void reportError(errorHandlingConfig, {
                             error,
                             classOrMethodName,
                             params
@@ -144,7 +151,8 @@ class CloudflareRepository {
             })());
         } catch (error) {
             if (!notSendError) {
-                errorRepository.sendErrorReport({
+                // Log error including the namespace name and key
+                void reportError(errorHandlingConfig, {
                     error,
                     classOrMethodName: 'CloudflareRepository waitUntil',
                 });
@@ -156,7 +164,6 @@ class CloudflareRepository {
     }
 }
 
-// Export a singleton instance of the CacheRepository
 const cloudflareRepository = new CloudflareRepository();
 
 export default cloudflareRepository;

@@ -1,6 +1,6 @@
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import { setIntlConfig } from "cloudflare-next-intl/setIntlConfig";
-import errorRepository from "@/shared/repositories/error_repository";
+import onError from "@/shared/error_handling/on_error";
 import cloudflareRepository from "@/shared/repositories/cloudflare_repository";
 
 declare global {
@@ -14,14 +14,7 @@ const intlConfig = setIntlConfig({
         getCloudflareContext: cloudflareRepository.getContext.bind(cloudflareRepository),
     },
     errorHandling: {
-        onError: (params) => {
-            errorRepository.sendErrorReport({
-                classOrMethodName: params.classOrMethodName,
-                error: params.error,
-                params: params.params as Record<string, unknown>,
-                isClient: params.isClient,
-            });
-        },
+        onError: onError,
         overrideConsoleError: true,
     },
     cookieConsent: {

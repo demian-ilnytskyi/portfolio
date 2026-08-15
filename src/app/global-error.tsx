@@ -2,9 +2,9 @@
 
 import KTextConstants from '@/shared/constants/variables/text_constants';
 import { usePathname } from 'next/navigation';
-import GlobalErrorBody from './global-error/body';
+import GlobalErrorBody, { isChunkLoadError } from './global-error/body';
 import { useEffect } from 'react';
-import clientSendErrorReport, { initClientError } from '@/shared/helpers/error_client_helper';
+import { reportClientError } from '@/shared/error_handling/report_client_error';
 
 import "./globals.css";
 
@@ -17,8 +17,8 @@ export default function GlobalError({
     let locale: Language;
 
     useEffect(() => {
-        initClientError();
-        clientSendErrorReport({ error, classOrMethodName: 'GlobalError' });
+        if (isChunkLoadError(error)) return;
+        reportClientError(error, 'GlobalError');
     }, [error])
 
     switch (path.split('/').filter(Boolean).at(0)) {
@@ -31,7 +31,7 @@ export default function GlobalError({
 
     return <html lang={locale}>
         <body className='flex justify-center bg-white'>
-            <GlobalErrorBody locale={locale} />
+            <GlobalErrorBody locale={locale} error={error} />
         </body>
     </html>
 }
