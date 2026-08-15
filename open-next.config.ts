@@ -6,7 +6,7 @@ import doQueue from "@opennextjs/cloudflare/overrides/queue/do-queue";
 export default defineCloudflareConfig({
   incrementalCache: r2IncrementalCache,
   enableCacheInterception: true,
-  routePreloadingBehavior: "withWaitUntil",
+  // routePreloadingBehavior: "withWaitUntil",
   cachePurge: cloudflareCachePurger({ type: 'durableObject' }),
   queue: doQueue,
 });
