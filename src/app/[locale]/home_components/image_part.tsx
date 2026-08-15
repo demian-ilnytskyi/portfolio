@@ -16,11 +16,11 @@ export default async function HomeImagePart(): Promise<Component> {
             <Image
                 src={profileImage}
                 alt={"Profile"}
-                loading={"eager"}
                 placeholder="blur"
                 priority
                 width={400}
                 height={400}
+                sizes="400px"
                 fetchPriority="high"
                 className="rounded-full border-gray-200 dark:border-0 border-2"
             />

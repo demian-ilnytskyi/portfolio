@@ -1,6 +1,6 @@
 // Define an interface for the average search volume.
 
-import errorRepository from "@/shared/repositories/error_repository";
+import { reportError } from "cloudflare-next-intl/errorHandling";
 
 // It contains separate 'min' and 'max' fields.
 interface Avg {
@@ -57,7 +57,7 @@ const filterKeywordsByAvg = (
         // console.info('Current keywords length: ', filteredAndSorted.length);
         return filteredAndSorted;
     } catch (e) {
-        errorRepository.sendErrorReport({ error: e, params: { keywords, minAvg }, classOrMethodName: 'filterKeywordsByAvg' });
+        void reportError(undefined, { error: e, params: { keywords, minAvg }, classOrMethodName: 'filterKeywordsByAvg' });
         return [];
     }
 };

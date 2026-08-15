@@ -1,18 +1,38 @@
 import type { NextConfig } from "next";
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 import path from 'path';
 
 const isDev = process.env.NODE_ENV === "development";
+
+if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { initOpenNextCloudflareForDev } = require("@opennextjs/cloudflare");
+    initOpenNextCloudflareForDev();
+}
 
 /**
  * Generates a Cache-Control header value.
  * @param seconds The maximum age for the cache in seconds.
  * @returns A Cache-Control header string.
  */
-const cacheHeader = isDev ? 'no-store' : `public, max-age=3600, must-revalidate, stale-while-revalidate=120, stale-if-error=604800`;
+const cacheHeaderFor = (sMaxAge: number) =>
+    isDev ? 'no-store' : `public, max-age=3600, must-revalidate, s-maxage=${sMaxAge}, stale-while-revalidate=120, stale-if-error=604800`;
+
+const staticCacheHeader = cacheHeaderFor(86400);
+const cacheHeader = cacheHeaderFor(3600);
+const dynamicCacheHeader = isDev ? 'no-store' : 'private, no-cache, must-revalidate';
 
 const nextConfig: NextConfig = {
     reactCompiler: true,
+    compress: false,
+    poweredByHeader: false,
+    experimental: {
+        optimizePackageImports: [
+            "lucide-react",
+            "tw-animate-css",
+            "clsx",
+            "tailwind-merge",
+        ],
+    },
     images: {
         /**
          * Defines a list of device widths that Next.js should use to generate responsive image sizes.
@@ -90,11 +110,6 @@ const nextConfig: NextConfig = {
                         value: 'max-age=63072000; includeSubDomains; preload',
                     },
                     // Set the Cache-Control header to manage how the response is cached.
-                    // 'public': Response can be cached by any cache.
-                    // 'max-age=604800': Response is fresh for 7 days.
-                    // 'must-revalidate': Cache must revalidate stale responses with the server.
-                    // 'stale-while-revalidate=120': Allows serving stale content for up to 120 seconds while revalidating in the background.
-                    // 'stale-if-error=604800': Allows serving stale content for up to 7 days if the server is unreachable or returns an error.
                     {
                         key: 'Cache-Control',
                         value: cacheHeader,
@@ -109,8 +124,12 @@ const nextConfig: NextConfig = {
                     // This policy sends the origin, path, and query string when making same-origin requests, but only the origin when making cross-origin requests.
                     {
                         key: 'Referrer-Policy',
-                        value: 'origin-when-cross-origin'
-                    }
+                        value: 'strict-origin-when-cross-origin'
+                    },
+                    {
+                        key: 'Permissions-Policy',
+                        value: 'camera=(), microphone=(), geolocation=()'
+                    },
                 ],
             },
             // No cache if happened error
@@ -119,16 +138,29 @@ const nextConfig: NextConfig = {
                 has: [
                     {
                         type: 'cookie',
-                        key: '__clear_cache_key__',
+                        key: '__clear_cookie_key__',
                         value: 'true',
                     },
                 ],
                 headers: [
                     {
                         key: 'Cache-Control',
-                        value: 'no-store, must-revalidat',
+                        value: 'no-store, must-revalidate',
                     },
                 ],
+            },
+            // Static marketing pages cache longer at edge
+            {
+                source: '/:locale/privacy-policy',
+                headers: [{ key: 'Cache-Control', value: staticCacheHeader }],
+            },
+            {
+                source: '/:locale/projects',
+                headers: [{ key: 'Cache-Control', value: staticCacheHeader }],
+            },
+            {
+                source: '/:locale/experience',
+                headers: [{ key: 'Cache-Control', value: staticCacheHeader }],
             },
         ];
     },
@@ -136,4 +168,3 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 
-initOpenNextCloudflareForDev();

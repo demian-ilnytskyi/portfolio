@@ -1,7 +1,7 @@
 "use server";
 
 import Secrets from "../constants/variables/secrets";
-import errorRepository from "./error_repository";
+import { reportError } from "cloudflare-next-intl/errorHandling";
 
 export interface ContactProps {
     isError?: boolean;
@@ -50,7 +50,7 @@ export async function sendContact(
 
         // Check if the request was successful
         if (!response.ok || ('ok' in data && !data.ok)) {
-            errorRepository.sendErrorReport({
+            void reportError(undefined, {
                 error: response.body,
                 classOrMethodName: 'sendContact',
                 params: { data }
@@ -65,7 +65,7 @@ export async function sendContact(
             isError: false,
         };
     } catch (error) {
-        errorRepository.sendErrorReport({
+        void reportError(undefined, {
             error,
             classOrMethodName: 'sendContact',
         });

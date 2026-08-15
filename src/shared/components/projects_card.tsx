@@ -34,10 +34,10 @@ export default function ProjectsCard({
                 src={image}
                 width={800}
                 height={400}
-                alt={"Veteranam"}
-                loading={"eager"}
+                alt={title}
                 placeholder="blur"
-                className="rounded-t-2xl bg-zinc-800 self-center"
+                className="rounded-t-2xl bg-zinc-800 self-center w-full h-auto"
+                sizes="(max-width: 768px) 100vw, 800px"
                 fetchPriority={imagePriority ? "high" : "auto"}
                 priority={imagePriority}
             />
