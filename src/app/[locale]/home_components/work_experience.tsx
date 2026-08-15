@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 export default async function WorkExperience(): Promise<Component> {
     const t = await getTranslations("HomePage.WorkExperience");
 
-    const projects: ExperienceModel[] = t("jobs");
+    const projects = t("jobs") as unknown as ExperienceModel[];
 
     return (
         <section className="items-center flex flex-col p-4 md:p-8">

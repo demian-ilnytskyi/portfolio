@@ -29,7 +29,10 @@ export async function generateMetadata({ params }: {
 
     const t = await getTranslations("Projects", locale);
 
-    const project = t(name);
+    const project = t(name) as unknown as {
+        title?: string;
+        description?: string;
+    };
 
     const link = `${AppLinks.projectsPage}/${name}`;
 

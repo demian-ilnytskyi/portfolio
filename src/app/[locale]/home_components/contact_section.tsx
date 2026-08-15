@@ -35,7 +35,9 @@ const contactList: ContactListProps[] = [
 export default async function ContactSection(): Promise<Component> {
     const t = await getTranslations("HomePage.Connect");
 
-    const contactText: ContactListTextProps[] = t("social");
+    const contactText = t(
+        "social"
+    ) as unknown as ContactListTextProps[];
 
     return (
         <section className="items-center flex flex-col p-4 md:p-8 max-w-3xl self-center">
