@@ -5,6 +5,8 @@ compatibility_date = "2025-06-13"
 workers_dev = false
 main = ".open-next/worker.js"
 name = "portfolio"
+minify = true
+upload_source_maps = true
 
 # Compatibility Flags
 # wrangler.toml supports string arrays
@@ -14,10 +16,21 @@ compatibility_flags = [
 	"global_fetch_strictly_public",
 ]
 
+[images]
+binding = "IMAGES"
+
+[cache]
+enabled = true
+
 [[r2_buckets]]
 binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "portfolio-cache"
 preview_bucket_name = "local-prod-cache-bucket"
+
+[[d1_databases]]
+binding = "ERRORS_DB"
+database_name = "portfolio-errors"
+database_id = "692825d4-52d1-4ecf-ba7a-6f346e150cba"
 
 [[durable_objects.bindings]]
 name = "NEXT_CACHE_DO_QUEUE"
@@ -32,13 +45,17 @@ tag = "v1"
 new_sqlite_classes = ["DOQueueHandler"]
 
 # Assets configuration (if you have a static assets directory)
-[assets] # Note: The closing bracket was missing in your original input, I've corrected it.
+[assets]
 directory = ".open-next/assets"
-binding = "ASSETS" # This is the variable name that will be available in your Worker to access assets
+binding = "ASSETS"
+html_handling = "auto-trailing-slash"
+not_found_handling = "none"
+run_worker_first = false
 
 # Observability (Logging and Monitoring)
 [observability]
 enabled = true
+head_sampling_rate = 0.1
 
 [placement]
 mode = "smart"
@@ -46,10 +63,21 @@ mode = "smart"
 [env.development]
 name = "portfolio-development"
 
+[env.development.images]
+binding = "IMAGES"
+
+[env.development.cache]
+enabled = true
+
 [[env.development.r2_buckets]]
 binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "dev-portfolio-cache"
 preview_bucket_name = "local-dev-cache-bucket"
+
+[[env.development.d1_databases]]
+binding = "ERRORS_DB"
+database_name = "portfolio-errors"
+database_id = "692825d4-52d1-4ecf-ba7a-6f346e150cba"
 
 [[env.development.durable_objects.bindings]]
 name = "NEXT_CACHE_DO_QUEUE"

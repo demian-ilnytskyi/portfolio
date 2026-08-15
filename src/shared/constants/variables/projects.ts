@@ -15,7 +15,7 @@ import githubIcon from "../../../../public/icons/git_hub.svg";
 export interface ProjectProps {
     name: string;
     image: StaticImageData;
-    links: { image: StaticImageData, value: string }[];
+    links: { image: StaticImageData, value: string, label: string }[];
     hasCodeLink?: boolean;
 }
 
@@ -27,22 +27,27 @@ const projects: ProjectProps[] = [
             {
                 image: appStoreIcon,
                 value: "https://apps.apple.com/us/app/veteranam-info/id6584519009",
+                label: "App Store",
             },
             {
                 image: googlePlayIcon,
                 value: "https://play.google.com/store/apps/details?id=info.veteranam",
+                label: "Google Play",
             },
             {
                 image: webIcon,
                 value: "https://veteranam.info",
+                label: "Website",
             },
             {
                 image: githubIcon,
                 value: "https://github.com/CodingHouseStudio/veteranam_info",
+                label: "GitHub",
             },
             {
                 image: figmaIcon,
                 value: "https://www.figma.com/design/W9Xbu0ajz9LTH1hxXpQFgy/Veteran?node-id=10-102&p=f&t=eceU352NjGy7x9Ok-0",
+                label: "Figma",
             },
         ],
     },
@@ -53,6 +58,7 @@ const projects: ProjectProps[] = [
             {
                 image: figmaIcon,
                 value: "https://www.figma.com/design/zY5Oqp6f6UDrtyAzKXX4eg/CheckMyBuilding?node-id=114-3&t=v73XkFNC9f6D0QZs-1",
+                label: "Figma",
             },
         ],
         hasCodeLink: false,
@@ -75,6 +81,7 @@ const projects: ProjectProps[] = [
             {
                 image: webIcon,
                 value: "https://hungerquest.app",
+                label: "Website",
             },
         ]
     },
