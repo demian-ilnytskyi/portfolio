@@ -14,8 +14,8 @@ if (process.env.NODE_ENV === "development") {
  * @param seconds The maximum age for the cache in seconds.
  * @returns A Cache-Control header string.
  */
-const cacheHeaderFor = (sMaxAge: number) =>
-    isDev ? 'no-store' : `public, max-age=3600, must-revalidate, s-maxage=${sMaxAge}, stale-while-revalidate=120, stale-if-error=604800`;
+const cacheHeaderFor = (_sMaxAge: number) =>
+    isDev ? 'no-store' : `public, max-age=3600, must-revalidate, stale-while-revalidate=120, stale-if-error=604800`;
 
 const staticCacheHeader = cacheHeaderFor(86400);
 const cacheHeader = cacheHeaderFor(3600);
