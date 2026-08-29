@@ -1,5 +1,5 @@
 import React from "react";
-import VinextImage, { getImageProps, imageOptimizationUrl } from "vinext/shims/image";
+import VinextImage, { getImageProps as vinextGetImageProps, imageOptimizationUrl } from "vinext/shims/image";
 import type { ImageProps } from "next/image";
 import manifest from "../../public/generated/images.json" with { type: "json" };
 
@@ -13,7 +13,7 @@ interface ManifestEntry {
 
 const images = manifest as Record<string, ManifestEntry>;
 
-export default function Image(props: ImageProps): React.JSX.Element {
+function resolveProps(props: ImageProps): ImageProps {
     let src = props.src;
     let blurDataURL = props.blurDataURL;
     let width = props.width;
@@ -32,7 +32,17 @@ export default function Image(props: ImageProps): React.JSX.Element {
             }
         }
     }
-    return <VinextImage {...props} src={src} blurDataURL={blurDataURL} width={width} height={height} />;
+    return { ...props, src, blurDataURL, width, height };
 }
 
-export { getImageProps, imageOptimizationUrl };
+export default function Image(props: ImageProps): React.JSX.Element {
+    const resolved = resolveProps(props);
+    return <VinextImage {...resolved} />;
+}
+
+export function getImageProps(props: ImageProps): ReturnType<typeof vinextGetImageProps> {
+    const resolved = resolveProps(props);
+    return vinextGetImageProps(resolved);
+}
+
+export { imageOptimizationUrl };

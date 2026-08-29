@@ -10,7 +10,14 @@ export default function imageOptimizer(options?: ImageOptimizerOptions): Plugin 
     const resolved = resolveOptions(options);
     return {
         name: "image-optimizer",
+        enforce: "pre",
         apply: resolved.dev ? undefined : "build",
+        resolveId(id: string): string | undefined {
+            if (id === "next/image") {
+                return path.resolve(process.cwd(), "plugins/image-optimizer/next-image.tsx");
+            }
+            return undefined;
+        },
         async buildStart(): Promise<void> {
             const root = process.cwd();
             const entries = await run(root, resolved, path.resolve(root, CACHE_FILE));
