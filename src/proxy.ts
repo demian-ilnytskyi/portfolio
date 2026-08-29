@@ -1,16 +1,6 @@
-import type { NextRequest, NextResponse } from "next/server";
 import { intlMiddleware } from "cloudflare-next-intl";
 
-export async function proxy(request: NextRequest): Promise<NextResponse<unknown>> {
-    const cf = (request as NextRequest & { cf?: IncomingRequestCfProperties }).cf;
-
-    if (cf) {
-        if (typeof cf.country === "string") request.headers.set("x-cf-country", cf.country);
-        if (typeof cf.timezone === "string") request.headers.set("x-cf-timezone", cf.timezone);
-    }
-
-    return intlMiddleware(request);
-}
+export const proxy = intlMiddleware;
 
 export const config = {
     matcher: [
