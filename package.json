@@ -14,7 +14,7 @@
     "deploy": "IS_BUILDING=true vinext build && npx @vinext/cloudflare deploy",
     "pre-deploy": "IS_BUILDING=true vinext build",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "check-size": "wrangler deploy --outdir boundled/ --dry-run"
+    "check-size": "wrangler deploy -c dist/server/wrangler.json --outdir boundled/ --dry-run"
   },
   "dependencies": {
     "@vinext/cloudflare": "^1.0.0-beta.6",
@@ -39,6 +39,7 @@
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/sharp": "^0.31.1",
     "@vitejs/plugin-react": "^6.1.0",
     "@vitejs/plugin-rsc": "^0.5.34",
     "babel-plugin-react-compiler": "^1.0.0",
@@ -46,6 +47,7 @@
     "eslint-config-next": "16.2.10",
     "eslint-config-prettier": "^10.1.2",
     "postcss": "^8",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.44.1",
