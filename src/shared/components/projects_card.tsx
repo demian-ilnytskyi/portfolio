@@ -38,6 +38,7 @@ export default function ProjectsCard({
                 sizes="(max-width: 768px) 100vw, 800px"
                 fetchPriority={imagePriority ? "high" : "auto"}
                 priority={imagePriority}
+                placeholder="blur"
             />
             <div className="px-5 mt-2 flex flex-col">
                 <h2 className={cn(AppTextStyle.titleLargeBold, "text-center")}>

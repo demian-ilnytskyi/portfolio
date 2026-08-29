@@ -21,6 +21,7 @@ export default async function HomeImagePart(): Promise<Component> {
                 sizes="400px"
                 fetchPriority="high"
                 className="rounded-full border-gray-200 dark:border-0 border-2"
+                placeholder="blur"
             />
             <h1
                 className={cn(
