@@ -1,13 +1,6 @@
 import type { NextConfig } from "next";
-import path from 'path';
 
 const isDev = process.env.NODE_ENV === "development";
-
-if (process.env.NODE_ENV === "development") {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { initOpenNextCloudflareForDev } = require("@opennextjs/cloudflare");
-    initOpenNextCloudflareForDev();
-}
 
 /**
  * Generates a Cache-Control header value.
@@ -19,7 +12,7 @@ const cacheHeaderFor = (_sMaxAge: number) =>
 
 const staticCacheHeader = cacheHeaderFor(86400);
 const cacheHeader = cacheHeaderFor(3600);
-const dynamicCacheHeader = isDev ? 'no-store' : 'private, no-cache, must-revalidate';
+const _dynamicCacheHeader = isDev ? 'no-store' : 'private, no-cache, must-revalidate';
 
 const nextConfig: NextConfig = {
     reactCompiler: true,
@@ -64,20 +57,6 @@ const nextConfig: NextConfig = {
          * Here, optimized images will be cached for 7 days (604800 seconds).
          */
         minimumCacheTTL: 604800, // 7 days
-    },
-    turbopack: {
-        resolveAlias: {
-            "@intl-config": "./src/l18n/intl_config.ts",
-            "@locale-file/*.json": "./messages/*.json",
-        },
-    },
-    webpack(config) {
-        config.resolve.alias = {
-            ...config.resolve.alias,
-            "@intl-config": path.resolve(__dirname, "src/l18n/intl_config"),
-            "@locale-file": path.resolve(__dirname, "messages"),
-        };
-        return config;
     },
     compiler: {
         removeConsole: isDev ? undefined : {

@@ -1,5 +1,4 @@
 import AppTextStyle from "../constants/styles/app_text_styles";
-import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import { Link } from "cloudflare-next-intl";
 import AppLinks from "../constants/variables/links";
@@ -14,7 +13,7 @@ export interface ProjectsProps {
 
 export interface ProjectsCardProps extends ProjectsProps {
     viewDetailText: string;
-    image: StaticImageData;
+    image: string;
     imagePriority?: boolean;
     path: string;
 }
@@ -35,11 +34,11 @@ export default function ProjectsCard({
                 width={800}
                 height={400}
                 alt={title}
-                placeholder="blur"
                 className="rounded-t-2xl bg-zinc-800 self-center w-full h-auto"
                 sizes="(max-width: 768px) 100vw, 800px"
                 fetchPriority={imagePriority ? "high" : "auto"}
                 priority={imagePriority}
+                placeholder="blur"
             />
             <div className="px-5 mt-2 flex flex-col">
                 <h2 className={cn(AppTextStyle.titleLargeBold, "text-center")}>

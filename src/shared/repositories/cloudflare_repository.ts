@@ -1,6 +1,7 @@
-import type { CloudflareContext } from "@opennextjs/cloudflare";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { env } from "cloudflare:workers";
+import { getRequestExecutionContext } from "vinext/shims/request-context";
 import { reportError } from "cloudflare-next-intl/errorHandling";
+import { getCountry, getTimezone } from "cloudflare-next-intl/geo";
 import onError from "../error_handling/on_error";
 
 // Reports directly with just { onError } rather than importing the full
@@ -8,79 +9,30 @@ import onError from "../error_handling/on_error";
 // avoids a circular import between cloudflare_repository and intl_config.
 const errorHandlingConfig = { errorHandling: { onError: onError } };
 
-type Context = CloudflareContext<CfProperties, ExecutionContext>;
+interface Cf {
+    country?: string;
+    timezone?: string;
+    [key: string]: unknown;
+}
+
+interface Context {
+    env: typeof env;
+    cf: Cf | undefined;
+    ctx?: { waitUntil(promise: Promise<unknown>): void };
+}
 
 class CloudflareRepository {
-    private context: Context | null = null;
-
-    constructor() {
-        this.context = null;
-    }
-
     init() {
-        this.context = null;
+        // No cached context to reset
     }
 
-    async getContext(options: {
-        async: true;
-        notSendError?: boolean;
-        fresh?: boolean;
-    }): Promise<Context | null>;
-    getContext(options?: {
-        async: false;
-        notSendError?: boolean;
-        fresh?: boolean;
-    }): Context | null;
-
-    getContext(options?: {
-        async: boolean;
-        notSendError?: boolean;
-        fresh?: boolean;
-    },): Context | null | Promise<Context | null> {
+    async getContext(options?: { async?: boolean; notSendError?: boolean; fresh?: boolean }): Promise<Context | null> {
         try {
-            if (options?.fresh === true) {
-                if (options.async === true) {
-                    return (async () => {
-                        try {
-                            return await getCloudflareContext({ async: true });
-                        } catch (error) {
-                            if (options.notSendError === true) {
-                                console.warn(`CloudflareRepository getContext error(async, fresh): ${error}`);
-                            } else {
-                                void reportError(errorHandlingConfig, {
-                                    error,
-                                    classOrMethodName: 'CloudflareRepository getContext(async, fresh)',
-                                });
-                            }
-                            return null;
-                        }
-                    })();
-                }
-                return getCloudflareContext();
-            }
-
-            if (!this.context) {
-                if (options?.async === true) {
-                    return (async () => {
-                        try {
-                            this.context = await getCloudflareContext({ async: true });
-                            return this.context;
-                        } catch (error) {
-                            if (options.notSendError === true) {
-                                console.warn(`CloudflareRepository getContext error(async): ${error}`);
-                            } else {
-                                void reportError(errorHandlingConfig, {
-                                    error,
-                                    classOrMethodName: 'CloudflareRepository getContext(async)',
-                                });
-                            }
-                            return this.context;
-                        }
-                    })()
-                } else {
-                    this.context = getCloudflareContext();
-                }
-            }
+            return {
+                env,
+                cf: undefined,
+                ctx: getRequestExecutionContext() ?? undefined,
+            };
         } catch (error) {
             if (options?.notSendError === true) {
                 console.warn(`CloudflareRepository getContext error: ${error}`);
@@ -90,26 +42,16 @@ class CloudflareRepository {
                     classOrMethodName: 'CloudflareRepository getContext',
                 });
             }
-
+            return null;
         }
-        return this.context;
     }
 
     async getCountryCode(): Promise<string | undefined> {
-        try {
-            const context = await this.getContext({ async: true });
-            if (!context) return undefined;
-            if (typeof context.cf?.country === 'string') {
-                return context.cf.country;
-            } else {
-                return undefined
-            }
-        } catch (error) {
-            void reportError(errorHandlingConfig, {
-                error,
-                classOrMethodName: 'CloudflareRepository isEUCountry',
-            });
-        }
+        return await getCountry();
+    }
+
+    async getTimezone(): Promise<string | undefined> {
+        return await getTimezone(undefined, 'UTC');
     }
 
     async fetch(
@@ -130,10 +72,10 @@ class CloudflareRepository {
         notSendError?: boolean;
     }): void {
         try {
-            const context = this.getContext();
-            if (!context) return;
+            const ctx = getRequestExecutionContext();
+            if (!ctx) return;
 
-            context.ctx.waitUntil((async () => {
+            ctx.waitUntil((async () => {
                 try {
                     await callback();
                 } catch (error) {
@@ -151,7 +93,6 @@ class CloudflareRepository {
             })());
         } catch (error) {
             if (!notSendError) {
-                // Log error including the namespace name and key
                 void reportError(errorHandlingConfig, {
                     error,
                     classOrMethodName: 'CloudflareRepository waitUntil',

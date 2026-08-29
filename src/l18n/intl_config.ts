@@ -1,7 +1,8 @@
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import { setIntlConfig } from "cloudflare-next-intl/setIntlConfig";
 import onError from "@/shared/error_handling/on_error";
-import cloudflareRepository from "@/shared/repositories/cloudflare_repository";
+import { env } from "cloudflare:workers";
+import { getRequestExecutionContext } from "vinext/shims/request-context";
 
 declare global {
     type Language = "uk" | "en";
@@ -11,7 +12,8 @@ const intlConfig = setIntlConfig({
     locales: KTextConstants.locales,
     defaultLocale: KTextConstants.defaultLocale,
     generate: {
-        getCloudflareContext: cloudflareRepository.getContext.bind(cloudflareRepository),
+        env: env as unknown as Record<string, unknown>,
+        ctx: () => getRequestExecutionContext() ?? undefined,
     },
     errorHandling: {
         onError: onError,
@@ -25,4 +27,3 @@ const intlConfig = setIntlConfig({
     },
 });
 export default intlConfig;
-

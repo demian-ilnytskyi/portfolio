@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { env } from "cloudflare:workers";
 import { hasErrorsAccess } from "../gate";
 import errorsRepository from "@/shared/repositories/errors_repository";
 import ErrorDetailView from "./error_detail_view";
@@ -22,8 +22,7 @@ export default async function ErrorDetailPage({
     const id = Number(rawId);
     if (!Number.isInteger(id) || id <= 0) notFound();
 
-    const context = await getCloudflareContext({ async: true });
-    const db = context?.env?.ERRORS_DB;
+    const db = env?.ERRORS_DB;
     if (!db) {
         return (
             <main className="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-2 px-4 py-10 text-center">

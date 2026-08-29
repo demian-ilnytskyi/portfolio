@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { env } from "cloudflare:workers";
 import { hasErrorsAccess, verifyErrorsPassword, setErrorsAuthCookie } from "./gate";
 import { notFound } from "next/navigation";
 
@@ -22,8 +22,7 @@ export async function loginToErrors(password: string): Promise<boolean> {
 }
 
 async function getDb(): Promise<D1Database> {
-    const context = await getCloudflareContext({ async: true });
-    const db = context?.env?.ERRORS_DB;
+    const db = env?.ERRORS_DB;
     if (!db) throw new Error("ERRORS_DB binding is not available");
     return db;
 }

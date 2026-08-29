@@ -1,15 +1,14 @@
 # wrangler.toml
+# Cloudflare Workers config for the vinext build (main = vinext/server/fetch-handler,
+# assets = dist/client). VINEXT_KV_CACHE per env is the ISR data cache (kvDataAdapter),
+# replacing the old OpenNext R2 incremental cache.
 
-# General Worker settings
 compatibility_date = "2025-06-13"
 workers_dev = false
-main = ".open-next/worker.js"
+main = "vinext/server/fetch-handler"
 name = "portfolio"
-minify = true
 upload_source_maps = true
 
-# Compatibility Flags
-# wrangler.toml supports string arrays
 compatibility_flags = [
 	"nodejs_compat",
 	"nodejs_compat_populate_process_env",
@@ -22,19 +21,14 @@ binding = "IMAGES"
 [cache]
 enabled = true
 
-[[r2_buckets]]
-binding = "NEXT_INC_CACHE_R2_BUCKET"
-bucket_name = "portfolio-cache"
-preview_bucket_name = "local-prod-cache-bucket"
+[[kv_namespaces]]
+binding = "VINEXT_KV_CACHE"
+id = "8be5f0ddeded42e99aae36d21c4f7814"
 
 [[d1_databases]]
 binding = "ERRORS_DB"
 database_name = "portfolio-errors"
 database_id = "692825d4-52d1-4ecf-ba7a-6f346e150cba"
-
-[[durable_objects.bindings]]
-name = "NEXT_CACHE_DO_QUEUE"
-class_name = "DOQueueHandler"
 
 [[services]]
 binding = "WORKER_SELF_REFERENCE"
@@ -44,9 +38,13 @@ service = "portfolio"
 tag = "v1"
 new_sqlite_classes = ["DOQueueHandler"]
 
-# Assets configuration (if you have a static assets directory)
+[[migrations]]
+tag = "v2"
+deleted_classes = ["DOQueueHandler"]
+
+# Assets configuration
 [assets]
-directory = ".open-next/assets"
+directory = "dist/client"
 binding = "ASSETS"
 html_handling = "auto-trailing-slash"
 not_found_handling = "none"
@@ -69,23 +67,22 @@ binding = "IMAGES"
 [env.development.cache]
 enabled = true
 
-[[env.development.r2_buckets]]
-binding = "NEXT_INC_CACHE_R2_BUCKET"
-bucket_name = "dev-portfolio-cache"
-preview_bucket_name = "local-dev-cache-bucket"
+[[env.development.kv_namespaces]]
+binding = "VINEXT_KV_CACHE"
+id = "9375d3c09d49430c9215c6b7a42f5350"
 
 [[env.development.d1_databases]]
 binding = "ERRORS_DB"
 database_name = "portfolio-errors"
 database_id = "692825d4-52d1-4ecf-ba7a-6f346e150cba"
 
-[[env.development.durable_objects.bindings]]
-name = "NEXT_CACHE_DO_QUEUE"
-class_name = "DOQueueHandler"
-
 [[env.development.migrations]]
 tag = "v1"
 new_sqlite_classes = ["DOQueueHandler"]
+
+[[env.development.migrations]]
+tag = "v2"
+deleted_classes = ["DOQueueHandler"]
 
 [[env.development.services]]
 binding = "WORKER_SELF_REFERENCE"

@@ -128,13 +128,13 @@ export default async function ProjectPage(
                 <Image
                     src={projectInfo.image}
                     alt={title}
-                    placeholder="blur"
                     width={1024}
                     height={576}
                     fetchPriority="high"
                     sizes="(max-width: 1024px) 100vw, 1024px"
                     className="rounded-t-2xl bg-zinc-800 self-center"
                     priority
+                    placeholder="blur"
                 />
                 <div className="px-5 mt-5 flex flex-col">
                     <h1
@@ -156,7 +156,7 @@ export default async function ProjectPage(
                                 className={cn(
                                     AppTextStyle.titleLargeBold,
                                     "text-center",
-                                )}
+                                    )}
                             >
                                 {t("links")}
                             </h3>{" "}
@@ -176,6 +176,7 @@ export default async function ProjectPage(
                                                 width={180}
                                                 height={54}
                                                 alt={linkModel.label}
+                                                placeholder="blur"
                                             />
                                         </a>
                                     ),
