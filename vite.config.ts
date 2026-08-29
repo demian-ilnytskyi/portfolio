@@ -11,6 +11,7 @@ const srcDir = fileURLToPath(new URL("./src", import.meta.url));
 const intlConfigPath = fileURLToPath(new URL("./src/l18n/intl_config.ts", import.meta.url));
 const messagesDir = fileURLToPath(new URL("./messages", import.meta.url));
 const cfStubPath = fileURLToPath(new URL("./src/shared/helpers/cloudflare_workers_stub.ts", import.meta.url));
+const userAgentStubPath = fileURLToPath(new URL("./src/shared/helpers/user_agent_stub.ts", import.meta.url));
 const cfniDir = fileURLToPath(new URL("./node_modules/cloudflare-next-intl/dist/src", import.meta.url)).replace(
   /\\/g,
   "/"
@@ -94,6 +95,7 @@ export default defineConfig({
       "react-dom",
     ],
     alias: [
+      { find: "next/dist/server/web/spec-extension/user-agent", replacement: userAgentStubPath },
       { find: /^@locale-file\/(.*)$/, replacement: `${messagesDir}/$1` },
       { find: "@locale-file", replacement: messagesDir },
       { find: "@intl-config", replacement: intlConfigPath },
