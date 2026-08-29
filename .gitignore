@@ -51,4 +51,5 @@ boundled/
 /.open-next
 
 public/config.json
+public/generated/
 .agent/memory/MEMORY.local.md

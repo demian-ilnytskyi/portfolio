@@ -1,38 +1,59 @@
 # Vite Image Optimizer Plugin Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use
+> superpowers:subagent-driven-development (recommended) or
+> superpowers:executing-plans to implement this plan task-by-task. Steps use
+> checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a local Vite plugin that at build time downscales oversized `public/` raster images, emits AVIF + WebP siblings, and generates a typed manifest of width/height/blurDataURL that components consume for `next/image`.
+**Goal:** Add a local Vite plugin that at build time downscales oversized
+`public/` raster images, emits AVIF + WebP siblings, and generates a typed
+manifest of width/height/blurDataURL that components consume for `next/image`.
 
-**Architecture:** One plugin directory `plugins/image-optimizer/` split into pure, individually testable modules (`types.ts`, `cache.ts`, `process-image.ts`, `manifest.ts`, `index.ts`). The Vite plugin object is a thin orchestrator invoked from `buildStart`. Output manifest lands at `src/generated/images.ts` and is committed so `dev`/`typegen` work without a build.
+**Architecture:** One plugin directory `plugins/image-optimizer/` split into
+pure, individually testable modules (`types.ts`, `cache.ts`, `process-image.ts`,
+`manifest.ts`, `index.ts`). The Vite plugin object is a thin orchestrator
+invoked from `buildStart`. Output manifest lands at `src/generated/images.ts`
+and is committed so `dev`/`typegen` work without a build.
 
-**Tech Stack:** Vite 8, sharp 0.35 (already a devDependency), TypeScript 5.8 (ESM, `"type": "module"`), Node built-in test runner (`node --test`), tsx for running TS tests.
+**Tech Stack:** Vite 8, sharp 0.35 (already a devDependency), TypeScript 5.8
+(ESM, `"type": "module"`), Node built-in test runner (`node --test`), tsx for
+running TS tests.
 
 **Spec:** `docs/superpowers/specs/2026-08-29-vinext-image-optimizer-design.md`
 
 ## Global Constraints
 
-- ESM only. `package.json` has `"type": "module"`. Use `import`, never `require`.
-- All new source is TypeScript with explicit return types (repo lint style: `typescript-eslint`, explicit return types used throughout `src/`).
+- ESM only. `package.json` has `"type": "module"`. Use `import`, never
+  `require`.
+- All new source is TypeScript with explicit return types (repo lint style:
+  `typescript-eslint`, explicit return types used throughout `src/`).
 - Indentation: 4 spaces (matches existing `src/` files).
 - No comments in code (user global rule).
-- `sharp` and `@types/sharp` are already in `devDependencies` — do not re-add or change versions.
-- Plugin must be **idempotent**: running the build twice must not re-compress an already-optimized original.
-- Defaults: `maxWidth: 1920`, `quality: 80`, `formats: ["avif", "webp"]`, `blurWidth: 16`, `dirs: ["public/images", "public/icons"]`, `manifest: "src/generated/images.ts"`.
-- Only these extensions are processed: `.png`, `.jpg`, `.jpeg`. `.svg`, `.ico`, `.avif`, `.webp` are always skipped.
+- `sharp` and `@types/sharp` are already in `devDependencies` — do not re-add or
+  change versions.
+- Plugin must be **idempotent**: running the build twice must not re-compress an
+  already-optimized original.
+- Defaults: `maxWidth: 1920`, `quality: 80`, `formats: ["avif", "webp"]`,
+  `blurWidth: 16`, `dirs: ["public/images", "public/icons"]`,
+  `manifest: "src/generated/images.ts"`.
+- Only these extensions are processed: `.png`, `.jpg`, `.jpeg`. `.svg`, `.ico`,
+  `.avif`, `.webp` are always skipped.
 - Cache location: `node_modules/.cache/vite-image-optimizer/manifest.json`.
-- Test command for every task: `npx tsx --test plugins/image-optimizer/*.test.ts`
+- Test command for every task:
+  `npx tsx --test plugins/image-optimizer/*.test.ts`
 
 ---
 
 ### Task 1: Project scaffolding, types, and the test harness
 
 **Files:**
+
 - Create: `plugins/image-optimizer/types.ts`
 - Create: `plugins/image-optimizer/types.test.ts`
 - Modify: `package.json` (add `test` script and `tsx` devDependency)
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces:
   - `interface OptimizedImage { src: string; width: number; height: number; blurDataURL: string }`
@@ -41,9 +62,10 @@
   - `type ResolvedOptions = Required<ImageOptimizerOptions>`
   - `const DEFAULT_OPTIONS: ResolvedOptions`
   - `function resolveOptions(options: ImageOptimizerOptions | undefined): ResolvedOptions`
-  - `const SUPPORTED_EXTENSIONS: readonly string[]` — `[".png", ".jpg", ".jpeg"]`
+  - `const SUPPORTED_EXTENSIONS: readonly string[]` —
+    `[".png", ".jpg", ".jpeg"]`
 
-- [ ] **Step 1: Add the test runner dependency and script**
+- [x] **Step 1: Add the test runner dependency and script**
 
 Run:
 
@@ -57,14 +79,18 @@ Then edit `package.json`, adding to `"scripts"` right after `"check-size"`:
 "test": "tsx --test plugins/image-optimizer/*.test.ts"
 ```
 
-- [ ] **Step 2: Write the failing test**
+- [x] **Step 2: Write the failing test**
 
 Create `plugins/image-optimizer/types.test.ts`:
 
 ```ts
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { DEFAULT_OPTIONS, resolveOptions, SUPPORTED_EXTENSIONS } from "./types.ts";
+import {
+    DEFAULT_OPTIONS,
+    resolveOptions,
+    SUPPORTED_EXTENSIONS,
+} from "./types.ts";
 
 test("resolveOptions returns defaults when given undefined", () => {
     assert.deepEqual(resolveOptions(undefined), DEFAULT_OPTIONS);
@@ -92,12 +118,12 @@ test("supported extensions exclude svg and ico", () => {
 });
 ```
 
-- [ ] **Step 3: Run the test to verify it fails**
+- [x] **Step 3: Run the test to verify it fails**
 
-Run: `npx tsx --test plugins/image-optimizer/types.test.ts`
-Expected: FAIL — `Cannot find module './types.ts'`.
+Run: `npx tsx --test plugins/image-optimizer/types.test.ts` Expected: FAIL —
+`Cannot find module './types.ts'`.
 
-- [ ] **Step 4: Write the implementation**
+- [x] **Step 4: Write the implementation**
 
 Create `plugins/image-optimizer/types.ts`:
 
@@ -122,7 +148,11 @@ export interface ImageOptimizerOptions {
 
 export type ResolvedOptions = Required<ImageOptimizerOptions>;
 
-export const SUPPORTED_EXTENSIONS: readonly string[] = [".png", ".jpg", ".jpeg"];
+export const SUPPORTED_EXTENSIONS: readonly string[] = [
+    ".png",
+    ".jpg",
+    ".jpeg",
+];
 
 export const DEFAULT_OPTIONS: ResolvedOptions = {
     dirs: ["public/images", "public/icons"],
@@ -140,12 +170,12 @@ export function resolveOptions(
 }
 ```
 
-- [ ] **Step 5: Run the test to verify it passes**
+- [x] **Step 5: Run the test to verify it passes**
 
-Run: `npx tsx --test plugins/image-optimizer/types.test.ts`
-Expected: PASS — 4 tests.
+Run: `npx tsx --test plugins/image-optimizer/types.test.ts` Expected: PASS — 4
+tests.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add package.json package-lock.json plugins/image-optimizer/types.ts plugins/image-optimizer/types.test.ts
@@ -157,17 +187,21 @@ git commit -m "feat(images): add image optimizer option types and test harness"
 ### Task 2: Fixture helper for image tests
 
 **Files:**
+
 - Create: `plugins/image-optimizer/test-helpers.ts`
 - Create: `plugins/image-optimizer/test-helpers.test.ts`
 
 **Interfaces:**
+
 - Consumes: nothing from earlier tasks.
 - Produces:
-  - `async function makeTempDir(): Promise<string>` — creates a unique dir under `os.tmpdir()`.
-  - `async function writeFixturePng(dir: string, name: string, width: number, height: number): Promise<string>` — writes a solid-colour PNG, returns its absolute path.
+  - `async function makeTempDir(): Promise<string>` — creates a unique dir under
+    `os.tmpdir()`.
+  - `async function writeFixturePng(dir: string, name: string, width: number, height: number): Promise<string>`
+    — writes a solid-colour PNG, returns its absolute path.
   - `async function cleanup(dir: string): Promise<void>`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `plugins/image-optimizer/test-helpers.test.ts`:
 
@@ -190,12 +224,12 @@ test("writeFixturePng creates a png of the requested size", async () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
-Run: `npx tsx --test plugins/image-optimizer/test-helpers.test.ts`
-Expected: FAIL — `Cannot find module './test-helpers.ts'`.
+Run: `npx tsx --test plugins/image-optimizer/test-helpers.test.ts` Expected:
+FAIL — `Cannot find module './test-helpers.ts'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `plugins/image-optimizer/test-helpers.ts`:
 
@@ -234,12 +268,12 @@ export async function cleanup(dir: string): Promise<void> {
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
-Run: `npx tsx --test plugins/image-optimizer/test-helpers.test.ts`
-Expected: PASS — 1 test.
+Run: `npx tsx --test plugins/image-optimizer/test-helpers.test.ts` Expected:
+PASS — 1 test.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add plugins/image-optimizer/test-helpers.ts plugins/image-optimizer/test-helpers.test.ts
@@ -251,18 +285,24 @@ git commit -m "test(images): add sharp fixture helpers"
 ### Task 3: The per-file image processor
 
 **Files:**
+
 - Create: `plugins/image-optimizer/process-image.ts`
 - Create: `plugins/image-optimizer/process-image.test.ts`
 
 **Interfaces:**
-- Consumes: `ResolvedOptions`, `OptimizedImage`, `ImageFormat` from `./types.ts`.
+
+- Consumes: `ResolvedOptions`, `OptimizedImage`, `ImageFormat` from
+  `./types.ts`.
 - Produces:
   - `async function processImage(absolutePath: string, publicRoot: string, options: ResolvedOptions): Promise<OptimizedImage>`
-    Resizes the original in place if wider than `options.maxWidth`, re-encodes it at `options.quality`, writes one sibling per entry in `options.formats`, computes the blur data URL, and returns the manifest entry. `src` in the result is the POSIX-style path relative to `publicRoot`, prefixed with `/`.
+    Resizes the original in place if wider than `options.maxWidth`, re-encodes
+    it at `options.quality`, writes one sibling per entry in `options.formats`,
+    computes the blur data URL, and returns the manifest entry. `src` in the
+    result is the POSIX-style path relative to `publicRoot`, prefixed with `/`.
   - `async function makeBlurDataURL(absolutePath: string, blurWidth: number): Promise<string>`
   - `function toPublicSrc(absolutePath: string, publicRoot: string): string`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `plugins/image-optimizer/process-image.test.ts`:
 
@@ -287,7 +327,10 @@ test("oversized image is downscaled to maxWidth preserving aspect ratio", async 
     const root = await makeTempDir();
     const file = await writeFixturePng(root, "big.png", 4000, 2000);
 
-    const result = await processImage(file, root, { ...DEFAULT_OPTIONS, maxWidth: 1000 });
+    const result = await processImage(file, root, {
+        ...DEFAULT_OPTIONS,
+        maxWidth: 1000,
+    });
 
     assert.equal(result.width, 1000);
     assert.equal(result.height, 500);
@@ -343,12 +386,12 @@ test("result src is rooted at the public dir", async () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
-Run: `npx tsx --test plugins/image-optimizer/process-image.test.ts`
-Expected: FAIL — `Cannot find module './process-image.ts'`.
+Run: `npx tsx --test plugins/image-optimizer/process-image.test.ts` Expected:
+FAIL — `Cannot find module './process-image.ts'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `plugins/image-optimizer/process-image.ts`:
 
@@ -428,12 +471,12 @@ export async function processImage(
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
-Run: `npx tsx --test plugins/image-optimizer/process-image.test.ts`
-Expected: PASS — 6 tests.
+Run: `npx tsx --test plugins/image-optimizer/process-image.test.ts` Expected:
+PASS — 6 tests.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add plugins/image-optimizer/process-image.ts plugins/image-optimizer/process-image.test.ts
@@ -445,19 +488,25 @@ git commit -m "feat(images): add per-file resize, re-encode and blur pipeline"
 ### Task 4: The idempotence cache
 
 **Files:**
+
 - Create: `plugins/image-optimizer/cache.ts`
 - Create: `plugins/image-optimizer/cache.test.ts`
 
 **Interfaces:**
+
 - Consumes: `OptimizedImage` from `./types.ts`.
 - Produces:
   - `interface CacheEntry { mtimeMs: number; size: number; result: OptimizedImage }`
   - `type CacheData = Record<string, CacheEntry>`
-  - `async function loadCache(cacheFile: string): Promise<CacheData>` — returns `{}` when the file is absent or malformed.
-  - `async function saveCache(cacheFile: string, data: CacheData): Promise<void>` — creates parent dirs.
-  - `async function isFresh(absolutePath: string, entry: CacheEntry | undefined, siblings: string[]): Promise<boolean>` — true only when `entry` exists, `mtimeMs` and `size` match the file on disk, and every path in `siblings` exists.
+  - `async function loadCache(cacheFile: string): Promise<CacheData>` — returns
+    `{}` when the file is absent or malformed.
+  - `async function saveCache(cacheFile: string, data: CacheData): Promise<void>`
+    — creates parent dirs.
+  - `async function isFresh(absolutePath: string, entry: CacheEntry | undefined, siblings: string[]): Promise<boolean>`
+    — true only when `entry` exists, `mtimeMs` and `size` match the file on
+    disk, and every path in `siblings` exists.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `plugins/image-optimizer/cache.test.ts`:
 
@@ -470,7 +519,12 @@ import { isFresh, loadCache, saveCache } from "./cache.ts";
 import type { CacheEntry } from "./cache.ts";
 import { cleanup, makeTempDir, writeFixturePng } from "./test-helpers.ts";
 
-const RESULT = { src: "/a.png", width: 10, height: 10, blurDataURL: "data:image/webp;base64,AA" };
+const RESULT = {
+    src: "/a.png",
+    width: 10,
+    height: 10,
+    blurDataURL: "data:image/webp;base64,AA",
+};
 
 test("loadCache returns an empty object when the file is missing", async () => {
     const dir = await makeTempDir();
@@ -508,7 +562,11 @@ test("isFresh is true when mtime, size and siblings all match", async () => {
     const sibling = path.join(dir, "a.webp");
     await writeFile(sibling, "x");
     const stats = await stat(file);
-    const entry: CacheEntry = { mtimeMs: stats.mtimeMs, size: stats.size, result: RESULT };
+    const entry: CacheEntry = {
+        mtimeMs: stats.mtimeMs,
+        size: stats.size,
+        result: RESULT,
+    };
     assert.equal(await isFresh(file, entry, [sibling]), true);
     await cleanup(dir);
 });
@@ -517,7 +575,11 @@ test("isFresh is false when a sibling is missing", async () => {
     const dir = await makeTempDir();
     const file = await writeFixturePng(dir, "a.png", 10, 10);
     const stats = await stat(file);
-    const entry: CacheEntry = { mtimeMs: stats.mtimeMs, size: stats.size, result: RESULT };
+    const entry: CacheEntry = {
+        mtimeMs: stats.mtimeMs,
+        size: stats.size,
+        result: RESULT,
+    };
     assert.equal(await isFresh(file, entry, [path.join(dir, "a.webp")]), false);
     await cleanup(dir);
 });
@@ -526,7 +588,11 @@ test("isFresh is false after the file is touched", async () => {
     const dir = await makeTempDir();
     const file = await writeFixturePng(dir, "a.png", 10, 10);
     const stats = await stat(file);
-    const entry: CacheEntry = { mtimeMs: stats.mtimeMs, size: stats.size, result: RESULT };
+    const entry: CacheEntry = {
+        mtimeMs: stats.mtimeMs,
+        size: stats.size,
+        result: RESULT,
+    };
     const later = new Date(Date.now() + 10_000);
     await utimes(file, later, later);
     assert.equal(await isFresh(file, entry, []), false);
@@ -534,12 +600,12 @@ test("isFresh is false after the file is touched", async () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
-Run: `npx tsx --test plugins/image-optimizer/cache.test.ts`
-Expected: FAIL — `Cannot find module './cache.ts'`.
+Run: `npx tsx --test plugins/image-optimizer/cache.test.ts` Expected: FAIL —
+`Cannot find module './cache.ts'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `plugins/image-optimizer/cache.ts`:
 
@@ -564,7 +630,10 @@ export async function loadCache(cacheFile: string): Promise<CacheData> {
     }
 }
 
-export async function saveCache(cacheFile: string, data: CacheData): Promise<void> {
+export async function saveCache(
+    cacheFile: string,
+    data: CacheData,
+): Promise<void> {
     await mkdir(path.dirname(cacheFile), { recursive: true });
     await writeFile(cacheFile, JSON.stringify(data, null, 2));
 }
@@ -577,7 +646,9 @@ export async function isFresh(
     if (!entry) return false;
     try {
         const stats = await stat(absolutePath);
-        if (stats.mtimeMs !== entry.mtimeMs || stats.size !== entry.size) return false;
+        if (stats.mtimeMs !== entry.mtimeMs || stats.size !== entry.size) {
+            return false;
+        }
         for (const sibling of siblings) await stat(sibling);
         return true;
     } catch {
@@ -586,12 +657,12 @@ export async function isFresh(
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
-Run: `npx tsx --test plugins/image-optimizer/cache.test.ts`
-Expected: PASS — 7 tests.
+Run: `npx tsx --test plugins/image-optimizer/cache.test.ts` Expected: PASS — 7
+tests.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add plugins/image-optimizer/cache.ts plugins/image-optimizer/cache.test.ts
@@ -603,26 +674,45 @@ git commit -m "feat(images): add mtime-and-size cache for idempotent optimizatio
 ### Task 5: Manifest generation
 
 **Files:**
+
 - Create: `plugins/image-optimizer/manifest.ts`
 - Create: `plugins/image-optimizer/manifest.test.ts`
 
 **Interfaces:**
+
 - Consumes: `OptimizedImage` from `./types.ts`.
 - Produces:
-  - `function renderManifest(entries: OptimizedImage[]): string` — returns the full TypeScript source of the generated module. Entries are sorted by `src` so output is deterministic.
-  - `async function writeManifest(targetPath: string, entries: OptimizedImage[]): Promise<void>` — creates parent dirs and writes only if the content differs (avoids touching mtime on no-op builds).
+  - `function renderManifest(entries: OptimizedImage[]): string` — returns the
+    full TypeScript source of the generated module. Entries are sorted by `src`
+    so output is deterministic.
+  - `async function writeManifest(targetPath: string, entries: OptimizedImage[]): Promise<void>`
+    — creates parent dirs and writes only if the content differs (avoids
+    touching mtime on no-op builds).
 
 The generated module exports:
 
 ```ts
-export interface OptimizedImage { src: string; width: number; height: number; blurDataURL: string }
+export interface OptimizedImage {
+    src: string;
+    width: number;
+    height: number;
+    blurDataURL: string;
+}
 export const optimizedImages: Record<string, OptimizedImage>;
 export type OptimizedImageSrc = keyof typeof optimizedImages;
 export function getImage(src: string): OptimizedImage | undefined;
-export function getImageProps(src: string): { src: string; width: number; height: number; blurDataURL: string; placeholder: "blur" };
+export function getImageProps(
+    src: string,
+): {
+    src: string;
+    width: number;
+    height: number;
+    blurDataURL: string;
+    placeholder: "blur";
+};
 ```
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `plugins/image-optimizer/manifest.test.ts`:
 
@@ -635,21 +725,36 @@ import { renderManifest, writeManifest } from "./manifest.ts";
 import { cleanup, makeTempDir } from "./test-helpers.ts";
 
 const ENTRIES = [
-    { src: "/images/b.png", width: 2, height: 2, blurDataURL: "data:image/webp;base64,BB" },
-    { src: "/images/a.png", width: 1, height: 1, blurDataURL: "data:image/webp;base64,AA" },
+    {
+        src: "/images/b.png",
+        width: 2,
+        height: 2,
+        blurDataURL: "data:image/webp;base64,BB",
+    },
+    {
+        src: "/images/a.png",
+        width: 1,
+        height: 1,
+        blurDataURL: "data:image/webp;base64,AA",
+    },
 ];
 
 test("renderManifest is sorted and contains every entry", () => {
     const source = renderManifest(ENTRIES);
     assert.ok(source.includes(`"/images/a.png"`));
     assert.ok(source.includes(`"/images/b.png"`));
-    assert.ok(source.indexOf(`"/images/a.png"`) < source.indexOf(`"/images/b.png"`));
+    assert.ok(
+        source.indexOf(`"/images/a.png"`) < source.indexOf(`"/images/b.png"`),
+    );
     assert.ok(source.includes("export function getImageProps"));
     assert.ok(source.includes("export const optimizedImages"));
 });
 
 test("renderManifest output is stable across calls", () => {
-    assert.equal(renderManifest(ENTRIES), renderManifest([...ENTRIES].reverse()));
+    assert.equal(
+        renderManifest(ENTRIES),
+        renderManifest([...ENTRIES].reverse()),
+    );
 });
 
 test("writeManifest creates the file and its parent directory", async () => {
@@ -673,12 +778,12 @@ test("writeManifest does not rewrite identical content", async () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
-Run: `npx tsx --test plugins/image-optimizer/manifest.test.ts`
-Expected: FAIL — `Cannot find module './manifest.ts'`.
+Run: `npx tsx --test plugins/image-optimizer/manifest.test.ts` Expected: FAIL —
+`Cannot find module './manifest.ts'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `plugins/image-optimizer/manifest.ts`:
 
@@ -741,12 +846,12 @@ export async function writeManifest(
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
-Run: `npx tsx --test plugins/image-optimizer/manifest.test.ts`
-Expected: PASS — 4 tests.
+Run: `npx tsx --test plugins/image-optimizer/manifest.test.ts` Expected: PASS —
+4 tests.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add plugins/image-optimizer/manifest.ts plugins/image-optimizer/manifest.test.ts
@@ -758,18 +863,29 @@ git commit -m "feat(images): generate typed image manifest module"
 ### Task 6: Directory scan and the run orchestrator
 
 **Files:**
+
 - Create: `plugins/image-optimizer/run.ts`
 - Create: `plugins/image-optimizer/run.test.ts`
 
 **Interfaces:**
-- Consumes: `resolveOptions`, `SUPPORTED_EXTENSIONS`, `ResolvedOptions`, `OptimizedImage` from `./types.ts`; `processImage` from `./process-image.ts`; `loadCache`, `saveCache`, `isFresh` from `./cache.ts`; `writeManifest` from `./manifest.ts`.
+
+- Consumes: `resolveOptions`, `SUPPORTED_EXTENSIONS`, `ResolvedOptions`,
+  `OptimizedImage` from `./types.ts`; `processImage` from `./process-image.ts`;
+  `loadCache`, `saveCache`, `isFresh` from `./cache.ts`; `writeManifest` from
+  `./manifest.ts`.
 - Produces:
-  - `async function collectImages(dirs: string[], root: string): Promise<string[]>` — recursive; returns absolute paths whose extension is in `SUPPORTED_EXTENSIONS`; missing directories are skipped silently; results sorted.
-  - `async function run(root: string, options: ResolvedOptions, cacheFile: string): Promise<OptimizedImage[]>` — scans, processes uncached files, reuses cached results, writes the cache and the manifest, returns all entries.
+  - `async function collectImages(dirs: string[], root: string): Promise<string[]>`
+    — recursive; returns absolute paths whose extension is in
+    `SUPPORTED_EXTENSIONS`; missing directories are skipped silently; results
+    sorted.
+  - `async function run(root: string, options: ResolvedOptions, cacheFile: string): Promise<OptimizedImage[]>`
+    — scans, processes uncached files, reuses cached results, writes the cache
+    and the manifest, returns all entries.
 
-Note: `publicRoot` passed to `processImage` is `path.join(root, "public")`, so manifest `src` values come out as `/images/x.png`.
+Note: `publicRoot` passed to `processImage` is `path.join(root, "public")`, so
+manifest `src` values come out as `/images/x.png`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `plugins/image-optimizer/run.test.ts`:
 
@@ -810,7 +926,10 @@ test("run writes a manifest containing a rooted src for every image", async () =
     const manifest = path.join(root, "src", "generated", "images.ts");
     const cacheFile = path.join(root, ".cache", "manifest.json");
 
-    const entries = await run(root, { ...DEFAULT_OPTIONS, manifest: "src/generated/images.ts" }, cacheFile);
+    const entries = await run(root, {
+        ...DEFAULT_OPTIONS,
+        manifest: "src/generated/images.ts",
+    }, cacheFile);
 
     assert.equal(entries.length, 1);
     assert.equal(entries[0].src, "/images/a.png");
@@ -854,12 +973,12 @@ test("changing a source file causes reprocessing", async () => {
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
-Run: `npx tsx --test plugins/image-optimizer/run.test.ts`
-Expected: FAIL — `Cannot find module './run.ts'`.
+Run: `npx tsx --test plugins/image-optimizer/run.test.ts` Expected: FAIL —
+`Cannot find module './run.ts'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `plugins/image-optimizer/run.ts`:
 
@@ -886,19 +1005,27 @@ async function walk(directory: string, found: string[]): Promise<void> {
             await walk(full, found);
             continue;
         }
-        if (SUPPORTED_EXTENSIONS.includes(path.extname(item.name).toLowerCase())) {
+        if (
+            SUPPORTED_EXTENSIONS.includes(path.extname(item.name).toLowerCase())
+        ) {
             found.push(full);
         }
     }
 }
 
-export async function collectImages(dirs: string[], root: string): Promise<string[]> {
+export async function collectImages(
+    dirs: string[],
+    root: string,
+): Promise<string[]> {
     const found: string[] = [];
     for (const dir of dirs) await walk(path.resolve(root, dir), found);
     return found.sort();
 }
 
-function siblingPaths(absolutePath: string, options: ResolvedOptions): string[] {
+function siblingPaths(
+    absolutePath: string,
+    options: ResolvedOptions,
+): string[] {
     return options.formats.map((format) =>
         absolutePath.replace(/\.[^.]+$/, `.${format}`)
     );
@@ -935,17 +1062,16 @@ export async function run(
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
-Run: `npx tsx --test plugins/image-optimizer/run.test.ts`
-Expected: PASS — 4 tests.
+Run: `npx tsx --test plugins/image-optimizer/run.test.ts` Expected: PASS — 4
+tests.
 
-- [ ] **Step 5: Run the whole suite**
+- [x] **Step 5: Run the whole suite**
 
-Run: `npm test`
-Expected: PASS — all tests from Tasks 1–6.
+Run: `npm test` Expected: PASS — all tests from Tasks 1–6.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add plugins/image-optimizer/run.ts plugins/image-optimizer/run.test.ts
@@ -957,17 +1083,25 @@ git commit -m "feat(images): add directory scan and cached run orchestrator"
 ### Task 7: The Vite plugin wrapper and config wiring
 
 **Files:**
+
 - Create: `plugins/image-optimizer/index.ts`
 - Create: `plugins/image-optimizer/index.test.ts`
 - Modify: `vite.config.ts`
-- Modify: `.gitignore` (ensure `node_modules/.cache` is covered — it is, via `node_modules`; verify only)
+- Modify: `.gitignore` (ensure `node_modules/.cache` is covered — it is, via
+  `node_modules`; verify only)
 
 **Interfaces:**
-- Consumes: `resolveOptions`, `ImageOptimizerOptions` from `./types.ts`; `run` from `./run.ts`.
-- Produces: `default function imageOptimizer(options?: ImageOptimizerOptions): Plugin` — a Vite plugin named `"image-optimizer"` with `apply: "build"` whose `buildStart` calls `run(process.cwd(), resolved, CACHE_FILE)` and logs a one-line summary.
-- `export const CACHE_FILE: string` — `"node_modules/.cache/vite-image-optimizer/manifest.json"`.
 
-- [ ] **Step 1: Write the failing test**
+- Consumes: `resolveOptions`, `ImageOptimizerOptions` from `./types.ts`; `run`
+  from `./run.ts`.
+- Produces:
+  `default function imageOptimizer(options?: ImageOptimizerOptions): Plugin` — a
+  Vite plugin named `"image-optimizer"` with `apply: "build"` whose `buildStart`
+  calls `run(process.cwd(), resolved, CACHE_FILE)` and logs a one-line summary.
+- `export const CACHE_FILE: string` —
+  `"node_modules/.cache/vite-image-optimizer/manifest.json"`.
+
+- [x] **Step 1: Write the failing test**
 
 Create `plugins/image-optimizer/index.test.ts`:
 
@@ -984,16 +1118,19 @@ test("plugin has the expected identity and only applies on build", () => {
 });
 
 test("cache file lives under node_modules", () => {
-    assert.equal(CACHE_FILE, "node_modules/.cache/vite-image-optimizer/manifest.json");
+    assert.equal(
+        CACHE_FILE,
+        "node_modules/.cache/vite-image-optimizer/manifest.json",
+    );
 });
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
-Run: `npx tsx --test plugins/image-optimizer/index.test.ts`
-Expected: FAIL — `Cannot find module './index.ts'`.
+Run: `npx tsx --test plugins/image-optimizer/index.test.ts` Expected: FAIL —
+`Cannot find module './index.ts'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `plugins/image-optimizer/index.ts`:
 
@@ -1004,28 +1141,37 @@ import { run } from "./run.ts";
 import { resolveOptions } from "./types.ts";
 import type { ImageOptimizerOptions } from "./types.ts";
 
-export const CACHE_FILE = "node_modules/.cache/vite-image-optimizer/manifest.json";
+export const CACHE_FILE =
+    "node_modules/.cache/vite-image-optimizer/manifest.json";
 
-export default function imageOptimizer(options?: ImageOptimizerOptions): Plugin {
+export default function imageOptimizer(
+    options?: ImageOptimizerOptions,
+): Plugin {
     const resolved = resolveOptions(options);
     return {
         name: "image-optimizer",
         apply: "build",
         async buildStart(): Promise<void> {
             const root = process.cwd();
-            const entries = await run(root, resolved, path.resolve(root, CACHE_FILE));
-            this.info(`image-optimizer: ${entries.length} images in ${resolved.manifest}`);
+            const entries = await run(
+                root,
+                resolved,
+                path.resolve(root, CACHE_FILE),
+            );
+            this.info(
+                `image-optimizer: ${entries.length} images in ${resolved.manifest}`,
+            );
         },
     };
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
-Run: `npx tsx --test plugins/image-optimizer/index.test.ts`
-Expected: PASS — 2 tests.
+Run: `npx tsx --test plugins/image-optimizer/index.test.ts` Expected: PASS — 2
+tests.
 
-- [ ] **Step 5: Wire the plugin into `vite.config.ts`**
+- [x] **Step 5: Wire the plugin into `vite.config.ts`**
 
 Add the import after the existing `cloudflare` import:
 
@@ -1033,15 +1179,16 @@ Add the import after the existing `cloudflare` import:
 import imageOptimizer from "./plugins/image-optimizer/index.ts";
 ```
 
-And add it as the first entry of the `plugins` array, before `cloudflareNextIntl()`:
+And add it as the first entry of the `plugins` array, before
+`cloudflareNextIntl()`:
 
 ```ts
-  plugins: [
-    imageOptimizer(),
-    cloudflareNextIntl(),
+plugins: [
+  imageOptimizer(),
+  cloudflareNextIntl(),
 ```
 
-- [ ] **Step 6: Run the real build and inspect the output**
+- [x] **Step 6: Run the real build and inspect the output**
 
 ```bash
 npm run build
@@ -1049,9 +1196,12 @@ ls -la public/images
 head -30 src/generated/images.ts
 ```
 
-Expected: `.avif` and `.webp` siblings exist for all five project PNGs and `profile.png`; every original PNG is smaller than before; `src/generated/images.ts` has one entry per raster image with real `width`, `height`, and a `data:image/webp;base64,` blur string.
+Expected: `.avif` and `.webp` siblings exist for all five project PNGs and
+`profile.png`; every original PNG is smaller than before;
+`src/generated/images.ts` has one entry per raster image with real `width`,
+`height`, and a `data:image/webp;base64,` blur string.
 
-- [ ] **Step 7: Verify idempotence**
+- [x] **Step 7: Verify idempotence**
 
 ```bash
 md5 public/images/profile.png
@@ -1061,7 +1211,7 @@ md5 public/images/profile.png
 
 Expected: identical checksums — the second build must not touch the file.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add plugins/image-optimizer/index.ts plugins/image-optimizer/index.test.ts vite.config.ts public/images public/icons src/generated/images.ts
@@ -1073,15 +1223,19 @@ git commit -m "feat(images): wire image optimizer plugin into vite config"
 ### Task 8: Consume the manifest in components
 
 **Files:**
+
 - Modify: `src/shared/components/projects_card.tsx`
 - Modify: `src/app/[locale]/home_components/image_part.tsx`
 - Modify: `public/_headers`
 
 **Interfaces:**
-- Consumes: `getImageProps` from `@/generated/images` (Task 5's generated module, produced at `src/generated/images.ts`; `@` already aliases to `src` in `vite.config.ts`).
+
+- Consumes: `getImageProps` from `@/generated/images` (Task 5's generated
+  module, produced at `src/generated/images.ts`; `@` already aliases to `src` in
+  `vite.config.ts`).
 - Produces: nothing consumed by later tasks.
 
-- [ ] **Step 1: Replace the hardcoded dimensions in `projects_card.tsx`**
+- [x] **Step 1: Replace the hardcoded dimensions in `projects_card.tsx`**
 
 Add the import alongside the existing ones:
 
@@ -1092,19 +1246,20 @@ import { getImageProps } from "@/generated/images";
 Replace the `<Image …/>` block (currently `width={800} height={400}`) with:
 
 ```tsx
-            <Image
-                {...getImageProps(image)}
-                alt={title}
-                className="rounded-t-2xl bg-zinc-800 self-center w-full h-auto"
-                sizes="(max-width: 768px) 100vw, 800px"
-                fetchPriority={imagePriority ? "high" : "auto"}
-                priority={imagePriority}
-            />
+<Image
+    {...getImageProps(image)}
+    alt={title}
+    className="rounded-t-2xl bg-zinc-800 self-center w-full h-auto"
+    sizes="(max-width: 768px) 100vw, 800px"
+    fetchPriority={imagePriority ? "high" : "auto"}
+    priority={imagePriority}
+/>;
 ```
 
-Also remove the now-unused `import type { StaticImageData } from "next/image";` line.
+Also remove the now-unused `import type { StaticImageData } from "next/image";`
+line.
 
-- [ ] **Step 2: Use the manifest in `image_part.tsx`**
+- [x] **Step 2: Use the manifest in `image_part.tsx`**
 
 Add the import:
 
@@ -1115,17 +1270,17 @@ import { getImageProps } from "@/generated/images";
 Replace the `<Image …/>` block with:
 
 ```tsx
-            <Image
-                {...getImageProps("/images/profile.png")}
-                alt={"Profile"}
-                priority
-                sizes="400px"
-                fetchPriority="high"
-                className="rounded-full border-gray-200 dark:border-0 border-2"
-            />
+<Image
+    {...getImageProps("/images/profile.png")}
+    alt={"Profile"}
+    priority
+    sizes="400px"
+    fetchPriority="high"
+    className="rounded-full border-gray-200 dark:border-0 border-2"
+/>;
 ```
 
-- [ ] **Step 3: Add `Vary: Accept` to the image routes in `public/_headers`**
+- [x] **Step 3: Add `Vary: Accept` to the image routes in `public/_headers`**
 
 Change the `/images/*` block to:
 
@@ -1143,7 +1298,7 @@ And the `/icons/*` block to:
   Vary: Accept
 ```
 
-- [ ] **Step 4: Typecheck and lint**
+- [x] **Step 4: Typecheck and lint**
 
 ```bash
 npm run check
@@ -1152,15 +1307,17 @@ npm run lint
 
 Expected: both pass with no errors.
 
-- [ ] **Step 5: Build and smoke-test in the browser**
+- [x] **Step 5: Build and smoke-test in the browser**
 
 ```bash
 npm run preview
 ```
 
-Open the home page and one project page. Expected: the profile image and each project card render at their true aspect ratio, and a blurred placeholder is visible on a throttled connection before the full image loads.
+Open the home page and one project page. Expected: the profile image and each
+project card render at their true aspect ratio, and a blurred placeholder is
+visible on a throttled connection before the full image loads.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/shared/components/projects_card.tsx "src/app/[locale]/home_components/image_part.tsx" public/_headers
@@ -1172,13 +1329,15 @@ git commit -m "feat(images): consume generated image manifest for dimensions and
 ### Task 9: Document the plugin
 
 **Files:**
+
 - Create: `plugins/image-optimizer/README.md`
 
 **Interfaces:**
+
 - Consumes: everything above.
 - Produces: nothing.
 
-- [ ] **Step 1: Write the README**
+- [x] **Step 1: Write the README**
 
 Create `plugins/image-optimizer/README.md`:
 
@@ -1197,20 +1356,21 @@ generates `src/generated/images.ts` with intrinsic dimensions and a
 import imageOptimizer from "./plugins/image-optimizer/index.ts";
 
 export default defineConfig({
-    plugins: [imageOptimizer(), /* … */],
+    plugins: [imageOptimizer()/* … */
+    ],
 });
 ```
 
 ## Options
 
-| Option | Default | Meaning |
-|---|---|---|
-| `dirs` | `["public/images", "public/icons"]` | Directories scanned recursively |
-| `maxWidth` | `1920` | Downscale anything wider |
-| `quality` | `80` | Encoder quality for all formats |
-| `formats` | `["avif", "webp"]` | Sibling formats emitted |
-| `manifest` | `"src/generated/images.ts"` | Generated module path |
-| `blurWidth` | `16` | Width of the inlined blur placeholder |
+| Option      | Default                             | Meaning                               |
+| ----------- | ----------------------------------- | ------------------------------------- |
+| `dirs`      | `["public/images", "public/icons"]` | Directories scanned recursively       |
+| `maxWidth`  | `1920`                              | Downscale anything wider              |
+| `quality`   | `80`                                | Encoder quality for all formats       |
+| `formats`   | `["avif", "webp"]`                  | Sibling formats emitted               |
+| `manifest`  | `"src/generated/images.ts"`         | Generated module path                 |
+| `blurWidth` | `16`                                | Width of the inlined blur placeholder |
 
 ## In components
 
@@ -1218,7 +1378,7 @@ export default defineConfig({
 import Image from "next/image";
 import { getImageProps } from "@/generated/images";
 
-<Image {...getImageProps("/images/profile.png")} alt="Profile" sizes="400px" />
+<Image {...getImageProps("/images/profile.png")} alt="Profile" sizes="400px" />;
 ```
 
 `getImageProps` throws for an unknown path, so a renamed or deleted image is
@@ -1227,9 +1387,9 @@ caught at runtime on the first render rather than shipping a broken `<img>`.
 ## Idempotence
 
 Results are cached in `node_modules/.cache/vite-image-optimizer/manifest.json`
-keyed by each file's mtime and size. A file is reprocessed only when it
-changes or one of its siblings is missing, so repeated builds never
-re-compress an already-compressed original.
+keyed by each file's mtime and size. A file is reprocessed only when it changes
+or one of its siblings is missing, so repeated builds never re-compress an
+already-compressed original.
 
 `src/generated/images.ts` is committed so `npm run dev` and `npm run typegen`
 work without first running a build.
@@ -1241,7 +1401,7 @@ npm test
 ```
 ````
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add plugins/image-optimizer/README.md

@@ -1,5 +1,10 @@
+/generated/*
+  Cache-Control: public, max-age=31536000, immutable
+  Vary: Accept
+
 /images/*
   Cache-Control: public, max-age=31536000, immutable
+  Vary: Accept
 
 /uk/*.md
   Cache-Control: public, max-age=31536000, immutable
@@ -15,6 +20,7 @@
 
 /icons/*
   Cache-Control: public, max-age=31536000, immutable
+  Vary: Accept
 
 /favicon.ico
   Cache-Control: public, max-age=604800, immutable

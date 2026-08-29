@@ -1,5 +1,4 @@
 import AppTextStyle from "../constants/styles/app_text_styles";
-import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import { Link } from "cloudflare-next-intl";
 import AppLinks from "../constants/variables/links";
