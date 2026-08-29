@@ -15,12 +15,11 @@
     "pre-deploy": "IS_BUILDING=true vinext build",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "check-size": "wrangler deploy -c dist/server/wrangler.json --outdir boundled/ --dry-run",
-    "optimize-images": "tsx plugins/image-optimizer/cli.ts",
-    "test": "tsx --test plugins/image-optimizer/*.test.ts"
+    "optimize-images": "cfni-image-optimizer"
   },
   "dependencies": {
     "@vinext/cloudflare": "^1.0.0-beta.6",
-    "cloudflare-next-intl": "^0.8.53",
+    "cloudflare-next-intl": "^0.8.55",
     "clsx": "^2.1.1",
     "lucide-react": "^0.552.0",
     "markdown-to-jsx": "^8.0.0",
