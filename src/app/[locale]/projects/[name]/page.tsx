@@ -128,7 +128,6 @@ export default async function ProjectPage(
                 <Image
                     src={projectInfo.image}
                     alt={title}
-                    placeholder="blur"
                     width={1024}
                     height={576}
                     fetchPriority="high"

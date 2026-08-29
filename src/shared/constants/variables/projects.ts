@@ -1,21 +1,19 @@
-import type { StaticImageData } from "next/image";
+const veteranam = "/images/veteranam-info.png";
+const checkMyBuilding = "/images/check-my-building.png";
+const livaClinicImage = "/images/liva-clinic.png";
+const hungerQuestImage = "/images/hunger-quest.png";
+const IceCreamTimeImage = "/images/ice-cream-time.png";
 
-import veteranam from "../../../../public/images/veteranam-info.png";
-import checkMyBuilding from "../../../../public/images/check-my-building.png";
-import livaClinicImage from "../../../../public/images/liva-clinic.png";
-import hungerQuestImage from "../../../../public/images/hunger-quest.png";
-import IceCreamTimeImage from "../../../../public/images/ice-cream-time.png";
-
-import appStoreIcon from "../../../../public/icons/app_store.svg";
-import googlePlayIcon from "../../../../public/icons/play_market.svg";
-import webIcon from "../../../../public/icons/web.svg";
-import figmaIcon from "../../../../public/icons/figma.svg";
-import githubIcon from "../../../../public/icons/git_hub.svg";
+const appStoreIcon = "/icons/app_store.svg";
+const googlePlayIcon = "/icons/play_market.svg";
+const webIcon = "/icons/web.svg";
+const figmaIcon = "/icons/figma.svg";
+const githubIcon = "/icons/git_hub.svg";
 
 export interface ProjectProps {
     name: string;
-    image: StaticImageData;
-    links: { image: StaticImageData, value: string, label: string }[];
+    image: string;
+    links: { image: string, value: string, label: string }[];
     hasCodeLink?: boolean;
 }
 

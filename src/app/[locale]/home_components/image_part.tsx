@@ -1,6 +1,5 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import Image from "next/image";
-import profileImage from "../../../../public/images/profile.png";
 import { cn } from "@/lib/utils";
 import { HomeImageScheme } from "@/shared/components/shems";
 import { getTranslations } from "cloudflare-next-intl";
@@ -14,9 +13,8 @@ export default async function HomeImagePart(): Promise<Component> {
             <HomeImageScheme title={title} />
 
             <Image
-                src={profileImage}
+                src="/images/profile.png"
                 alt={"Profile"}
-                placeholder="blur"
                 priority
                 width={400}
                 height={400}

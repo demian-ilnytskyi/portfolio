@@ -19,6 +19,8 @@
 
 # production
 /build
+/dist
+/.vinext
 
 # misc
 .DS_Store
@@ -49,3 +51,4 @@ boundled/
 /.open-next
 
 public/config.json
+.agent/memory/MEMORY.local.md
