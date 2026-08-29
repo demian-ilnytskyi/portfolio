@@ -19,7 +19,7 @@ test("resolveOptions overrides only the provided keys", () => {
 test("defaults match the spec", () => {
     assert.equal(DEFAULT_OPTIONS.maxWidth, 1920);
     assert.equal(DEFAULT_OPTIONS.quality, 80);
-    assert.equal(DEFAULT_OPTIONS.blurWidth, 16);
+    assert.equal(DEFAULT_OPTIONS.blurWidth, 8);
     assert.equal(DEFAULT_OPTIONS.dev, true);
     assert.deepEqual(DEFAULT_OPTIONS.formats, ["avif", "webp"]);
     assert.deepEqual(DEFAULT_OPTIONS.dirs, ["public/images", "public/icons"]);

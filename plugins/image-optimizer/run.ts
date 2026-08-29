@@ -4,7 +4,7 @@ import { isFresh, loadCache, saveCache } from "./cache.ts";
 import type { CacheData } from "./cache.ts";
 import { writeManifest } from "./manifest.ts";
 import { processImage, toGeneratedPath } from "./process-image.ts";
-import { SUPPORTED_EXTENSIONS } from "./types.ts";
+import { SUPPORTED_EXTENSIONS, GENERATOR_VERSION } from "./types.ts";
 import type { OptimizedImage, ResolvedOptions } from "./types.ts";
 
 async function walk(directory: string, found: string[]): Promise<void> {
@@ -42,7 +42,8 @@ function targetAndSiblingPaths(
     const siblings = options.formats.map((format) =>
         targetFile.replace(/\.[^.]+$/, `.${format}`)
     );
-    return [targetFile, ...siblings];
+    const blurFile = targetFile.replace(/\.[^.]+$/, ".blur.webp");
+    return [targetFile, ...siblings, blurFile];
 }
 
 export async function run(
@@ -67,7 +68,7 @@ export async function run(
         }
         const result = await processImage(file, publicRoot, options, root);
         const stats = await stat(file);
-        next[key] = { mtimeMs: stats.mtimeMs, size: stats.size, result };
+        next[key] = { mtimeMs: stats.mtimeMs, size: stats.size, version: GENERATOR_VERSION, result };
         entries.push(result);
     }
 

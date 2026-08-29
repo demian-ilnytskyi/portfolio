@@ -23,14 +23,20 @@ export function toGeneratedPath(
 }
 
 export async function makeBlurDataURL(
-    absolutePath: string,
+    targetFile: string,
     blurWidth: number,
-): Promise<string> {
-    const buffer = await sharp(absolutePath)
-        .resize({ width: blurWidth })
-        .webp({ quality: 40 })
-        .toBuffer();
-    return `data:image/webp;base64,${buffer.toString("base64")}`;
+): Promise<{ blurDataURL: string; blurWidth: number; blurHeight: number }> {
+    const blurFile = targetFile.replace(/\.[^.]+$/, ".blur.webp");
+    const { data: buffer, info } = await sharp(targetFile)
+        .resize({ width: blurWidth, withoutEnlargement: true })
+        .webp({ quality: 70 })
+        .toBuffer({ resolveWithObject: true });
+    await sharp(buffer).toFile(blurFile);
+    return {
+        blurDataURL: `data:image/webp;base64,${buffer.toString("base64")}`,
+        blurWidth: info.width,
+        blurHeight: info.height,
+    };
 }
 
 async function encodeSibling(
@@ -101,6 +107,6 @@ export async function processImage(
         src: targetSrc,
         width,
         height,
-        blurDataURL: await makeBlurDataURL(targetFile, options.blurWidth),
+        ...(await makeBlurDataURL(targetFile, options.blurWidth)),
     };
 }

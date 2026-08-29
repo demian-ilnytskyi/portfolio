@@ -9,9 +9,33 @@ interface ManifestEntry {
     width?: number;
     height?: number;
     blurDataURL?: string;
+    blurWidth?: number;
+    blurHeight?: number;
 }
 
-const images = manifest as Record<string, ManifestEntry>;
+function getImageBlurSvg(
+    blurDataURL: string,
+    blurWidth?: number,
+    blurHeight?: number,
+    objectFit?: string,
+): string {
+    const std = 20;
+    const viewBox = blurWidth && blurHeight
+        ? `viewBox='0 0 ${blurWidth * 40} ${blurHeight * 40}'`
+        : "";
+    const preserveAspectRatio = viewBox
+        ? "none"
+        : objectFit === "contain"
+          ? "xMidYMid"
+          : objectFit === "cover"
+            ? "xMidYMid slice"
+            : "none";
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' ${viewBox}><filter id='b' color-interpolation-filters='sRGB'><feGaussianBlur stdDeviation='${std}'/><feColorMatrix values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 100 -1' result='s'/><feFlood x='0' y='0' width='100%' height='100%'/><feComposite operator='out' in='s'/><feComposite in2='SourceGraphic'/><feGaussianBlur stdDeviation='${std}'/></filter><image width='100%' height='100%' x='0' y='0' preserveAspectRatio='${preserveAspectRatio}' style='filter: url(#b);' href='${blurDataURL}'/></svg>`;
+    return `data:image/svg+xml;base64,${btoa(svg)}`;
+}
+
+const images = (manifest as { images?: Record<string, ManifestEntry> }).images
+    ?? (manifest as unknown as Record<string, ManifestEntry>);
 
 function resolveProps(props: ImageProps): ImageProps {
     let src = props.src;
@@ -24,7 +48,12 @@ function resolveProps(props: ImageProps): ImageProps {
         if (entry) {
             if (entry.src) src = entry.src;
             if (!blurDataURL && props.placeholder === "blur" && entry.blurDataURL) {
-                blurDataURL = entry.blurDataURL;
+                blurDataURL = getImageBlurSvg(
+                    entry.blurDataURL,
+                    entry.blurWidth,
+                    entry.blurHeight,
+                    (props.style as React.CSSProperties | undefined)?.objectFit,
+                );
             }
             if (!width && !props.fill && entry.width) {
                 width = entry.width;

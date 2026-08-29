@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { GENERATOR_VERSION } from "./types.ts";
 import type { OptimizedImage } from "./types.ts";
 
 export function renderManifest(entries: OptimizedImage[]): string {
@@ -13,9 +14,11 @@ export function renderManifest(entries: OptimizedImage[]): string {
             width: entry.width,
             height: entry.height,
             blurDataURL: entry.blurDataURL,
+            blurWidth: entry.blurWidth,
+            blurHeight: entry.blurHeight,
         };
     }
-    return JSON.stringify(record, null, 2);
+    return JSON.stringify({ version: GENERATOR_VERSION, images: record }, null, 2);
 }
 
 export async function writeManifest(

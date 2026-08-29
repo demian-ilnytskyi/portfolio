@@ -1,3 +1,5 @@
+export const GENERATOR_VERSION = 2;
+
 export type ImageFormat = "avif" | "webp";
 
 export interface OptimizedImage {
@@ -6,6 +8,8 @@ export interface OptimizedImage {
     width: number;
     height: number;
     blurDataURL: string;
+    blurWidth: number;
+    blurHeight: number;
 }
 
 export interface ImageOptimizerOptions {
@@ -30,7 +34,7 @@ export const DEFAULT_OPTIONS: ResolvedOptions = {
     quality: 80,
     formats: ["avif", "webp"],
     manifest: "public/generated/images.json",
-    blurWidth: 16,
+    blurWidth: 8,
     dev: true,
 };
 

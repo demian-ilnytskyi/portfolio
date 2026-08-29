@@ -6,13 +6,13 @@ import { renderManifest, writeManifest } from "./manifest.ts";
 import { cleanup, makeTempDir } from "./test-helpers.ts";
 
 const ENTRIES = [
-    { originalSrc: "/images/b.png", src: "/generated/images/b.png", width: 2, height: 2, blurDataURL: "data:image/webp;base64,BB" },
-    { originalSrc: "/images/a.png", src: "/generated/images/a.png", width: 1, height: 1, blurDataURL: "data:image/webp;base64,AA" },
+    { originalSrc: "/images/b.png", src: "/generated/images/b.png", width: 2, height: 2, blurDataURL: "data:image/webp;base64,BB", blurWidth: 8, blurHeight: 8 },
+    { originalSrc: "/images/a.png", src: "/generated/images/a.png", width: 1, height: 1, blurDataURL: "data:image/webp;base64,AA", blurWidth: 8, blurHeight: 8 },
 ];
 
 test("renderManifest outputs valid sorted JSON containing every entry", () => {
     const source = renderManifest(ENTRIES);
-    const parsed = JSON.parse(source);
+    const parsed = JSON.parse(source).images;
     assert.deepEqual(Object.keys(parsed), ["/images/a.png", "/images/b.png"]);
     assert.equal(parsed["/images/a.png"].src, "/generated/images/a.png");
     assert.equal(parsed["/images/b.png"].src, "/generated/images/b.png");

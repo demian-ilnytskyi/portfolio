@@ -45,9 +45,10 @@ test("run writes a manifest and emits optimized images in public/generated", asy
     assert.ok(existsSync(genFile));
     assert.ok(existsSync(path.join(root, "public", "generated", "images", "a.avif")));
     assert.ok(existsSync(path.join(root, "public", "generated", "images", "a.webp")));
+    assert.ok(existsSync(path.join(root, "public", "generated", "images", "a.blur.webp")));
 
     const source = await readFile(manifest, "utf8");
-    const parsed = JSON.parse(source);
+    const parsed = JSON.parse(source).images;
     assert.ok(parsed["/images/a.png"]);
     assert.equal(parsed["/images/a.png"].src, "/generated/images/a.png");
     await cleanup(root);

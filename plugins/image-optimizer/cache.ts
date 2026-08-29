@@ -1,10 +1,12 @@
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { GENERATOR_VERSION } from "./types.ts";
 import type { OptimizedImage } from "./types.ts";
 
 export interface CacheEntry {
     mtimeMs: number;
     size: number;
+    version: number;
     result: OptimizedImage;
 }
 
@@ -29,6 +31,7 @@ export async function isFresh(
     siblings: string[],
 ): Promise<boolean> {
     if (!entry) return false;
+    if (entry.version !== GENERATOR_VERSION) return false;
     try {
         const stats = await stat(absolutePath);
         if (stats.mtimeMs !== entry.mtimeMs || stats.size !== entry.size) return false;

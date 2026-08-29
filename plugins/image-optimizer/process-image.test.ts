@@ -64,7 +64,7 @@ test("small image keeps its dimensions in outDir", async () => {
     await cleanup(root);
 });
 
-test("avif and webp siblings are emitted in outDir", async () => {
+test("avif, webp and blur siblings are emitted in outDir", async () => {
     const root = await makeTempDir();
     const publicRoot = path.join(root, "public");
     const file = await writeFixturePng(path.join(publicRoot, "images"), "a.png", 600, 400);
@@ -74,18 +74,22 @@ test("avif and webp siblings are emitted in outDir", async () => {
     const genDir = path.join(publicRoot, "generated", "images");
     assert.ok(existsSync(path.join(genDir, "a.avif")));
     assert.ok(existsSync(path.join(genDir, "a.webp")));
+    assert.ok(existsSync(path.join(genDir, "a.blur.webp")));
     const avif = await stat(path.join(genDir, "a.avif"));
     assert.ok(avif.size > 0);
     await cleanup(root);
 });
 
-test("blur data url is a small inline webp", async () => {
+test("blur data url is a small inline webp and writes blur file", async () => {
     const root = await makeTempDir();
     const file = await writeFixturePng(root, "a.png", 800, 600);
 
     const blur = await makeBlurDataURL(file, 16);
 
-    assert.ok(blur.startsWith("data:image/webp;base64,"));
-    assert.ok(blur.length < 2048);
+    assert.ok(blur.blurDataURL.startsWith("data:image/webp;base64,"));
+    assert.ok(blur.blurDataURL.length < 2048);
+    assert.equal(blur.blurWidth, 16);
+    assert.equal(blur.blurHeight, 12);
+    assert.ok(existsSync(path.join(root, "a.blur.webp")));
     await cleanup(root);
 });
