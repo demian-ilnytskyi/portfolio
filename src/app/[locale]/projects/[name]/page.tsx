@@ -7,7 +7,7 @@ import {
 } from "cloudflare-next-intl";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import { Image } from "cloudflare-next-intl/image";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import CustomMarkdown from "@/shared/components/markdown";
 import siteFetchRepository from "@/shared/repositories/site_fetch_repository";

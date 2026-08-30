@@ -1,5 +1,5 @@
 import AppTextStyle from "../constants/styles/app_text_styles";
-import Image from "next/image";
+import { Image } from "cloudflare-next-intl/image";
 import { Link } from "cloudflare-next-intl";
 import AppLinks from "../constants/variables/links";
 import CustomMarkdown from "./markdown";

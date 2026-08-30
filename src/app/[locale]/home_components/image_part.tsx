@@ -1,5 +1,5 @@
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
-import Image from "next/image";
+import { Image } from "cloudflare-next-intl/image";
 import { cn } from "@/lib/utils";
 import { HomeImageScheme } from "@/shared/components/shems";
 import { getTranslations } from "cloudflare-next-intl";
