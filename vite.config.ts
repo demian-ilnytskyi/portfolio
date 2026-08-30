@@ -36,6 +36,28 @@ export default defineConfig({
     noExternal: ["cloudflare-next-intl"],
   },
   optimizeDeps: {
+    // Force these into the INITIAL scan so Vite prebundles them once, up
+    // front, instead of meeting them for the first time at request time.
+    // `vinext` itself is excluded below (unbundled) and imports `react`
+    // internally (its `AwaitAppRenderDependencies` shim calls `React.use()`
+    // on a render-dependency promise) — if `react`/`react-dom` are only met
+    // lazily at request time, a later mid-session re-optimize can swap in a
+    // new generation whose `use` export vinext's already-loaded reference
+    // doesn't see, throwing "Cannot read properties of null (reading 'use')"
+    // and surfacing to the client as a failed Suspense boundary.
+    // drizzle-orm/pg/jose are reachable only through server-only repository
+    // modules via `cloudflare-next-intl/db`, so the initial scan misses them
+    // the same way.
+    include: [
+      "react",
+      "react-dom",
+      "drizzle-orm",
+      "drizzle-orm/node-postgres",
+      "drizzle-orm/pg-proxy",
+      "drizzle-orm/pg-core",
+      "pg",
+      "jose",
+    ],
     exclude: [
       "cloudflare-next-intl",
       "vinext",
