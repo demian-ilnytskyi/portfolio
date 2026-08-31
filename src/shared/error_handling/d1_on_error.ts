@@ -1,5 +1,4 @@
 import type { ErrorHandlingParams } from "cloudflare-next-intl/errorHandling";
-import { env } from "cloudflare:workers";
 import { getAuthUser } from "cloudflare-next-intl/getFirebaseAuthUser";
 import KTextConstants from "../constants/variables/text_constants";
 import errorsRepository from "../repositories/errors_repository";
@@ -34,6 +33,9 @@ export default async function d1OnError(params: ErrorHandlingParams): Promise<vo
     if (KTextConstants.isDev || KTextConstants.isBuild) return;
 
     try {
+        // Dynamic import: `cloudflare:workers` only resolves inside workerd —
+        // a static top-level import would crash vinext's Node-based prerender.
+        const { env } = await import("cloudflare:workers");
         const db = env?.ERRORS_DB;
         if (!db) return;
 

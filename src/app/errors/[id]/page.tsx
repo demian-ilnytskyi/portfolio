@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { env } from "cloudflare:workers";
 import { hasErrorsAccess } from "../gate";
 import errorsRepository from "@/shared/repositories/errors_repository";
 import ErrorDetailView from "./error_detail_view";
@@ -22,6 +21,9 @@ export default async function ErrorDetailPage({
     const id = Number(rawId);
     if (!Number.isInteger(id) || id <= 0) notFound();
 
+    // Dynamic import: `cloudflare:workers` only resolves inside workerd —
+    // a static top-level import would crash vinext's Node-based prerender.
+    const { env } = await import("cloudflare:workers");
     const db = env?.ERRORS_DB;
     if (!db) {
         return (

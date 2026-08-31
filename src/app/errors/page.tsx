@@ -1,4 +1,3 @@
-import { env } from "cloudflare:workers";
 import { hasErrorsAccess } from "./gate";
 import errorsRepository, { errorsListParamsSchema } from "@/shared/repositories/errors_repository";
 import ErrorsListClient from "./errors_list_client";
@@ -32,6 +31,9 @@ export default async function ErrorsPage({
         cursor: null,
     });
 
+    // Dynamic import: `cloudflare:workers` only resolves inside workerd —
+    // a static top-level import would crash vinext's Node-based prerender.
+    const { env } = await import("cloudflare:workers");
     const db = env?.ERRORS_DB;
 
     if (!db) {

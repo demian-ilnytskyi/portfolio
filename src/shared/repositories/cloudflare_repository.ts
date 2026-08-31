@@ -1,4 +1,4 @@
-import { env } from "cloudflare:workers";
+import type { env } from "cloudflare:workers";
 import { getRequestExecutionContext } from "vinext/shims/request-context";
 import { reportError } from "cloudflare-next-intl/errorHandling";
 import { getCountry, getTimezone } from "cloudflare-next-intl/geo";
@@ -28,6 +28,9 @@ class CloudflareRepository {
 
     async getContext(options?: { async?: boolean; notSendError?: boolean; fresh?: boolean }): Promise<Context | null> {
         try {
+            // Dynamic import: `cloudflare:workers` only resolves inside workerd —
+            // a static top-level import would crash vinext's Node-based prerender.
+            const { env } = await import("cloudflare:workers");
             return {
                 env,
                 cf: undefined,

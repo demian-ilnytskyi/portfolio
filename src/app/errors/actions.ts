@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { env } from "cloudflare:workers";
 import { hasErrorsAccess, verifyErrorsPassword, setErrorsAuthCookie } from "./gate";
 import { notFound } from "next/navigation";
 
@@ -22,6 +21,9 @@ export async function loginToErrors(password: string): Promise<boolean> {
 }
 
 async function getDb(): Promise<D1Database> {
+    // Dynamic import: `cloudflare:workers` only resolves inside workerd —
+    // a static top-level import would crash vinext's Node-based prerender.
+    const { env } = await import("cloudflare:workers");
     const db = env?.ERRORS_DB;
     if (!db) throw new Error("ERRORS_DB binding is not available");
     return db;
