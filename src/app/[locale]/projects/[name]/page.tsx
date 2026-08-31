@@ -51,11 +51,15 @@ export async function generateMetadata({ params }: {
     };
 }
 
-export function generateStaticParams(): { projectName: string }[] {
+export function generateStaticParams(): { name: string }[] {
     return projects.map((project) => ({
-        projectName: project.name,
+        name: project.name,
     }));
 }
+
+// vinext doesn't infer static-eligibility from an absence of dynamic API
+// calls — this explicit opt-in is required to actually be prerendered.
+export const dynamic = "force-static";
 
 async function fetchProjectDetails(
     { locale, projectName }: { locale: Language; projectName: string },

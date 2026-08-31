@@ -57,6 +57,11 @@ class CloudflareRepository {
         return await getTimezone(undefined, 'UTC');
     }
 
+    async hasAssetsBinding(): Promise<boolean> {
+        const context = await this.getContext({ async: true, notSendError: true });
+        return typeof context?.env.ASSETS?.fetch === 'function';
+    }
+
     async fetch(
         input: RequestInfo | URL,
         init?: RequestInit

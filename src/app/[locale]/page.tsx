@@ -9,6 +9,11 @@ import Divider from "@/shared/components/divider";
 import { setLocaleAsync } from "cloudflare-next-intl";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 
+// vinext (unlike Next.js) doesn't infer static-eligibility from an absence
+// of dynamic API calls — a dynamic-segment route ([locale]) needs this
+// explicit opt-in to actually be prerendered via generateStaticParams.
+export const dynamic = "force-static";
+
 export default async function Home({ params }: {
   params: Promise<{ locale: Language }>;
 }): Promise<Component | null> {

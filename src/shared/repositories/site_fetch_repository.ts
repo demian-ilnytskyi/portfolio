@@ -30,34 +30,27 @@ export class SiteFetchRepository {
             // const baseUrl = await this.getBaseUrl();
             const fetchUrl = new URL(path, KTextConstants.baseUrl).toString();
 
-            if (KTextConstants.isDev) {
-                const response = await fetch(fetchUrl, {
+            const hasCloudflare = await cloudflareRepository.hasAssetsBinding();
+
+            const response = hasCloudflare
+                ? await cloudflareRepository.fetch(fetchUrl, {
+                    cf: { cacheTtl: 86400 }, // Cache for 1 day
+                    headers: header,
+                })
+                : await fetch(fetchUrl, {
                     cache: "no-store",
                     headers: header,
                 });
 
-                if (!response.ok) {
-                    throw new Error(await response.text() || `HTTP ${response.status}`);
-                }
-
-                return await response.text();
-            } else {
-                const response = await cloudflareRepository.fetch(fetchUrl, {
-                    // Add cache control if needed
-                    cf: { cacheTtl: 86400 }, // Cache for 1 day
-                    headers: header,
-                });
-
-                if (!response) {
-                    throw new Error('fetch unknown error');
-                }
-
-                if (!response.ok) {
-                    throw new Error(await response.text() || `HTTP ${response.status}`);
-                }
-
-                return await response.text();
+            if (!response) {
+                throw new Error('fetch unknown error');
             }
+
+            if (!response.ok) {
+                throw new Error(await response.text() || `HTTP ${response.status}`);
+            }
+
+            return await response.text();
         } catch (e) {
             void reportError(undefined, {
                 error: e,
