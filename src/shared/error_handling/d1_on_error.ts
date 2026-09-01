@@ -1,7 +1,7 @@
 import type { ErrorHandlingParams } from "cloudflare-next-intl/errorHandling";
 import { getAuthUser } from "cloudflare-next-intl/getFirebaseAuthUser";
+import { recordError } from "cloudflare-next-intl/errorsBoard";
 import KTextConstants from "../constants/variables/text_constants";
-import errorsRepository from "../repositories/errors_repository";
 
 function stringifyParams(params: unknown): string | null {
     if (params === undefined) return null;
@@ -44,7 +44,7 @@ export default async function d1OnError(params: ErrorHandlingParams): Promise<vo
         const stack = error instanceof Error ? error.stack ?? null : null;
         const userEmail = await resolveUserEmail();
 
-        await errorsRepository.record(db, {
+        await recordError(db, {
             flavour: KTextConstants.flavour ?? "local",
             caller: params.classOrMethodName,
             message,

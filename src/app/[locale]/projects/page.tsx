@@ -16,10 +16,6 @@ import KTextConstants from "@/shared/constants/variables/text_constants";
 // inheriting from the [locale] layout.
 export const generateStaticParams = getLocaleStaticParams;
 
-// vinext doesn't infer static-eligibility from an absence of dynamic API
-// calls — this explicit opt-in is required to actually be prerendered.
-export const dynamic = "force-static";
-
 export async function generateMetadata({ params }: {
     params: Promise<{ locale: Language }>;
 }): Promise<Metadata | null> {

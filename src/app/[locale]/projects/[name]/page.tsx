@@ -10,7 +10,8 @@ import { notFound } from "next/navigation";
 import { Image } from "cloudflare-next-intl/image";
 import AppTextStyle from "@/shared/constants/styles/app_text_styles";
 import CustomMarkdown from "@/shared/components/markdown";
-import siteFetchRepository from "@/shared/repositories/site_fetch_repository";
+import { fetchText } from "cloudflare-next-intl/fetchText";
+import intlConfig from "@/l18n/intl_config";
 import { openGraph, twitter } from "@/shared/helpers/metadata_helper";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 import AppLinks from "@/shared/constants/variables/links";
@@ -57,16 +58,18 @@ export function generateStaticParams(): { name: string }[] {
     }));
 }
 
-// vinext doesn't infer static-eligibility from an absence of dynamic API
-// calls — this explicit opt-in is required to actually be prerendered.
-export const dynamic = "force-static";
-
 async function fetchProjectDetails(
     { locale, projectName }: { locale: Language; projectName: string },
 ): Promise<string | null> {
     const path = `./${locale}/${projectName}.md`;
+    const fetchUrl = new URL(path, KTextConstants.baseUrl).toString();
 
-    const text = await siteFetchRepository.fetchTextData({ path });
+    const text = await fetchText(
+        fetchUrl,
+        { cf: { cacheTtl: 86400 } }, // Cache for 1 day
+        { generate: intlConfig.generate, errorHandling: intlConfig.errorHandling },
+        "ProjectPage.fetchProjectDetails",
+    );
 
     return text;
 }

@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { hasErrorsAccess } from "../gate";
-import errorsRepository from "@/shared/repositories/errors_repository";
-import ErrorDetailView from "./error_detail_view";
-import ErrorsLoginForm from "../login_form";
+import { errorsAccess } from "../gate";
+import { getErrorById } from "cloudflare-next-intl/errorsBoard";
+import ErrorDetailClient from "./error_detail_client";
+import ErrorsLoginPage from "../login_page";
+import * as actions from "../actions";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,7 @@ export default async function ErrorDetailPage({
 }): Promise<Component | null> {
     if (KTextConstants.isBuild) return null;
 
-    if (!(await hasErrorsAccess())) return <ErrorsLoginForm />;
+    if (!(await errorsAccess.hasAccess())) return <ErrorsLoginPage />;
 
     const { id: rawId } = await params;
     const id = Number(rawId);
@@ -33,7 +34,7 @@ export default async function ErrorDetailPage({
         );
     }
 
-    const row = await errorsRepository.getById(db, id);
+    const row = await getErrorById(db, id);
     if (!row) notFound();
 
     return (
@@ -44,7 +45,7 @@ export default async function ErrorDetailPage({
             >
                 ← Back to error log
             </Link>
-            <ErrorDetailView row={row} />
+            <ErrorDetailClient row={row} actions={actions} />
         </main>
     );
 }

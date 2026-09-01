@@ -1,10 +1,11 @@
-import { hasErrorsAccess } from "./gate";
-import errorsRepository, { errorsListParamsSchema } from "@/shared/repositories/errors_repository";
-import ErrorsListClient from "./errors_list_client";
-import ErrorsFilterForm from "./errors_filter_form";
-import ErrorsStatStrip from "./errors_stat_strip";
-import ErrorsLoginForm from "./login_form";
 import Link from "next/link";
+import { errorsAccess } from "./gate";
+import { loadErrorsBoard, parseErrorsListFilters } from "cloudflare-next-intl/errorsBoard";
+import ErrorsStatStrip from "cloudflare-next-intl/ErrorsStatStrip";
+import ErrorsFilterForm from "cloudflare-next-intl/ErrorsFilterForm";
+import ErrorsListClient from "cloudflare-next-intl/ErrorsListClient";
+import ErrorsLoginPage from "./login_page";
+import * as actions from "./actions";
 import KTextConstants from "@/shared/constants/variables/text_constants";
 
 export const dynamic = "force-dynamic";
@@ -21,14 +22,13 @@ export default async function ErrorsPage({
     searchParams: Promise<SearchParams>;
 }): Promise<Component | null> {
     if (KTextConstants.isBuild) return null;
-    const resolvedSearchParams = await searchParams;
-    if (!(await hasErrorsAccess())) return <ErrorsLoginForm />;
+    if (!(await errorsAccess.hasAccess())) return <ErrorsLoginPage />;
 
-    const filters = errorsListParamsSchema.parse({
+    const resolvedSearchParams = await searchParams;
+    const filters = parseErrorsListFilters({
         flavour: resolvedSearchParams.flavour ?? "all",
         status: resolvedSearchParams.status ?? "new",
         q: resolvedSearchParams.q ?? "",
-        cursor: null,
     });
 
     // Dynamic import: `cloudflare:workers` only resolves inside workerd —
@@ -44,11 +44,11 @@ export default async function ErrorsPage({
         );
     }
 
-    let board: Awaited<ReturnType<typeof errorsRepository.loadBoard>>;
+    let board: Awaited<ReturnType<typeof loadErrorsBoard>>;
 
     try {
         // One D1 batch round-trip for list + flavours + counts.
-        board = await errorsRepository.loadBoard(db, filters);
+        board = await loadErrorsBoard(db, filters);
     } catch (error) {
         return (
             <main className="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-2 px-4 py-10 text-center">
@@ -89,6 +89,8 @@ export default async function ErrorsPage({
                 initialRows={board.rows}
                 initialNextCursor={board.nextCursor}
                 filters={filters}
+                actions={actions}
+                hrefFor={(id) => `/errors/${id}`}
             />
         </main>
     );

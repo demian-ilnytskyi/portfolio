@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "vinext dev",
-    "build": "IS_BUILDING=true vinext build",
+    "dev": "cfni-check-dynamic-pages --mode=fix --target=vinext && vinext dev",
+    "build": "cfni-check-dynamic-pages --mode=fix --target=vinext && IS_BUILDING=true vinext build",
     "analyze": "ANALYZE=true IS_BUILDING=true vinext build",
     "start": "vinext start",
     "lint": "vinext lint",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@vinext/cloudflare": "^1.0.0-beta.6",
-    "cloudflare-next-intl": "^0.9.4",
+    "cloudflare-next-intl": "^0.9.10",
     "clsx": "^2.1.1",
     "lucide-react": "^0.552.0",
     "markdown-to-jsx": "^8.0.0",
