@@ -1,4 +1,4 @@
-import { intlMiddleware } from "cloudflare-next-intl";
+import intlMiddleware from "cloudflare-next-intl/middleware";
 
 export const proxy = intlMiddleware;
 
