@@ -1,5 +1,5 @@
 import type { ErrorHandlingParams } from "cloudflare-next-intl/errorHandling";
-import { getAuthUser } from "cloudflare-next-intl/getFirebaseAuthUser";
+import { resolveErrorReportingUser } from "cloudflare-next-intl/resolveOptionalAuthUser";
 import { recordError } from "cloudflare-next-intl/errorsBoard";
 import KTextConstants from "../constants/variables/text_constants";
 
@@ -8,18 +8,6 @@ function stringifyParams(params: unknown): string | null {
     try {
         return JSON.stringify(params);
     } catch {
-        return null;
-    }
-}
-
-async function resolveUserEmail(): Promise<string | null> {
-    try {
-        const { user } = await getAuthUser();
-        return user?.email ?? null;
-    } catch {
-        // getAuthUser is Server Component/Action only — some error paths
-        // (e.g. a waitUntil-deferred callback, or outside any request scope)
-        // don't have that context, so this simply means "no user known".
         return null;
     }
 }
@@ -42,7 +30,8 @@ export default async function d1OnError(params: ErrorHandlingParams): Promise<vo
         const error = params.error;
         const message = error instanceof Error ? error.message : String(error);
         const stack = error instanceof Error ? error.stack ?? null : null;
-        const userEmail = await resolveUserEmail();
+        const { user } = await resolveErrorReportingUser(params.useAuthUser);
+        const userEmail = user?.email ?? null;
 
         await recordError(db, {
             flavour: KTextConstants.flavour ?? "local",
