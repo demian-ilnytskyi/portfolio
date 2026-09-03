@@ -57,9 +57,21 @@ export default defineConfig({
       "drizzle-orm/pg-core",
       "pg",
       "jose",
+      // Same "met at request time, re-optimized mid-session" race as
+      // react/drizzle-orm above: this is on nearly every client-side
+      // navigation path (Link, translations, cookie consent), so meeting it
+      // lazily instead of in the initial scan is what lets a mid-session
+      // re-optimize swap in a generation the rest of the graph doesn't see
+      // yet — the specific failure mode was `cloudflare-next-intl`'s Link
+      // resolving locale from a stale/duplicated module instance and
+      // building `/undefined/...` hrefs, fixed at the library level in
+      // 0.9.39 but still worth not re-triggering here.
+      "cloudflare-next-intl",
+      "clsx",
+      "tailwind-merge",
+      "lucide-react",
     ],
     exclude: [
-      "cloudflare-next-intl",
       "vinext",
     ],
   },
