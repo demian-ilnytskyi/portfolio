@@ -2,7 +2,7 @@
 
 import KTextConstants from '@/shared/constants/variables/text_constants';
 import { usePathname } from 'next/navigation';
-import GlobalErrorBody, { isChunkLoadError } from './global-error/body';
+import GlobalErrorBody, { isStaleDeployError } from './global-error/body';
 import { useEffect } from 'react';
 import { reportClientError } from '@/shared/error_handling/report_client_error';
 
@@ -17,7 +17,7 @@ export default function GlobalError({
     let locale: Language;
 
     useEffect(() => {
-        if (isChunkLoadError(error)) return;
+        if (isStaleDeployError(error)) return;
         reportClientError(error, 'GlobalError');
     }, [error])
 

@@ -6,31 +6,18 @@ import errorPageTranslation from "./translations";
 import KIcons from "@/shared/constants/components/icons";
 import { cn } from "@/lib/utils";
 import KTextConstants from "@/shared/constants/variables/text_constants";
-import { useEffect, useState } from "react";
 import LoadingIndicator from "@/shared/components/loading_indicator";
+import { isStaleDeployError, useStaleDeployRecovery } from "cloudflare-next-intl/errorHandling";
 
+export { isStaleDeployError, useStaleDeployRecovery };
 
-export function isChunkLoadError(error: Error): boolean {
-    const message = error.message?.toLowerCase() ?? '';
-    return error.name === 'ChunkLoadError'
-        || message.includes('chunk')
-        || message.includes('failed to fetch')
-        || message.includes('loading css chunk');
-}
 
 export default function GlobalErrorBody({ locale, error }: { locale: Language, error: Error }): Component {
 
     const t = errorPageTranslation.getLocale(locale);
-    const isChunkError = isChunkLoadError(error);
-    const [showLoading, setShowLoading] = useState(isChunkError);
+    const isChunkError = useStaleDeployRecovery(error);
 
-    useEffect(() => {
-        if (!isChunkError) return;
-        const timeout = setTimeout(() => setShowLoading(false), 5000);
-        return () => clearTimeout(timeout);
-    }, [isChunkError]);
-
-    if (showLoading) return <LoadingIndicator />;
+    if (isChunkError) return <LoadingIndicator />;
 
     return <main
         className="flex-1 flex flex-col items-center justify-center min-h-screen mx-4 justify-self-center">
