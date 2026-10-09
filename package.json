@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@vinext/cloudflare": "^1.0.1",
-    "cloudflare-next-intl": "^0.10.30",
+    "cloudflare-next-intl": "^0.10.32",
     "clsx": "^2.1.1",
     "lucide-react": "^0.552.0",
     "markdown-to-jsx": "^8.0.0",
