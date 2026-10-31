@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import vinext from "vinext";
 import { cloudflareNextIntl } from "cloudflare-next-intl/vite";
 import { cloudflare } from "@cloudflare/vite-plugin";
-import { kvDataAdapter } from "@vinext/cloudflare/cache/kv-data-adapter";
+import { r2DataAdapter } from "./src/shared/cache/r2_data_adapter.ts";
 import { imagesOptimizer } from "@vinext/cloudflare/images/images-optimizer";
 import { fileURLToPath } from "node:url";
 
@@ -13,10 +13,13 @@ export default defineConfig({
     port: 3000,
     strictPort: false,
   },
+  define: {
+    __dirname: '""',
+  },
   plugins: [
     cloudflareNextIntl(),
     vinext({
-      cache: { data: kvDataAdapter() },
+      cache: { data: r2DataAdapter({ binding: "NEXT_INC_CACHE_R2_BUCKET" }) },
       images: { optimizer: imagesOptimizer() },
     }),
     cloudflare({

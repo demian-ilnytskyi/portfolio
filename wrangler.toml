@@ -1,7 +1,6 @@
 # wrangler.toml
 # Cloudflare Workers config for the vinext build (main = vinext/server/fetch-handler,
-# assets = dist/client). VINEXT_KV_CACHE per env is the ISR data cache (kvDataAdapter),
-# replacing the old OpenNext R2 incremental cache.
+# assets = dist/client). NEXT_INC_CACHE_R2_BUCKET per env is the ISR data cache (r2DataAdapter).
 
 compatibility_date = "2025-06-13"
 workers_dev = false
@@ -21,9 +20,10 @@ binding = "IMAGES"
 [cache]
 enabled = true
 
-[[kv_namespaces]]
-binding = "VINEXT_KV_CACHE"
-id = "8be5f0ddeded42e99aae36d21c4f7814"
+[[r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "portfolio-cache"
+preview_bucket_name = "local-prod-cache-bucket"
 
 [[d1_databases]]
 binding = "ERRORS_DB"
@@ -67,9 +67,10 @@ binding = "IMAGES"
 [env.development.cache]
 enabled = true
 
-[[env.development.kv_namespaces]]
-binding = "VINEXT_KV_CACHE"
-id = "9375d3c09d49430c9215c6b7a42f5350"
+[[env.development.r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "dev-portfolio-cache"
+preview_bucket_name = "local-dev-cache-bucket"
 
 [[env.development.d1_databases]]
 binding = "ERRORS_DB"
