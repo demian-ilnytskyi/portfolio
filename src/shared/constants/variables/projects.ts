@@ -71,6 +71,7 @@ const projects: ProjectProps[] = [
         image: livaClinicImage,
         name: 'liva-clinic',
         links: [],
+        hasCodeLink: false,
     },
     {
         image: hungerQuestImage,
