@@ -10,7 +10,7 @@
     "lint": "vinext lint",
     "check": "vinext check",
     "typegen": "vinext typegen",
-    "preview": "npm run pre-deploy && vinext start",
+    "preview": "npm run pre-deploy && vite preview",
     "deploy": "npm run pre-deploy && npx @vinext/cloudflare deploy",
     "pre-deploy": "IS_BUILDING=true vite build",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@vinext/cloudflare": "^1.0.1",
-    "cloudflare-next-intl": "^0.14.3",
+    "cloudflare-next-intl": "^0.15.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.552.0",
     "markdown-to-jsx": "^8.0.0",
